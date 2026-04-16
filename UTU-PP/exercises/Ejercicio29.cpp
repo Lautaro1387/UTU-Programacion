@@ -1,28 +1,27 @@
 
-patos
+// revisar
+#include <stdio.h>
 
 
-
-
-
-
-i, d, arrayPalabra, arrayTexto, resultado, cantidad, min
-
-scanf arrayPalabra, %c
-scanf arrayTexto %c
-
-do {
+int main(){
+    char arrayPalabra, arrayTexto, cantTexto, resultado; 
+    int i;
     
-    for(arrayPalabra[i]) {
+//    scanf arrayPalabra, %c
+//   scanf arrayTexto %c
+    printf ("Ingresa");
+    do {
         
-            if (arrayPalabra[i] == arrayTexto[]){
-
-                min = cantidad[i]
-            }
-
+        for(arrayPalabra[i]) {
+            
+                if (arrayPalabra[i] == arrayTexto[i]){
     
+                }
     
-    resultado = cantidad[i] // por ahi es
-
+        
+        resultado = cantidad[i] // por ahi es
+    
+    }
+    while (arrayTexto[d-1]  && arrayTexto != '\n')
 }
-while (arrayTexto[d-1] && arrayPalabra != '\n')
+
