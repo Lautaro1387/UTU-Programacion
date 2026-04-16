@@ -9,7 +9,7 @@ int i;
 int promedio;
 int valor;
 
-// a) Cargar un arreglo del tipo definido con valores leídos desde teclado.
+// a) Cargar un arreglo del tipo definido con valores leídos desde teclado
 
 for (i = 0; i < TAM; i++){
     printf("Ingrese un valor ");
@@ -25,7 +25,6 @@ printf("\n");
 // c) Calcular el promedio de los valores almacenados en el arreglo - CHECK.
 for (i = 0; i < TAM; i++){  
 
-    promedio = promedio + numero[i];
     promedio = promedio / numero[i];
 }
 printf("El promedio es: %d", promedio);
@@ -54,3 +53,4 @@ for (i = 0; i < TAM; i++) {
 // j) Cargar otro arreglo del tipo definido, ordenándolo a medida que se leen los números. Desplegar por pantalla el contenido del arreglo.
 
 // k) Determinar si los dos arreglos son iguales (es decir, si tienen almacenados los mismos valores y en las mismas posiciones) y luego emitir un mensaje indicando el resultado.
+
