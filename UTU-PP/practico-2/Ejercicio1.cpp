@@ -25,12 +25,13 @@ printf("\n");
 // c) Calcular el promedio de los valores almacenados en el arreglo - CHECK.
 for (i = 0; i < TAM; i++){  
 
-    promedio = promedio / numero[i];
+    promedio = promedio % numero[i];
+    i++;
 }
 printf("El promedio es: %d", promedio);
 
 
-// d) Leer un valor entero desde teclado y determinar si pertenece o no al arreglo.
+// d) Leer un valor entero desde teclado y determinar si pertenece o no al arreglo - CHECK.
 
 for (i = 0; i < TAM; i++) {
     
