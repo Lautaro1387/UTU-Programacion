@@ -86,11 +86,11 @@ int main(){
                                            case 3:
                                            secuencia[i]='N';
                                            break;
-                                           
+                                      
                                         }
                                     }       
                                     do { 
-                                            printf("%c \n", secuencia[j]);
+                                            printf("%c s\n", secuencia[j]);
                                             //sleep(TIEMPO_COLOR_P);
                                             // system("clear");
                                             scanf(" %c \n", &ingreso[j]);
