@@ -1,173 +1,80 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-#define MAX 20
+const int N = 100;
+
+const int NIVEL_P = 6;
+const int NIVEL_I = 8;
+const int NIVEL_A = 10;
+
+const float TIEMPO_COLOR_P = 1.5;
+const float TIEMPO_COLOR_I = 1.3;
+const float TIEMPO_COLOR_A = 1;
+
+const int ACIERTO_NIVEL_P = 1;
+const int ACIERTO_NIVEL_I = 3;
+const int ACIERTO_NIVEL_A = 5;
 
 int main()
 {
-    char nombre[30];
+    char nombre[N];
 
-    char secuencia[MAX];
-    char ingreso[MAX];
+    // Mejores puntajes
 
-    char nivel;
+    int mejorP = 0;
+    int mejorI = 0;
+    int mejorA = 0;
 
-    int largoNivel;
-    int puntos;
+    char nombreP[N] = "";
+    char nombreI[N] = "";
+    char nombreA[N] = "";
 
-    int ronda;
-    int puntaje = 0;
-
-    int i;
-    int correcto;
+    char jugar = 'S';
 
     srand(time(NULL));
 
-    printf("====== JUEGO SIMON ======\n\n");
-
-    /* pedir nombre */
-
-    printf("Ingrese nombre: ");
-    scanf("%s", nombre);
-
-    /* terminar */
-
-    if(nombre[0] == 'f' &&
-       nombre[1] == 'i' &&
-       nombre[2] == 'n')
+    do
     {
-    }
+        printf("Bienvenido al Juego de SIMON ver 1.0\n");
 
-    /* pedir nivel */
+        printf("Ingrese nombre (fin para terminar): ");
+        scanf("%s", nombre);
 
-    printf("\nNiveles:\n");
-    printf("p = Principiante\n");
-    printf("i = Intermedio\n");
-    printf("a = Avanzado\n");
+        // TERMINAR JUEGO
 
-    printf("\nIngrese nivel: ");
-    scanf(" %c", &nivel);
-
-    /* configurar nivel */
-
-    switch(nivel)
-    {
-        case 'p':
-
-            largoNivel = 6;
-            puntos = 1;
-
-            break;
-
-        case 'i':
-
-            largoNivel = 8;
-            puntos = 3;
-
-            break;
-
-        case 'a':
-
-            largoNivel = 10;
-            puntos = 5;
-
-            break;
-
-        default:
-
-            printf("Nivel incorrecto");
-
-    }
-
-    /* juego */
-
-    for(ronda = 1; ronda <= largoNivel; ronda++)
-    {
-        printf("\nRONDA %d\n", ronda);
-
-        /* generar color */
-
-        int numero;
-
-        numero = rand() % 4;
-
-        switch(numero)
+        if(strcmp(nombre, "fin") == 0)
         {
-            case 0:
-                secuencia[ronda - 1] = 'R';
-                break;
+            printf("\nRESULTADOS FINALES\n");
 
-            case 1:
-                secuencia[ronda - 1] = 'A';
-                break;
+            printf("Principiante: %s %d puntos\n",
+                   nombreP, mejorP);
 
-            case 2:
-                secuencia[ronda - 1] = 'V';
-                break;
+            printf("Intermedio: %s %d puntos\n",
+                   nombreI, mejorI);
 
-            case 3:
-                secuencia[ronda - 1] = 'N';
-                break;
+            printf("Avanzado: %s %d puntos\n",
+                   nombreA, mejorA);
+
+            return 0;
         }
 
-        /* mostrar secuencia */
-
-        printf("Secuencia:\n");
-
-        for(i = 0; i < ronda; i++)
+        /*
+        if(nivel == 'p' || nivel == 'P')
         {
-            putchar(secuencia[i]);
-            printf(" ");
-        }
-
-        printf("\n");
-
-        /* pedir secuencia */
-
-        printf("Ingrese la secuencia:\n");
-
-        for(i = 0; i < ronda; i++)
-        {
-            scanf(" %c", &ingreso[i]);
-        }
-
-        /* comparar */
-
-        correcto = 1;
-
-        for(i = 0; i < ronda; i++)
-        {
-            if(secuencia[i] != ingreso[i])
+            if(puntaje > mejorP)
             {
-                correcto = 0;
+                mejorP = puntaje;
+                strcpy(nombreP, nombre);
             }
         }
+    
 
-        /* resultado */
+        printf("Desea jugar otra partida? (S/N): ");
+        scanf(" %c", &jugar);
 
-        if(correcto == 1)
-        {
-            puntaje = puntaje + puntos;
-
-            printf("Correcto\n");
-            printf("Puntaje: %d\n", puntaje);
-        }
-        else
-        {
-            printf("Incorrecto\n");
-            printf("Puntaje final: %d\n", puntaje);
-
-            break;
-        }
-
-        /* pausa */
-
-        printf("\nPresione ENTER para continuar...");
-        getchar();
-        getchar();
-    }
-
-    printf("\nFin del juego\n");
+    } while(jugar == 'S' || jugar == 's');
 
 }

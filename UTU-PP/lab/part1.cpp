@@ -4,9 +4,6 @@
 #include <time.h>
 #include <unistd.h>
 #include <string.h> // comparar string fin
-// sleep(2);
-// system("clear");
-// system("cls")
 
 const int N = 100; // nombre;
 // Largo de la secuencia de colores dependiendo el nivel
@@ -25,49 +22,67 @@ const int ACIERTO_NIVEL_A = 5;
 
 int main()
 {
-
+    
     int i,n, puntaje = 0, randoms;
     char nombre[100];
     char h, nivel;
     char centinela[] = {'f', 'i', 'n', '\0'};
     bool t = true, encontrada = true;
-
+    char jugar = 'S';
+    bool caracter = true;
+    
     // Generar un número aleatorio y limitarlo al rango de 0 a 3
     srand(time(NULL));
-
+    
+    do { // Bucle para seguir jugando
     printf("Bienvenido al Juego de SIMON ver. 1.0.\n");
     printf("Ingrese su nombre\n");
     i = 0;
+    
+    
+    // Cambiar esta sección del fin
     do
     {
         scanf("%c", &nombre[i]);
         if (nombre[i] != '\n')
-            i++;
+        i++;
     } while (i < N && nombre[i] != '\n');
-
+    
     nombre[i] = '\0';
     i = 0;
     do
     {
         if (nombre[i] == centinela[i])
-            i++;
+        i++;
         else
-            t = false;
+        t = false;
     } while (nombre[i] != '\0' && t);
-
+    
     if (!t)
     {
         // do while (para seguir jugando)
+        
+        // TEST
         printf("Ingrese nivel del Juego (p, i, a): ");
         scanf(" %c", &nivel);
+        /*
+        do
+        {
+       
+            if (nivel != 'p' && nivel != 'i' && nivel != 'a')
+            printf("Nivel incorrecto. \n");
+        } while (nivel != 'p' && nivel != 'i' && nivel != 'a');
+        */
 
+        
         switch (nivel)
         {
         case 'p':
         case 'P':
             printf("Pulse <enter> para comenzar el juego. \n");
             scanf("%c", &h); // NO TOCAR NUNCA
-            while (h != '\n')
+            getchar();
+            while(h != '\n')
                 scanf("%c", &h);
             char secuencia[NIVEL_P];
             char ingreso[NIVEL_P];
@@ -134,8 +149,20 @@ int main()
             break;
         default:
             printf("Caracter incorrecto, ingrese otro\n");
+            caracter = false;
             break;
         }
-        printf("%d \n", puntaje);
+        if (caracter)
+            printf("%d ", puntaje);
+        
+    
+
     }
+    if (caracter) {
+        printf("Desea jugar otra partida? (S/N): ");
+        scanf(" %c", &jugar);
+    }
+
+
+    } while(jugar == 'S');
 }
