@@ -22,98 +22,95 @@ const int ACIERTO_NIVEL_A = 5;
 
 int main()
 {
-    
-    int i,n, puntaje = 0, randoms;
-    char nombre[100];
+
+    int i,j, n, puntaje = 0, randoms, mejorP = 0, mejorI = 0, mejorA = 0;
     char h, nivel;
-    char centinela[] = {'f', 'i', 'n', '\0'};
-    bool t = true, encontrada = true;
+    char nombre[100];
+    char nombreP[100];
+    bool f = false, encontrada = true;
     char jugar = 'S';
     bool caracter = true;
     
     // Generar un número aleatorio y limitarlo al rango de 0 a 3
     srand(time(NULL));
     
-    do { // Bucle para seguir jugando
-    printf("Bienvenido al Juego de SIMON ver. 1.0.\n");
-    printf("Ingrese su nombre\n");
-    i = 0;
-    
-    
-    // Cambiar esta sección del fin
     do
-    {
-        scanf("%c", &nombre[i]);
-        if (nombre[i] != '\n')
-        i++;
-    } while (i < N && nombre[i] != '\n');
-    
-    nombre[i] = '\0';
-    i = 0;
-    do
-    {
-        if (nombre[i] == centinela[i])
-        i++;
-        else
-        t = false;
-    } while (nombre[i] != '\0' && t);
-    
-    if (!t)
-    {
-        // do while (para seguir jugando)
-        
-        // TEST
-        printf("Ingrese nivel del Juego (p, i, a): ");
-        scanf(" %c", &nivel);
-        /*
+    { // Bucle para seguir jugando
+        printf("Bienvenido al Juego de SIMON ver. 1.0.\n");
+        printf("Ingrese su nombre\n");
+        j = 0;
+
+        // Cambiar esta sección del fin
         do
         {
-       
-            if (nivel != 'p' && nivel != 'i' && nivel != 'a')
-            printf("Nivel incorrecto. \n");
-        } while (nivel != 'p' && nivel != 'i' && nivel != 'a');
-        */
+            scanf("%c", &nombre[j]);
+            if (nombre[j] != '\n')
+                j++;
+        } while (j < N && nombre[j] != '\n');
 
-        
-        switch (nivel)
+        nombre[j] = '\0';
+        i = 0;
+        if(strcmp(nombre, "fin") == 0)
+            f=true;
+
+        if (!f)
         {
-        case 'p':
-        case 'P':
-            printf("Pulse <enter> para comenzar el juego. \n");
-            scanf("%c", &h); // NO TOCAR NUNCA
-            getchar();
-            while(h != '\n')
-                scanf("%c", &h);
-            char secuencia[NIVEL_P];
-            char ingreso[NIVEL_P];
-            for (i = 0; i < NIVEL_P; i++)
-            {
-                randoms = rand() % 4;
-                switch (randoms)
-                {
-                case 0:
-                    secuencia[i] = 'R';
-                    break;
-                case 1:
-                    secuencia[i] = 'A';
-                    break;
-                case 2:
-                    secuencia[i] = 'V';
-                    break;
-                case 3:
-                    secuencia[i] = 'N';
-                    break;
-                }
-            }
-            n=0;
+            // do while (para seguir jugando)
+            puntaje = 0;
+            // TEST
+            printf("Ingrese nivel del Juego (p, i, a): ");
+            scanf(" %c", &nivel);
+            /*
             do
             {
-                    for(i=0;i<=n;i++)
-                    printf("%c", secuencia[i]);
+
+                if (nivel != 'p' && nivel != 'i' && nivel != 'a')
+                printf("Nivel incorrecto. \n");
+            } while (nivel != 'p' && nivel != 'i' && nivel != 'a');
+            */
+
+            switch (nivel)
+            {
+            case 'p':
+            case 'P':
+                printf("Pulse <enter> para comenzar el juego. \n");
+                scanf("%c", &h); // NO TOCAR NUNCA
+                getchar();
+              
+                char secuencia[NIVEL_P];
+                char ingreso[NIVEL_P];
+                for (i = 0; i < NIVEL_P; i++)
+                {
+                    randoms = rand() % 4;
+                    switch (randoms)
+                    {
+                    case 0:
+                        secuencia[i] = 'R';
+                        break;
+                    case 1:
+                        secuencia[i] = 'A';
+                        break;
+                    case 2:
+                        secuencia[i] = 'V';
+                        break;
+                    case 3:
+                        secuencia[i] = 'N';
+                        break;
+                    }
+                }
+                n = 0;
+                do
+                {
+                    for (i = 0; i <= n; i++)
+                        printf("%c ", secuencia[i]);
                     sleep(TIEMPO_COLOR_P);
-                    system("clear"); // Comando para Linux / macOS
+                    #ifdef _WIN32
+                                        system("cls");
+                    #else
+                                        system("clear");
+                    #endif
                     printf("\n");
-                    i=0;
+                    i = 0;
                     do
                     {
                         scanf(" %c", &ingreso[i]);
@@ -128,40 +125,55 @@ int main()
                             printf("Pa tu casa manco gg! \n");
                         }
                     } while (encontrada && i <= n);
-                n++;
-             } while(encontrada && n < NIVEL_P);
-             break;
+                    n++;
+                } while (encontrada && n < NIVEL_P);
+                if(puntaje > mejorP)
+                {
+                    mejorP = puntaje;
+                    strcpy(nombreP, nombre);
 
-        case 'i':
-        case 'I':
-            printf("Pulse <enter> para comenzar el juego.\n ");
-            scanf("%c", &h);
-            while (h != '\n')
+                }
+
+                break;
+
+            case 'i':
+            case 'I':
+                printf("Pulse <enter> para comenzar el juego.\n ");
                 scanf("%c", &h);
-            break;
-        case 'a':
-        case 'A':
-            printf("Pulse <enter> para comenzar el juego.\n ");
-            scanf("%c", &h);
-            while (h != '\n')
+                while (h != '\n')
+                    scanf("%c", &h);
+                break;
+            case 'a':
+            case 'A':
+                printf("Pulse <enter> para comenzar el juego.\n ");
                 scanf("%c", &h);
-            break;
-        default:
-            printf("Caracter incorrecto, ingrese otro\n");
-            caracter = false;
-            break;
+                while (h != '\n')
+                    scanf("%c", &h);
+                break;
+            default:
+                printf("Caracter incorrecto, ingrese otro\n");
+                caracter = false;
+                break;
+            }
+            
+            if (caracter)
+            {
+                printf("Debe ingresar S(s) o N(n). Vuelva a intentarlo: \n ");
+                scanf(" %c", &jugar);
+                while (jugar != 'N' && jugar != 'S'){
+                    printf("Caracter incorrecto, vuelva a intentarlo: \n");
+                    scanf(" %c", &jugar);
+                }
+                
+            }
+            else
+            jugar = 'S';
         }
-        if (caracter)
-            printf("Puntaje: %d ", puntaje);
         
+    } while (jugar == 'S' || jugar == 's');
+        printf("Resultados del Juego: \n");
+        printf("Principiante: %s %d puntos \n", &nombreP, mejorP);
+        printf("Intermedio: %s %d puntos \n", &nombreP, mejorP);
+        printf("Avanzado: %s %d puntos \n", &nombreP, mejorP);
     
-
-    }
-    if (caracter) {
-        printf("Desea jugar otra partida? (S/N): ");
-        scanf(" %c", &jugar);
-    }
-
-
-    } while(jugar == 'S');
 }
