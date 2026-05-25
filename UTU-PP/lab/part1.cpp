@@ -121,18 +121,17 @@ int main()
                         {
                             i++;
                             puntaje = puntaje + ACIERTO_NIVEL_P;
-
-                            printf("Correcto! \n");
                         }
                         else
                         {
                             encontrada = false;
                             printf("Pa tu casa manco gg! \n");
                         }
-                    } while (encontrada && i < n);
+                    } while (encontrada && i <= n);
                 n++;
-             }while(encontrada && n < NIVEL_P);
+             } while(encontrada && n < NIVEL_P);
              break;
+
         case 'i':
         case 'I':
             printf("Pulse <enter> para comenzar el juego.\n ");
@@ -153,7 +152,7 @@ int main()
             break;
         }
         if (caracter)
-            printf("%d ", puntaje);
+            printf("Puntaje: %d ", puntaje);
         
     
 
