@@ -73,7 +73,7 @@ int main()
                 nivel_usuario = NIVEL_P;
                 puntaje_usuario = ACIERTO_NIVEL_P;
                 tiempo_usuario = TIEMPO_COLOR_P;
-                mejor_usuario = mejorP;
+                // mejor_usuario = mejorP;
                 // mejor_nombre = nombreP;
                 break;
             case 'i':
@@ -81,7 +81,7 @@ int main()
                 nivel_usuario = NIVEL_I;
                 puntaje_usuario = ACIERTO_NIVEL_I;
                 tiempo_usuario = TIEMPO_COLOR_I;
-                mejor_usuario = mejorI;
+                // mejor_usuario = mejorI;
                 // mejor_nombre = nombreI;
                 break;
             case 'a':
@@ -89,7 +89,7 @@ int main()
                 nivel_usuario = NIVEL_A;
                 puntaje_usuario = ACIERTO_NIVEL_A;
                 tiempo_usuario = TIEMPO_COLOR_A;
-                mejor_usuario = mejorA;
+                // mejor_usuario = mejorA; NO SE PUEDE PORQUE AL FINAL NECESITAMOS CADA NIVEL POR PRINTF
                 // mejor_nombre = nombreA;
                 break;
             default:
@@ -153,14 +153,14 @@ int main()
                 } while (encontrada && i <= n);
                 n++;
             } while (encontrada && n < nivel_usuario);
-            /*
+            
             if (puntaje > mejor_usuario)
             {
                 mejor_usuario = puntaje;
-                strcpy(mejor_nombre, nombre);
+                // strcpy(mejor_nombre, nombre);
             }
             
-            */ 
+         
             if (caracter)
             {
                 printf("Debe ingresar S(s) o N(n). Vuelva a intentarlo: \n ");
