@@ -179,8 +179,8 @@ int main()
 
     } while (jugar == 'S' || jugar == 's');
         printf("Resultados del Juego: \n");
-        printf("Principiante: %s %d puntos \n", &nombreP, mejorP);
-        printf("Intermedio: %s %d puntos \n", &nombreI, mejorI);
-        printf("Avanzado: %s %d puntos \n", &nombreA, mejorP);
+        printf("Principiante: %s %d puntos \n", &nombreP, mejor_usuario);
+        printf("Intermedio: %s %d puntos \n", &nombreI, mejor_usuario);
+        printf("Avanzado: %s %d puntos \n", &nombreA, mejor_usuario);
     
 }
