@@ -153,12 +153,14 @@ int main()
                 } while (encontrada && i <= n);
                 n++;
             } while (encontrada && n < nivel_usuario);
+            /*
             if (puntaje > mejor_usuario)
             {
                 mejor_usuario = puntaje;
                 strcpy(mejor_nombre, nombre);
             }
-
+            
+            */ 
             if (caracter)
             {
                 printf("Debe ingresar S(s) o N(n). Vuelva a intentarlo: \n ");
