@@ -57,7 +57,6 @@ int main()
         {
             // do while (para seguir jugando)
             puntaje = 0;
-            // TEST
             printf("Ingrese nivel del Juego (p, i, a): ");
             scanf(" %c", &nivel);
             /*
@@ -168,7 +167,9 @@ int main()
             }
             else
             jugar = 'S';
-        }
+        } else 
+            jugar = 'N';
+
         
     } while (jugar == 'S' || jugar == 's');
         printf("Resultados del Juego: \n");
