@@ -27,7 +27,7 @@ int main()
     char h, nivel;
     char nombre[100];
     char nombreP[100];
-    bool f = false, encontrada = true;
+    bool f = false, encontrada;
     char jugar = 'S';
     bool caracter = true;
     
@@ -38,12 +38,14 @@ int main()
     { // Bucle para seguir jugando
         printf("Bienvenido al Juego de SIMON ver. 1.0.\n");
         printf("Ingrese su nombre\n");
+        getchar();
         j = 0;
 
         // Cambiar esta sección del fin
-        do
+        do // while
         {
             scanf("%c", &nombre[j]);
+            
             if (nombre[j] != '\n')
                 j++;
         } while (j < N && nombre[j] != '\n');
@@ -72,10 +74,10 @@ int main()
             {
             case 'p':
             case 'P':
-                printf("Pulse <enter> para comenzar el juego. \n");
-                scanf("%c", &h); // NO TOCAR NUNCA
+                printf("Pulse <enter> para comenzar el juego. ");
+                scanf("%c", &h); // NO TOCAR
                 getchar();
-              
+                
                 char secuencia[NIVEL_P];
                 char ingreso[NIVEL_P];
                 for (i = 0; i < NIVEL_P; i++)
@@ -98,10 +100,11 @@ int main()
                     }
                 }
                 n = 0;
+                encontrada = true;
                 do
                 {
                     for (i = 0; i <= n; i++)
-                        printf("%c ", secuencia[i]);
+                        printf("%c", secuencia[i]);
                     sleep(TIEMPO_COLOR_P);
                     #ifdef _WIN32
                                         system("cls");
@@ -112,17 +115,15 @@ int main()
                     i = 0;
                     do
                     {
-                        scanf(" %c", &ingreso[i]);
+ 
+                         scanf(" %c", &ingreso[i]);
                         if (secuencia[i] == ingreso[i])
                         {
                             i++;
                             puntaje = puntaje + ACIERTO_NIVEL_P;
                         }
                         else
-                        {
                             encontrada = false;
-                            printf("Pa tu casa manco gg! \n");
-                        }
                     } while (encontrada && i <= n);
                     n++;
                 } while (encontrada && n < NIVEL_P);
