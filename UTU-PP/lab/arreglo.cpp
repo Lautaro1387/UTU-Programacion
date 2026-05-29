@@ -75,6 +75,7 @@ int main()
                 tiempo_usuario = TIEMPO_COLOR_P;
                 // mejor_usuario = mejorP;
                 // mejor_nombre = nombreP;
+                                            
                 break;
             case 'i':
             case 'I':
