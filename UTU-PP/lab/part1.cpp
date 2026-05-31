@@ -99,7 +99,12 @@ int main()
                     {
                         printf("%c", secuencia[i]);
                         sleep(TIEMPO_COLOR_P);
-                        system("clear");
+                            #ifdef _WIN32
+        system("cls");
+    // Detecta si es un entorno Linux, Unix o macOS
+    #else
+        system("clear");
+    #endif
                     }
                     i = 0;
                     printf("\n");
@@ -265,8 +270,11 @@ int main()
             jugar = 'N';
 
     } while (jugar == 'S' || jugar == 's');
+
+    /*
     printf("Resultados del Juego: \n");
     printf("Principiante: %s %d puntos \n", &nombreP, mejorP);
     printf("Intermedio: %s %d puntos \n", &nombreP, mejorP);
     printf("Avanzado: %s %d puntos \n", &nombreP, mejorP);
+    */
 }
