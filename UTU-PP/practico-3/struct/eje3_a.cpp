@@ -48,7 +48,7 @@ void DesplegarFecha(Fecha &fecha){
 
 // Fecha es valida?
 bool FechaEsValida(Fecha fecha){
-    
+
 }
 
 /*
@@ -73,7 +73,8 @@ void CargarArreglo(Producto productos[]){
     int i;
 
     for(i=0; i<TAM; i++)
-        CargarArreglo(productos[i]);
+        i++; //esto para que el codigo no de error nomas
+        // CargarArreglo(productos[i]);
 }
 
 // Desplegado del arreglo.
@@ -82,7 +83,8 @@ void DesplegarArreglo(Producto productos[]){
     int i;
 
     for(i=0; i<TAM; i++)
-        DesplegarArreglo(productos[i]);
+        i++; //esto para que el codigo no de error nomas
+        // DesplegarArreglo(productos[i]);
 }
 
 
