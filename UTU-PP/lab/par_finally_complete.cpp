@@ -23,32 +23,36 @@ const int ACIERTO_NIVEL_A = 5;
 int main()
 {
 
-    int i, j, n, puntaje = 0, randoms, mejorP = 0, mejorI = 0, mejorA = 0;
-    char h, nivel;
-    char nombre[100];
-    char nombreP[100];
-    bool f = false, encontrada;
+    int i, j, n, puntaje, randoms, mejorP = 0, mejorI = 0, mejorA = 0;
+    char h, nivel, nombre[N], nombreP[N], nombreI[N], nombreA[N];
+    bool f = false, caracter = true, encontrada;
     char jugar = 'S';
-    bool caracter = true;
 
-    // Generar un número aleatorio y limitarlo al rango de 0 a 3
+    // Genera un número aleatorio y limitarlo al rango de 0 a 3
     srand(time(NULL));
 
+    nombreP[0] = '\0';
+    nombreI[0] = '\0';
+    nombreA[0] = '\0';
+
     do
-    { // Bucle para seguir jugando
+    {
         printf("Bienvenido al Juego de SIMON ver. 1.0.\n");
-        printf("Ingrese su nombre\n");
-        getchar();
+        printf("Ingrese su nombre (fin=fin del juego)\n");
         j = 0;
 
-        // Cambiar esta sección del fin
-        do // while
-        {
-            scanf("%c", &nombre[j]);
+        scanf("%c", &nombre[j]);
 
-            if (nombre[j] != '\n')
-                j++;
-        } while (j < N && nombre[j] != '\n');
+        while (nombre[0] == '\n')
+        {
+            printf("Debe ingresar nombre del Jugador o fin para finalizar el juego. Vuelva a intentar. \n");
+            scanf("%c", &nombre[j]);
+        }
+        while (nombre[j] != '\n' && j < N)
+        {
+            j++;
+            scanf("%c", &nombre[j]);
+        }
 
         nombre[j] = '\0';
 
@@ -59,13 +63,20 @@ int main()
         if (!f)
         {
             puntaje = 0;
-            printf("Ingrese nivel del Juego (p, i, a): ");
-            scanf(" %c", &nivel);
+            do
+            {
+                printf("Ingrese nivel del Juego (p, i, a): ");
+                scanf(" %c", &nivel);
+                if (nivel != 'p' && nivel != 'i' && nivel != 'a')
+                    printf("Nivel del juego no es valido. Vuelva a intentarlo. \n");
+
+            } while (nivel != 'p' && nivel != 'i' && nivel != 'a');
 
             switch (nivel)
             {
             case 'p':
             case 'P':
+            {
                 printf("Pulse <enter> para comenzar el juego. ");
                 scanf("%c", &h);
                 getchar();
@@ -91,62 +102,55 @@ int main()
                         break;
                     }
                 }
+
                 n = 0;
                 encontrada = true;
-
-
                 do
                 {
                     for (i = 0; i <= n; i++)
                     {
-                             #ifdef _WIN32
-                            system("cls");  // Comando para Windows
-                        #else
-                            system("clear"); // Comando para Linux y macOS
-                        #endif
+                        sleep(TIEMPO_COLOR_P);
+                        system("cls");
                         printf("%c", secuencia[i]);
                         sleep(TIEMPO_COLOR_P);
-                               #ifdef _WIN32
-                            system("cls");  // Comando para Windows
-                        #else
-                            system("clear"); // Comando para Linux y macOS
-                        #endif
-
+                        system("cls");
                     }
-                    i = 0;
 
+                    i = 0;
+                    puntaje = 0;
                     do
                     {
                         scanf(" %c", &ingreso[i]);
-                            #ifdef _WIN32
-                            system("cls");  // Comando para Windows
-                        #else
-                            system("clear"); // Comando para Linux y macOS
-                        #endif
-                        sleep(TIEMPO_COLOR_P);
+
                         if (secuencia[i] == ingreso[i])
                         {
                             i++;
                             puntaje = puntaje + ACIERTO_NIVEL_P;
                         }
                         else
+                        {
                             encontrada = false;
+                            printf("Incorrecto, fin del juego \n");
+                        }
                     } while (encontrada && i <= n);
                     n++;
+
                 } while (encontrada && n < NIVEL_P);
-                if (puntaje > mejorP)
+
+                if (puntaje >= mejorP)
                 {
                     mejorP = puntaje;
                     strcpy(nombreP, nombre);
                 }
                 break;
+            }
             case 'i':
             case 'I':
             {
-
                 printf("Pulse <enter> para comenzar el juego. ");
                 scanf("%c", &h);
                 getchar();
+
                 char secuencia[NIVEL_I];
                 char ingreso[NIVEL_I];
                 for (i = 0; i < NIVEL_I; i++)
@@ -168,50 +172,54 @@ int main()
                         break;
                     }
                 }
+
                 n = 0;
                 encontrada = true;
                 do
                 {
                     for (i = 0; i <= n; i++)
                     {
-                             #ifdef _WIN32
-                            system("cls");  // Comando para Windows
-                        #else
-                            system("clear"); // Comando para Linux y macOS
-                        #endif
+                        sleep(TIEMPO_COLOR_I);
+                        system("cls");
                         printf("%c", secuencia[i]);
                         sleep(TIEMPO_COLOR_I);
-                        system("clear");
+                        system("cls");
                     }
-                    printf("\n");
                     i = 0;
+                    puntaje = 0;
                     do
                     {
                         scanf(" %c", &ingreso[i]);
+
                         if (secuencia[i] == ingreso[i])
                         {
                             i++;
                             puntaje = puntaje + ACIERTO_NIVEL_I;
                         }
                         else
+                        {
                             encontrada = false;
+                            printf("Incorrecto, fin del juego \n");
+                        }
                     } while (encontrada && i <= n);
                     n++;
+
                 } while (encontrada && n < NIVEL_I);
-                if (puntaje > mejorP)
+                if (puntaje >= mejorI)
                 {
-                    mejorP = puntaje;
-                    strcpy(nombreP, nombre);
+                    mejorI = puntaje;
+                    strcpy(nombreI, nombre);
                 }
+                break;
             }
             break;
             case 'a':
             case 'A':
             {
-
                 printf("Pulse <enter> para comenzar el juego. ");
                 scanf("%c", &h);
                 getchar();
+
                 char secuencia[NIVEL_A];
                 char ingreso[NIVEL_A];
                 for (i = 0; i < NIVEL_A; i++)
@@ -233,18 +241,22 @@ int main()
                         break;
                     }
                 }
+
                 n = 0;
                 encontrada = true;
                 do
                 {
                     for (i = 0; i <= n; i++)
                     {
+                        sleep(TIEMPO_COLOR_A);
+                        system("cls");
                         printf("%c", secuencia[i]);
                         sleep(TIEMPO_COLOR_A);
-                        system("clear");
+                        system("cls");
                     }
-                    printf("\n");
+
                     i = 0;
+                    puntaje = 0;
                     do
                     {
                         scanf(" %c", &ingreso[i]);
@@ -254,23 +266,25 @@ int main()
                             puntaje = puntaje + ACIERTO_NIVEL_A;
                         }
                         else
+                        {
                             encontrada = false;
+                            printf("Incorrecto, fin del juego \n");
+                        }
                     } while (encontrada && i <= n);
                     n++;
                 } while (encontrada && n < NIVEL_A);
-                if (puntaje > mejorP)
+                if (puntaje >= mejorA)
                 {
-                    mejorP = puntaje;
-                    strcpy(nombreP, nombre);
+                    mejorA = puntaje;
+                    strcpy(nombreA, nombre);
                 }
+                break;
             }
             break;
             default:
-                printf("Caracter incorrecto, ingrese otro\n");
                 caracter = false;
                 break;
             }
-
             if (caracter)
             {
                 printf("Debe ingresar S(s) o N(n). Vuelva a intentarlo: \n ");
@@ -286,13 +300,11 @@ int main()
         }
         else
             jugar = 'N';
-
+        if (!f)
+            getchar();
     } while (jugar == 'S' || jugar == 's');
-
-    /*
     printf("Resultados del Juego: \n");
-    printf("Principiante: %s %d puntos \n", &nombreP, mejorP);
-    printf("Intermedio: %s %d puntos \n", &nombreP, mejorP);
-    printf("Avanzado: %s %d puntos \n", &nombreP, mejorP);
-    */
+    printf("Principiante: %s - %d puntos \n", nombreP, mejorP);
+    printf("Intermedio: %s - %d puntos \n", nombreI, mejorI);
+    printf("Avanzado: %s - %d puntos \n", nombreA, mejorA);
 }
