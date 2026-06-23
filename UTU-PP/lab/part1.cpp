@@ -51,7 +51,7 @@ int main()
         } while (j < N && nombre[j] != '\n');
 
         nombre[j] = '\0';
-        
+
         i = 0;
         if (strcmp(nombre, "fin") == 0)
             f = true;
@@ -93,19 +93,37 @@ int main()
                 }
                 n = 0;
                 encontrada = true;
+
+
                 do
                 {
                     for (i = 0; i <= n; i++)
                     {
+                             #ifdef _WIN32
+                            system("cls");  // Comando para Windows
+                        #else
+                            system("clear"); // Comando para Linux y macOS
+                        #endif
                         printf("%c", secuencia[i]);
                         sleep(TIEMPO_COLOR_P);
-                        system("clear");
+                               #ifdef _WIN32
+                            system("cls");  // Comando para Windows
+                        #else
+                            system("clear"); // Comando para Linux y macOS
+                        #endif
+
                     }
                     i = 0;
-                    printf("\n");
+
                     do
                     {
                         scanf(" %c", &ingreso[i]);
+                            #ifdef _WIN32
+                            system("cls");  // Comando para Windows
+                        #else
+                            system("clear"); // Comando para Linux y macOS
+                        #endif
+                        sleep(TIEMPO_COLOR_P);
                         if (secuencia[i] == ingreso[i])
                         {
                             i++;
@@ -156,6 +174,11 @@ int main()
                 {
                     for (i = 0; i <= n; i++)
                     {
+                             #ifdef _WIN32
+                            system("cls");  // Comando para Windows
+                        #else
+                            system("clear"); // Comando para Linux y macOS
+                        #endif
                         printf("%c", secuencia[i]);
                         sleep(TIEMPO_COLOR_I);
                         system("clear");
