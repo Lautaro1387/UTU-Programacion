@@ -5,7 +5,7 @@ Escribir un programa en C++ en el cual se defina una matriz de enteros, de F fil
 luego realice las siguientes acciones: 
 a) Cargar una matriz del tipo definido con valores leídos desde teclado ✅
 b) Mostrar por pantalla el contenido de la matriz. Cada fila debe listarse en una nueva línea ✅ 
-c) Calcular el promedio de los valores almacenados en la matriz (sumar todo y dividirlo por la cantidad) ​❌​
+c) Calcular el promedio de los valores almacenados en la matriz (sumar todo y dividirlo por la cantidad de elementos) ​❌​
 d) Determinar el menor valor almacenado en la matriz y desplegarlo por pantalla. 
 e) Dado un entero (leído desde teclado), determinar si pertenece o no a la matriz. 
 f) Dado otro entero (leído desde teclado), contar su cantidad de ocurrencias en la matriz. 
