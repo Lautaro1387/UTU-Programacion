@@ -21,3 +21,4 @@ racional div(racional r1, racional r2);
 void imprimir(racional r);
 
 #endif
+
