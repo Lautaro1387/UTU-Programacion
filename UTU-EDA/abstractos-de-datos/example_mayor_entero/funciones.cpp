@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include "cabezales.h"
 
+// Dado un arreglo de numeros entero,s retornar el mayor numero entero. Resolverlo en forma recursiva.
 
 /*
-
-
 racional crearRacional()
 {
     racional aux = new(nodoRacional);
@@ -63,14 +62,35 @@ int crearArreglo(int arr[], int tam){
 
 }
 
+// Funcion
 int mayor(int arr[], int n){
     
     // Caso base
-    int i;
+    if (n == 1){
+        return arr[0];
+    } else { 
+        int MAX = mayor(arr, n-1);
+        if (arr[n-1] > MAX) {
+            return arr[n-1];
+        } else {
+            return MAX;
+        }
+      } 
 
-    if (arr[i] > arr[i-1]) {
-        
+}
+
+// Procedimiento
+void mayor(int arr[], int n, int &resul){
+    // pre n > 0
+    if (n == 1 ){
+        resul = arr[0];
+    } else {
+        int MAX;
+        mayor(arr, n-1, MAX);
+        if (arr[n-1] > MAX){
+            resul = arr[n-1];
+        } else {
+            resul = MAX;
+        }
     }
-
-    // Paso inductivo
 }
