@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include "cabezales.h"
+// Definiciones completa y notas del profe + audio
+
+/*
+    para hacer referencia al dato l->dato
+    para pasar al proximo l->sig
+    para hacer referencia al proximo es l->sig->dato
+    para pasar al otro otra vez l->sig->sig
+*/
+
+struct nodo_lista {
+
+    int dato;
+    lista sig;
+
+};
+
+lista crear(){
+// Devuelve una lista vacia
+    return NULL;
+}
+
+lista cons(lista l, int n){
+    // pos: agergar n al comienzo de la lista
+    lista aux = new(nodo_lista);
+    aux->dato = n;
+    aux->sig = l;
+    return aux;
+    /*
+        si quiero invocarla es asi:
+        lista lis;
+        lis = crear();
+
+        lis = cons(lis, 2);
+        list = cons(lis, -3);
+    */
+}
+lista lis;
+
+// Procedimiento
+// si quiero que siga siendo la misma lista, debo de actualizarlo todo el tiempo
+// Le estamos pasando la dirección de L (por el &)
+void consP(lista &l, int n){
+
+    lista aux = new(nodo_lista);
+    aux-> dato = n;
+    aux->sig = l;
+    l = aux; // Siempre se puede hacer si el pasaje es por referencia, si no lo es, se acaba el procedimiento y se acaba porque es local
+    
+    // Si se invoca es asi: consP(lis, 8);
+}
+
+// Primero de la lista
+int head(lista l){
+    return l->dato;
+}
+
+lista tail(lista l){
+    return l->sig;
+}
+
+bool isEmpty(lista l){
+    // POS: retorna ture si l es vacia, false en caso contrario
+    return l == NULL;
+}
+
+// forma recursiva
+int contar(lista l){
+    // POS: retorna la cantidad de elementos de l
+    if (isEmpty(l)){ // tambien es valido i == NULL
+        return 0;
+    } else {
+        return (1+contar(tail(l)));    
+    }
+}
+
+//forma interactivo
+int contar(lista l){
+    int cant = 0;
+    while (l != NULL){
+        cant++;
+        l = l->sig; // no pierdo el valor de l, porque es una copia
+    }
+    return cant;
+}
+
+
+int sumar(lista l){
+   // PRE: l no vacia
+   // POS: retorna la suma de los elementos de l
+    int sum = 0;
+    while(l != NULL){
+        sum += l->dato; // sum = sum + l-<dato
+        l = l->sig;
+    }
+    return sum;
+}
+
+// forma mas optima de sumar
+int sumar(lista l){
+    // PRE: l no vacia
+    // POS: retorna la suma de los elementos de l
+    int sum = 0;
+    while (l != NULL){
+        sum += l->dato;
+        l = l->sig;
+    }
+    return sum += l->dato;
+}
+
+// forma recursiva para sumar
+int sumar(lista l){
+    // PRE: l no vacia
+    // POS: retorna la suma de los elementos de l
+    if (l->sig == NULL){
+        return l->dato;
+    } else {
+        return l->dato = sumar(l->sig); // tail(l)
+    }
+}
+
+// otra caso de forma recursiva
+int sumar(lista l){
+    if(isEmpty(tail(l))){
+        return head(l);
+    } else {
+        return head(l) + sumar(tail(l));
+    }
+}
+
+bool pertenece(lista l, int x){
+    // POS: retorna true si X esta en la lista, en caso contrario retorna false
+    while (l != NULL && l->dato != x) // por circuito corto se puede hacer
+        l = l->sig;
+    return l != NULL;
+}
