@@ -33,7 +33,7 @@ lista cons(lista l, int n){
     aux->sig = l;
     return aux;
     /*
-        si quiero invocarla es asi:
+        si quiero invocarla es asi (en el main):
         lista lis;
         lis = crear();
 
@@ -163,7 +163,68 @@ lista eliminar(lista l, int x){
         return l;
     }
 
-
+    // si quisiera invocarlo (en el main):
+    // lis = eliminar(lis, 2)
 
 }
 
+// forma iteractiva
+lista destruir(lista l){
+    // POS: Elimina todos los elementos de l y librerar memoria
+    lista aux;
+    while (l != NULL){
+        aux = l;
+        l = l->sig;
+        delete(aux);
+    }
+    return l;
+}
+
+// forma recursiva
+lista destruir(lista l){
+    // POS: Elimina todos los elementos de l y librerar memoria
+    lista aux;
+    if (isEmpty(l)){
+        return NULL; 
+    } else{
+        aux = l;
+        l = l->sig;
+        delete(aux);
+        return destruir(l);
+    }
+}
+
+
+// forma iteractiva
+lista snoc(lista l, int n){
+    // POS: Agrega n al final de la lista
+    lista aux = new(nodo_lista);
+    aux->dato = n;
+    aux->sig = NULL;
+    if(l == NULL){
+        return aux;
+    } else {
+        lista recorre = l;
+        while (recorre->sig != NULL)
+            recorre = recorre->sig;
+        recorre->sig = aux;
+        return l;
+    }
+}
+
+
+// forma recursiva
+lista snoc(lista l, int n){
+    // POS: Agrega n al final de la lista
+    // int n, es el resto
+    if (isEmpty(l)){
+        lista aux = new(nodo_lista);
+        aux->dato = n;
+        aux->sig = NULL;
+        return aux;
+    } else {
+        l->sig = snoc(l->sig, n); // fundamental para recursividad
+        return l;
+    }
+
+}
