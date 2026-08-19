@@ -3,7 +3,11 @@
 
 int main()
 {
-   
+    lista lis;
 
-    return 0;
+    lis = crear();
+    // lis = cons(lis, 4);
+    lis = snoc(lis, 4);
+
+    printf("%d", lis);
 }

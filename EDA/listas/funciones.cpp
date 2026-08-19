@@ -70,16 +70,7 @@ bool isEmpty(lista l){
     return l == NULL;
 }
 
-// forma recursiva
-int contar(lista l){
-    // POS: retorna la cantidad de elementos de l
-    if (isEmpty(l)){ // tambien es valido i == NULL
-        return 0;
-    } else {
-        return (1+contar(tail(l)));    
-    }
-}
-
+/*
 //forma interactivo
 int contar(lista l){
     int cant = 0;
@@ -89,7 +80,17 @@ int contar(lista l){
     }
     return cant;
 }
+*/
 
+// forma recursiva
+int contar(lista l){
+    // POS: retorna la cantidad de elementos de l
+    if (isEmpty(l)){ // tambien es valido i == NULL
+        return 0;
+    } else {
+        return (1+contar(tail(l)));    
+    }
+}
 
 int sumar(lista l){
    // PRE: l no vacia
@@ -101,7 +102,7 @@ int sumar(lista l){
     }
     return sum;
 }
-
+/*
 // forma mas optima de sumar
 int sumar(lista l){
     // PRE: l no vacia
@@ -133,6 +134,7 @@ int sumar(lista l){
         return head(l) + sumar(tail(l));
     }
 }
+*/
 
 bool pertenece(lista l, int x){
     // POS: retorna true si X esta en la lista, en caso contrario retorna false
@@ -167,7 +169,7 @@ lista eliminar(lista l, int x){
     // lis = eliminar(lis, 2)
 
 }
-
+/*
 // forma iteractiva
 lista destruir(lista l){
     // POS: Elimina todos los elementos de l y librerar memoria
@@ -180,6 +182,7 @@ lista destruir(lista l){
     return l;
 }
 
+*/
 // forma recursiva
 lista destruir(lista l){
     // POS: Elimina todos los elementos de l y librerar memoria
@@ -194,8 +197,8 @@ lista destruir(lista l){
     }
 }
 
-
-// forma iteractiva
+/*
+// forma iteractiva con estructura interna (nodo_lista)
 lista snoc(lista l, int n){
     // POS: Agrega n al final de la lista
     lista aux = new(nodo_lista);
@@ -206,14 +209,15 @@ lista snoc(lista l, int n){
     } else {
         lista recorre = l;
         while (recorre->sig != NULL)
-            recorre = recorre->sig;
+        recorre = recorre->sig;
         recorre->sig = aux;
         return l;
     }
 }
 
+*/
 
-// forma recursiva
+// forma recursiva con estructura interna (nodo_lista)
 lista snoc(lista l, int n){
     // POS: Agrega n al final de la lista
     // int n, es el resto
@@ -227,4 +231,31 @@ lista snoc(lista l, int n){
         return l;
     }
 
+}
+
+// snoc sin utilizar estructura interna de forma recursiva
+/*
+lista snoc(lista l, int n){ // si esto lo asigna a N, pierdo la lista original
+if(isEmpty(l)){
+    return cons(crear(), n);
+} else {
+    return cons(snoc(tail(l), n), head(l));
+}
+
+}
+*/
+
+// Procedimiento para imprimir
+void imprimir(lista l){
+
+    if (l == NULL){
+        printf("<Lista vacia>");
+    } else {
+        printf("<<");
+        while (l->sig != NULL){
+            printf("%d->", l->dato);
+            l = l->sig;
+        }
+        printf("%d>>\n", l->dato);
+    }
 }
