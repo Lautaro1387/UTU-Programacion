@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include "cabezales.h"
+// En parcial C++
+
+// liberar memoria 
+// C++ -> delete() (usaremos esta) - new 
+// C -> free()- malloc 
 // Definiciones completa y notas del profe + audio
 
 /*
@@ -135,3 +140,30 @@ bool pertenece(lista l, int x){
         l = l->sig;
     return l != NULL;
 }
+
+
+lista eliminar(lista l, int x){
+    // POS: retorna la lsita sin el eleemnto x y libera la memoria correspondiente al nodo
+    // Tenes que ver el caso donde tiene uno solo (chequear luego)
+    lista recorre = l, ant;
+
+    while (recorre != NULL && recorre->dato != x){
+        ant = recorre; // creo una copia y lo recorro con la copia
+        recorre = recorre -> sig;
+    }
+    if (recorre == NULL){
+        return l;
+    } else if (recorre == l){
+        l = l->sig;
+        delete(recorre);
+        return l;
+    } else {
+        ant->sig = recorre->sig;
+        delete(recorre);
+        return l;
+    }
+
+
+
+}
+
