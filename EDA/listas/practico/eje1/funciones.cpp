@@ -56,11 +56,31 @@ int Max(lista l){
 */
 
 
-
+/*
 lista Remove(int x, lista l){
+    
+lista recorre = l, aux;
+while (l != NULL && l->dato == x){
+    
+}
+}
 
-    lista recorre = l, aux;
-    while (l != NULL && l->dato == x){
+*/
 
+
+bool Equals(lista l, lista p){
+
+    // Verifica si las listas l y p 
+    // son iguales (mismos elementos en el mismo orden).
+
+    while (l != NULL && p != NULL && l->dato == p->dato){
+        l = l->sig;
+        p = p->sig;
+    }
+    if (l == NULL && p == NULL){
+        return true;
+    } else {
+        return false;
     }
 }
+// rreturn l == null && p == null;

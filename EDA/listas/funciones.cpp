@@ -12,6 +12,8 @@
     para pasar al proximo l->sig
     para hacer referencia al proximo es l->sig->dato
     para pasar al otro otra vez l->sig->sig
+
+    si haces l->dato y esta vacio, explota
 */
 
 struct nodo_lista {
