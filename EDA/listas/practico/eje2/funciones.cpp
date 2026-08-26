@@ -81,7 +81,7 @@ lista Merge(lista l, lista p){
             recorre->sig = NULL;
         }
         recorre = aux;
-        l = l->dato;
+        l = l->sig;
     }
       while (p != NULL){
         lista aux = new(nodo_lista);
@@ -93,7 +93,7 @@ lista Merge(lista l, lista p){
             recorre->sig = NULL;
         }
         recorre = aux;
-        p = p->dato;
+        p = p->sig;
     }
 
 return resultado;
