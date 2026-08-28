@@ -83,4 +83,4 @@ bool Equals(lista l, lista p){
         return false;
     }
 }
-// rreturn l == null && p == null;
+// return l == null && p == null;
