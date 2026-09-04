@@ -7,6 +7,7 @@
 struct nodo_lista{
     int dato;
     lista sig;
+
 };
 
 
