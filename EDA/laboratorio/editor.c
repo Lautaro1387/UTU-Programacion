@@ -15,6 +15,11 @@ struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios
 	para implementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
+
+
+	//editor debe de tener una estructura asociada a lineas
+	editor sig;
+	editor ant;
 };
 
 
