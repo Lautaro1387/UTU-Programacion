@@ -18,8 +18,6 @@ struct nodo_editor{
     palabra sig;
 };mplementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
-
-
 	//editor debe de tener una estructura asociada a lineas
 	editor sig;
 	editor ant;
@@ -38,6 +36,7 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
+
 	return NO_IMPLEMENTADA;
 }
 

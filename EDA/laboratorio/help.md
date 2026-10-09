@@ -45,3 +45,11 @@ Modulo de diccionario
 
 Modulo de Correcion y validacion
 15.ImprimirTextoIncorrecto
+
+
+Modulos a aplicar:
+
+1 - linea
+2 - texto
+3 - diccionario
+4 - editor

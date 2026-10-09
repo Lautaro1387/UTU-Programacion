@@ -18,7 +18,7 @@ typedef char* Cadena;
 typedef unsigned int Posicion;
 
 
-#define MAX_COMANDO 75
+#define MAX_COMANDO 75 // longitud de la palabra
 #define MAX_CANT_PALABRAS_X_LINEA 3
 #define MAX_CANT_ULTIMAS_PALABRAS 3
 
