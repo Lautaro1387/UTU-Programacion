@@ -13,7 +13,10 @@ using namespace std;
 
 struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios
-	para implementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
+	para istruct nodo_palabra{
+    char letra;
+    palabra sig;
+};mplementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
 
 
