@@ -3,10 +3,50 @@
 
 
 
+typedef struct nodo_linea * linea;
 
+struct nodo_linea{
+   Cadena palabra;
+   linea sig;
+};
 
 linea CrearLinea(){
     // Crea una nueva linea
-    linea aux = new(nodo_linea);
-    return aux;
+    return NULL;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+linea agregarPalabra(texto t, linea l, ){
+    if(l->palabra[0] == ' '){
+        palabra[0]
+    }
+}
+
+

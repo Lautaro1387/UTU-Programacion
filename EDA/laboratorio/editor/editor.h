@@ -9,7 +9,7 @@
 
 #include "definiciones.h"
 
-typedef struct nodo_editor * editor;
+typedef struct nodo_editor * editor; // conjunto de texto
 
 
 // Operaciones Relativas a las lineas (al documento)

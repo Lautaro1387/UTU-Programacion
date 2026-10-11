@@ -8,19 +8,17 @@
 // Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
+#include "linea.h"
 
 using namespace std;
 
 struct nodo_editor{
 	/* acá deben figurar los campos/estructuras que usted considere necesarios
-	para istruct nodo_palabra{
-    char letra;
-    palabra sig;
-};mplementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
+	para implementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
 	//editor debe de tener una estructura asociada a lineas
-	editor sig;
-	editor ant;
+	texto primer_linea;
+	texto ultima_linea;
 };
 
 
@@ -37,9 +35,14 @@ TipoRetorno InsertarLinea(editor & e){
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 
-	return NO_IMPLEMENTADA;
-}
+	editor aux = new(nodo_editor);
+	aux->ultima_linea->dato = CrearLinea();
+	e->sig = aux;
+	return e;
 
+}
+<
+>
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
