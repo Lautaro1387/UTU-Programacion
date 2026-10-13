@@ -77,6 +77,7 @@ void Show(lista l);
 // Muestra los elementos de la lista l separados por comas.
 
 
-
+bool esOrdenada(lista l);
+// pos: retorna true si l está ordenada de menor a mayor, false en caso contrario
 
 #endif

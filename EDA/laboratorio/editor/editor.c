@@ -61,7 +61,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 
-	editor iter = e;.
+	editor iter = e;
 	while (e-primer_linea != NULL && posicionLinea > 0){
 		iter-primer_linea = primer_linea-sig;		
 	} 

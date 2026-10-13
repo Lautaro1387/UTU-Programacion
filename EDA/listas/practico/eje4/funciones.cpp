@@ -113,6 +113,21 @@ bool Equals(lista l, lista p);
 void Show(lista l);
 // Muestra los elementos de la lista l separados por comas.
 
+// crear, cons, snoc, isEmpty, head, tail, pertenece, contar, eliminar
+bool esOrdenada(lista l){
+    // pos: retorna true si l está ordenada de menor a mayor, false en caso contrario
+    if (IsEmpty(l) || IsEmpty(Tail(l))){
+        return true;
+    } else if (Head(l) > Tail(l)){
+        return false;
+    } else {
+        return esOrdenada;
+    }
+
+
+}
+
+{100}{2}{3}{4}{23}{4}{23}
 
 // PENDIENTES
 // TAKE y DROP de forma recursiva sin representacion interna
