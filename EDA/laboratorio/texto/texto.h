@@ -9,6 +9,8 @@ struct nodo_texto{
 };
 
 
+
+
 texto CrearTexto();
 unsigned int CantidadLineas(texto t);
 void ImprimirTextoCompleto(texto t);

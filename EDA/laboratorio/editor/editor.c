@@ -9,6 +9,8 @@
 #include <string.h>
 #include <iostream>
 #include "linea.h"
+#include "texto.h"
+
 
 using namespace std;
 
@@ -27,6 +29,8 @@ editor CrearEditor(){
 	editor e = new(nodo_editor);
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
+	e->primer_linea = NULL;
+    e->ultima_linea = NULL;
 	return e;
 }
 
@@ -34,19 +38,44 @@ TipoRetorno InsertarLinea(editor & e){
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
+	
 
-	editor aux = new(nodo_editor);
-	aux->ultima_linea->dato = CrearLinea();
-	e->sig = aux;
-	return e;
+	texto aux = new(nodo_texto);
+	aux->dato = CrearLinea();
+	aux->sig = NULL;
+
+	
+	if (e->primer_linea == NULL){ // documento vacio
+		e->primer_linea = aux;
+		e->ultima_linea = aux;
+	} else {
+		e->ultima_linea->sig = aux; // 
+		e->ultima_linea = aux;
+	}
+
+	return OK;
 
 }
-<
+
+
+
+
 >
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+	editor iter = e;
+	while (e-primer_linea != NULL && posicionLinea > 0){
+		iter-primer_linea = primer_linea-sig;		
+	} 
+	if (posicionLinea == 0){
+		return InsertarLinea(iter-primer_linea);
+	} else {
+		return ERROR;
+	}
+
+	return NO_IMPLEMENTADA; // revisar bien
 }
 
 TipoRetorno BorrarLinea(editor & e, Posicion posicionLinea){

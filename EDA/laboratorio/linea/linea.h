@@ -18,7 +18,7 @@ struct nodo_linea{
 linea CrearLinea();
     // Crea una nueva linea
 
-linea ObtenerLinea(linea l);
+linea ObtenerLinea(texto t);
 
 linea ImprimirLinea();
 

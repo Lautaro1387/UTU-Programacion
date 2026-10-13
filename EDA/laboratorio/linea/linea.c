@@ -15,6 +15,11 @@ linea CrearLinea(){
     return NULL;
 }
 
+linea ObtenerLinea(texto t){
+    // check proximo
+    
+    return t-dato;
+}
 
 
 
