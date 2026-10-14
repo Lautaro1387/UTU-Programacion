@@ -10,15 +10,19 @@ struct nodo_linea{
    linea sig;
 };
 
+
 linea CrearLinea(){
     // Crea una nueva linea
     return NULL;
 }
 
-linea ObtenerLinea(texto t){
-    // check proximo
+linea crear_nodo(){
     
-    return t-dato;
+}
+
+linea ObtenerLinea(texto t){
+    // check proximo  
+    return t->dato;
 }
 
 

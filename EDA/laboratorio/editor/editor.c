@@ -82,7 +82,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 			e->ultima_linea = aux;
 			return OK;
 		} else {
-			aux->sig = ant->sig;
+			aux->sig = iter;
 			ant->sig = aux;
 			return OK;
 		}
@@ -112,6 +112,9 @@ TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 TipoRetorno ImprimirTexto(editor & e){
 // Imprime el texto por pantalla.
 // Ver más detalles en la letra del obligatorio.
+	texto iter = e->primer_linea;
+	while(iter!=NULL  )
+
 	return NO_IMPLEMENTADA;
 }
 
