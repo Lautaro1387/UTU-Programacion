@@ -61,17 +61,34 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 
-	editor iter = e;
-	while (e-primer_linea != NULL && posicionLinea > 0){
-		iter-primer_linea = primer_linea-sig;		
-	} 
-	if (posicionLinea == 0){
-		return InsertarLinea(iter);
+	texto aux = new(nodo_texto);
+	aux->dato = crearLinea();
+	if (e->primer_linea == NULL){
+		aux->sig = NULL;
+		e->primer_linea = aux;
+		return OK;
+	}
+	texto iter = e->primer_linea;
+	texto ant = iter;
+	while (iter != NULL && posicionLinea > 1){
+		ant = iter;
+		iter = iter->sig;
+		posicionLinea--;
+	}
+	if (posicionLinea == 1){
+		if (iter == NULL){
+			aux->sig = iter;
+			ant->sig = aux;
+			e->ultima_linea = aux;
+			return OK;
+		} else {
+			aux->sig = ant->sig;
+			ant->sig = aux;
+			return OK;
+		}
 	} else {
 		return ERROR;
 	}
-
-	return NO_IMPLEMENTADA; // revisar bien
 }
 
 TipoRetorno BorrarLinea(editor & e, Posicion posicionLinea){

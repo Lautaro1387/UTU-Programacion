@@ -14,15 +14,15 @@ typedef struct nodo_editor * editor; // conjunto de texto
 
 // Operaciones Relativas a las lineas (al documento)
 
-editor CrearEditor();
+editor CrearEditor(); // OK
 // Crea la estructura editor.
 
-TipoRetorno InsertarLinea(editor & e);
+TipoRetorno InsertarLinea(editor & e); // OK
 // Inserta una nueva línea vacía al final del texto.
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 
-TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea);
+TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea); // PENDIENTE
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 
