@@ -113,7 +113,13 @@ TipoRetorno ImprimirTexto(editor & e){
 // Imprime el texto por pantalla.
 // Ver más detalles en la letra del obligatorio.
 	texto iter = e->primer_linea;
-	while(iter!=NULL  )
+	int i = 0;
+	linea l;
+	while(iter!=NULL ){
+		i++;
+		l = obtenerLinea(iter);
+		printf("%d : %s/n", i, l)
+	}
 
 	return NO_IMPLEMENTADA;
 }
