@@ -4,11 +4,12 @@
 // main.c
 // Programa Principal Obligatorio
 
-#include "editor.h"
+#include "editor/editor.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h> 
 #include <iostream>
+#include "definiciones.h"
 
 using namespace std;
 

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "definiciones.h"
+#include "../definiciones.h"
 #include "texto.h"
 
 struct nodo_texto{
@@ -7,5 +7,9 @@ struct nodo_texto{
     texto sig;
 
 };
+linea ObtenerLinea(texto t){
+    // check proximo  
+    return t->dato;
+}
 
 

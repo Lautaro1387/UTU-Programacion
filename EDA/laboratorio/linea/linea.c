@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "definiciones.h"
+#include "linea.h"
 
 
 
@@ -16,14 +17,6 @@ linea CrearLinea(){
     return NULL;
 }
 
-linea crear_nodo(){
-    
-}
-
-linea ObtenerLinea(texto t){
-    // check proximo  
-    return t->dato;
-}
 
 
 

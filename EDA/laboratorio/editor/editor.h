@@ -1,5 +1,6 @@
 #ifndef EDITOR_H
 #define EDITOR_H
+#include "../definiciones.h"
 
 // Estructuras de Datos y Algoritmos - Obligatorio 2026
 // Tecnologo en Informatica FIng - DGETP - UTEC
@@ -7,7 +8,6 @@
 // editor.h
 // Modulo de especificacion de editor.
 
-#include "definiciones.h"
 
 typedef struct nodo_editor * editor; // conjunto de texto
 

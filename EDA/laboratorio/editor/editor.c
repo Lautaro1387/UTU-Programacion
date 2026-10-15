@@ -4,12 +4,13 @@
 // editor.c
 // Modulo de implementacion de editor.
 
-#include "editor.h"
-// Incluir los modulos realizados.
 #include <string.h>
 #include <iostream>
-#include "linea.h"
-#include "texto.h"
+#include "editor.h"
+#include "definiciones.h"
+// Incluir los modulos realizados.
+#include "../linea/linea.h"
+#include "../texto/texto.h"
 
 
 using namespace std;
@@ -112,16 +113,25 @@ TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
 TipoRetorno ImprimirTexto(editor & e){
 // Imprime el texto por pantalla.
 // Ver más detalles en la letra del obligatorio.
+	if (e->primer_linea == NULL){
+		printf("Texto vacio");
+		return OK;
+	}
 	texto iter = e->primer_linea;
 	int i = 0;
 	linea l;
-	while(iter!=NULL ){
+	while(iter != NULL){
+		l = ObtenerLinea(iter);
 		i++;
-		l = obtenerLinea(iter);
-		printf("%d : %s/n", i, l)
+		printf("%d: ", i);
+		while (l != NULL) {
+			printf("%s ", l->palabra);
+			l = l->sig;
+		}
+		printf("\n");
+		iter = iter->sig;
 	}
-
-	return NO_IMPLEMENTADA;
+	return OK;
 }
 
 TipoRetorno ComprimirTexto(editor & e){

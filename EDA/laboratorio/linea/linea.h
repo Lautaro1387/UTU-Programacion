@@ -1,7 +1,9 @@
-#include "definiciones.h"
+#ifndef LINEA_H
+#define LINEA_H
+
+#include "../definiciones.h"
 #include <stdio.h>
 #include <string.h>
-#include "texto.h"
 
 
 
@@ -12,11 +14,9 @@ typedef struct nodo_linea * linea; // conjunto de palabra
 
 linea CrearLinea();
     // Crea una nueva linea
-
-linea ObtenerLinea(texto t);
-
 linea ImprimirLinea();
 
 linea DestruirLinea();
 
 
+#endif
