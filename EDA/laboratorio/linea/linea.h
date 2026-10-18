@@ -13,7 +13,7 @@ typedef struct nodo_linea * linea; // conjunto de palabra
 // funciones auxiliares
 
 linea CrearLinea();
-    // Crea una nueva linea
+    // Crea una nueva lineaaaaa
 linea ImprimirLinea();
 
 linea DestruirLinea();
