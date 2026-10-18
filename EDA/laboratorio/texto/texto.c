@@ -5,11 +5,11 @@
 struct nodo_texto{
     linea dato;
     texto sig;
-
 };
+
 linea ObtenerLinea(texto t){
     // check proximo  
     return t->dato;
 }
 
-
+linea Insertar

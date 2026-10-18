@@ -18,6 +18,12 @@ linea CrearLinea(){
 }
 
 
+linea InsertarUltimaLinea(linea l, Cadena palabraAIngresar){
+    // Inserta una nueva palabra al final de la linea.
+  
+    }
+}
+
 
 
 

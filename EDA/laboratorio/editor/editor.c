@@ -7,7 +7,7 @@
 #include <string.h>
 #include <iostream>
 #include "editor.h"
-#include "definiciones.h"
+#include "../definiciones.h"
 // Incluir los modulos realizados.
 #include "../linea/linea.h"
 #include "../texto/texto.h"
@@ -40,7 +40,6 @@ TipoRetorno InsertarLinea(editor & e){
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 	
-
 	texto aux = new(nodo_texto);
 	aux->dato = CrearLinea();
 	aux->sig = NULL;
@@ -143,9 +142,29 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	texto iter = e->primer_linea;
+	while (iter != NULL && posicionLinea > 1){
+		iter = iter->sig;	
+		posicionLinea--;
+	}
+	if (iter == e->primer_linea){
+		insertarLinea(e->primer_linea);
+		linea nueva_palabra = new(nodo_linea);
+		nueva_palabra->palabra = palabraAIngresar;
+		nueva_palabra->sig = NULL;
+		e->primer_linea->dato = nueva_palabra;
+		return OK;
+	}
+	
+	return ERROR;
 }
 
+
+
+// strlen();
+if (posicionLinea < 1 || posicionPalabra < 1){
+	return ERROR;
+}
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
 // Borra la palabra en la posición indicada.
 // Ver más detalles en la letra del obligatorio.

@@ -22,7 +22,7 @@ TipoRetorno InsertarLinea(editor & e); // OK
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 
-TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea); // PENDIENTE
+TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea); // OK
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 
