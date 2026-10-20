@@ -143,16 +143,60 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
 	texto iter = e->primer_linea;
+	texto nueva_linea = new(nodo_texto);
+
+	nueva_linea->dato = new(nodo_linea);
+	nueva_linea->dato->palabra = palabraAIngresar;
+	nueva_linea->dato->sig = NULL;
+	nueva_linea->sig = NULL;
+
+	if (e->primer_linea == NULL){
+		e->primer_linea = nueva_linea;
+	}
 	while (iter != NULL && posicionLinea > 1){
-		iter = iter->sig;	
+		iter = iter->sig;
 		posicionLinea--;
 	}
-	if (iter == e->primer_linea){
-		insertarLinea(e->primer_linea);
+
+	if (posicionLinea == 1){
+		linea aux = iter->dato;
+		while (aux != NULL && posicionPalabra > 1){
+			aux = aux->sig;
+			posicionPalabra--;
+		}
+		
 		linea nueva_palabra = new(nodo_linea);
 		nueva_palabra->palabra = palabraAIngresar;
 		nueva_palabra->sig = NULL;
-		e->primer_linea->dato = nueva_palabra;
+		if(iter->dato == NULL){
+			iter->dato = nueva_palabra;
+			nueva_palabra->sig = NULL;
+		}
+		if(posicionPalabra == 1){
+			if (aux->sig == NULL){
+				aux->sig = nueva_palabra;
+				nueva_palabra->sig = NULL;
+			} else {
+				nueva_palabra->sig = aux->sig;
+				aux->sig = nueva_palabra;
+			}
+		}
+
+		strcpy(nueva_palabra->palabra, palabraAIngresar);
+
+
+
+
+
+
+
+		
+
+
+
+
+
+		
 		return OK;
 	}
 	
