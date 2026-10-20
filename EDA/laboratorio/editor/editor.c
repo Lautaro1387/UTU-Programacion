@@ -182,21 +182,10 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 			}
 		}
 
+		
+
 		strcpy(nueva_palabra->palabra, palabraAIngresar);
 
-
-
-
-
-
-
-		
-
-
-
-
-
-		
 		return OK;
 	}
 	
