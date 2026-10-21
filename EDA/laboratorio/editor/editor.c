@@ -42,21 +42,13 @@ TipoRetorno InsertarLinea(editor & e){
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 	
-	texto aux = CrearTexto();
-	//TextoDato(aux) = CrearLinea();
-	//TextoSiguiente(aux) = NULL;
-
 	if (e->primer_linea == NULL){ // documento vacio
-		e->primer_linea = aux;
-		e->ultima_linea = aux;
+		e->primer_linea = InsertarLineaTexto(e->primer_linea, CrearLinea());
+		e->ultima_linea = e->primer_linea;
 	} else {
-
-		e->primer_linea = aux;
-		e->ultima_linea = aux;
+		e->ultima_linea = InsertarLineaTexto(e->ultima_linea, CrearLinea());
 	}
-
 	return OK;
-
 }
 
 TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
@@ -76,19 +68,11 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 		posicionLinea--;
 	}
 	if (posicionLinea == 1){
-		if (iter == NULL){
-			
-			InsertarLinea(e);
-			TextoSiguiente(aux) = iter;
-			TextoSiguiente(ant) = aux;
-			e->ultima_linea = aux;
-			return OK;
-		} else {
-			TextoSiguiente(aux) = iter;
-			TextoSiguiente(ant) = aux;
-			return OK;
-		}
-	} else {
+		iter = InsertarLineaEnPosicionTexto(iter, ant, aux);
+		e->ultima_linea = TextoUltimaLinea(e);
+		return OK;
+	}
+	else {
 		return ERROR;
 	}
 }
@@ -126,8 +110,8 @@ TipoRetorno ImprimirTexto(editor & e){
 		i++;
 		printf("%d: ", i);
 		while (l != NULL) {
-			printf("%s ", l->palabra);
-			l = l->sig;
+			printf("%s ", LineaPalabra(l));
+			l = LineaSiguiente(l);
 		}
 		printf("\n");
 		iter = TextoSiguiente(iter);
@@ -145,10 +129,9 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
 
-	texto iter = e->primer_linea;
+	texto iter = CrearTexto();
 	texto nueva_linea = CrearTexto();
-	nueva_linea->dato = CrearLinea();
-	InsertarPalabraAlInicio(nueva_linea->dato,palabraAIngresar);	
+	InsertarPalabraAlInicio(nueva_linea, palabraAIngresar);	
 
 	if (e->primer_linea == NULL){
 		e->primer_linea = nueva_linea;
@@ -159,32 +142,32 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 	}
 
 	if (posicionLinea == 1){
-		linea aux = iter->dato;
+		linea aux = TextoDato(iter);
 		while (aux != NULL && posicionPalabra > 1){
-			aux = aux->sig;
+			aux = LineaSiguiente(aux);
 			posicionPalabra--;
 		}
 		
-		linea nueva_palabra = CrearLinea();
-		nueva_palabra->palabra = palabraAIngresar;
-		nueva_palabra->sig = NULL;
-		if(iter->dato == NULL){
+		// Crear una funcion de ingresarLineaAlInicio de tipo linea
+		linea nueva_palabra = InsertarPalabraAlInicio(nueva_palabra, palabraAIngresar);
+		if(TextoDato(iter) == NULL){
 			iter->dato = nueva_palabra;
-			nueva_palabra->sig = NULL;
+			// nueva_palabra->sig = NULL;
 		}
 		if(posicionPalabra == 1){
 			if (LineaSiguiente(aux) == NULL){
-				aux->sig = nueva_palabra;
-				nueva_palabra->sig = NULL;
+				aux = InsertarLineaTexto(aux, nueva_palabra);
+				// aux->sig = nueva_palabra;
+				// nueva_palabra->sig = NULL;
 			} else {
-				nueva_palabra->sig = LineaSiguiente(aux);
+				// modificiar InsertarLineaTexto el primer parametro para que sea de tipo linea y no texto
+				nueva_palabra = InsertarLineaTexto(nueva_palabra, LineaSiguiente(aux));
 				aux->sig = nueva_palabra;
-				
 			}
 				if (CantidadPalabras(e->primer_linea->dato) > 3){
 				linea iter2 = e->primer_linea->dato;
 				linea pal = CrearLinea();
-				while (iter2->sig != NULL)
+				while (LineaSiguiente(iter2) != NULL)
 					iter2 = LineaSiguiente(iter2);
 				strcpy(iter2->palabra, pal->palabra);
 				delete(iter2);

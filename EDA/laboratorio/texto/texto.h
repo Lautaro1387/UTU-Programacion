@@ -14,12 +14,22 @@ linea ObtenerLinea(texto t);
 
 texto InsertarLinea(texto t, linea l);
 
-unsigned int CantidadLineas(texto t);
-void ImprimirTextoCompleto(texto t);
+texto InsertarLineaTexto(texto t, linea l);
 
+texto TextoUltimaLinea(editor e);
 
 texto TextoPrimera(editor e);
 // devuelve el puntero a la primera línea de editor e (i.e. e->primer_linea).
+
+texto TextoUltima(editor e);
+// devuelve el puntero a la última línea (e->ultima_linea).
+
+texto InsertarLineaEnPosicionTexto(texto t, Posicion pos);
+
+
+unsigned int CantidadLineas(texto t);
+void ImprimirTextoCompleto(texto t);
+
 
 linea TextoDato(texto t);
 
@@ -32,16 +42,12 @@ linea TextoContenido(texto t);
 void TextoCrearLinea(editor &e, texto despues);
 // inserta una nueva línea (nodo vacía) en editor, inmediatamente después de la línea apuntada por despues. Si despues==NULL, agrega la línea al inicio (y actualiza primer_linea). Actualiza ultima_linea si es la última.
 
-texto TextoUltima(editor e);
-// devuelve el puntero a la última línea (e->ultima_linea).
 
-
-Texto CrearTexto();//Lista
-TipoRetorno InsertarLineaFinal(Texto t);                           // Debe ser O(1)
-TipoRetorno InsertarLineaAlPrincipio(Texto t);                        // Debe ser O(1)
-TipoRetorno InsertarLineaEnPosicionTexto(Texto t, Posicion pos);
-TipoRetorno BorrarLineaEnPosicion(Texto t, Posicion pos);
-TipoRetorno BorrarTodoTexto(Texto t);
-TipoRetorno ImprimirTextoCompleto(Texto t);
-void DestruirTexto(Texto& t);
+texto CrearTexto();//Lista
+TipoRetorno InsertarLineaFinal(texto t);                           // Debe ser O(1)
+TipoRetorno InsertarLineaAlPrincipio(texto t);                        // Debe ser O(1)
+TipoRetorno BorrarLineaEnPosicion(texto t, Posicion pos);
+TipoRetorno BorrarTodoTexto(texto t);
+TipoRetorno ImprimirTextoCompleto(texto t);
+void DestruirTexto(texto& t);
 #endif

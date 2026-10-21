@@ -80,6 +80,11 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra){
     }
 }
 
+
+texto insertarLineaAlInicio(texto t, Cadena palabra){
+    return insertarPalabraAlInicio(t->dato, palabra);
+}
+
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
 

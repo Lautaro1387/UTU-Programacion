@@ -42,16 +42,24 @@ void LineaInsertarDespues(linea ant, linea nodo);
 
 
 
-Linea CrearLinea();
-Linea ObtenerSiguienteLinea(Linea l);
-Linea ObtenerLinea(Texto t,Posicion PL);
-Linea InsertarPalabraEnLinea(Texto t,Posicion pos, Cadena palabra);
-void EstablecerSiguienteLinea(Linea l, Linea siguiente);
-TipoRetorno InsertarPalabraEnLinea(Linea l, Posicion pos, Cadena palabra);
-TipoRetorno BorrarPalabraEnLinea(Linea l, Posicion pos);
-TipoRetorno BorrarOcurrenciasEnLinea(Linea l, Cadena palabra);
-void ImprimirLineaContenido(Linea l);
-void DestruirLinea(Linea& l);
+
+
+
+
+
+
+
+
+linea CrearLinea();
+linea ObtenerSiguienteLinea(linea l);
+linea ObtenerLinea(texto t, Posicion pos);
+linea InsertarPalabraEnLinea(texto t,Posicion pos, Cadena palabra);
+void EstablecerSiguienteLinea(linea l, linea siguiente);
+TipoRetorno InsertarPalabraEnLinea(linea l, Posicion pos, Cadena palabra);
+TipoRetorno BorrarPalabraEnLinea(linea l, Posicion pos);
+TipoRetorno BorrarOcurrenciasEnLinea(linea l, Cadena palabra);
+void ImprimirLineaContenido(linea l);
+void DestruirLinea(linea& l);
 
 
 #endif
