@@ -11,6 +11,7 @@
 // Incluir los modulos realizados.
 #include "../linea/linea.h"
 #include "../texto/texto.h"
+#include "../diccionario/diccionario.h"
 
 
 using namespace std;
@@ -20,6 +21,7 @@ struct nodo_editor{
 	para implementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
 	//editor debe de tener una estructura asociada a lineas
+	Diccionario dic;
 	texto primer_linea;
 	texto ultima_linea;
 };
@@ -40,16 +42,16 @@ TipoRetorno InsertarLinea(editor & e){
 // Este requerimiento debe ser resuelto en O(1) peor caso.
 // Ver más detalles en la letra del obligatorio.
 	
-	texto aux = new(nodo_texto);
-	aux->dato = CrearLinea();
-	aux->sig = NULL;
+	texto aux = CrearTexto();
+	//TextoDato(aux) = CrearLinea();
+	//TextoSiguiente(aux) = NULL;
 
-	
 	if (e->primer_linea == NULL){ // documento vacio
 		e->primer_linea = aux;
 		e->ultima_linea = aux;
 	} else {
-		e->ultima_linea->sig = aux; // 
+
+		e->primer_linea = aux;
 		e->ultima_linea = aux;
 	}
 
@@ -61,10 +63,8 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 
-	texto aux = new(nodo_texto);
-	aux->dato = crearLinea();
+	texto aux = CrearTexto();
 	if (e->primer_linea == NULL){
-		aux->sig = NULL;
 		e->primer_linea = aux;
 		return OK;
 	}
@@ -72,18 +72,20 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 	texto ant = iter;
 	while (iter != NULL && posicionLinea > 1){
 		ant = iter;
-		iter = iter->sig;
+		iter = TextoSiguiente(iter);
 		posicionLinea--;
 	}
 	if (posicionLinea == 1){
 		if (iter == NULL){
-			aux->sig = iter;
-			ant->sig = aux;
+			
+			InsertarLinea(e);
+			TextoSiguiente(aux) = iter;
+			TextoSiguiente(ant) = aux;
 			e->ultima_linea = aux;
 			return OK;
 		} else {
-			aux->sig = iter;
-			ant->sig = aux;
+			TextoSiguiente(aux) = iter;
+			TextoSiguiente(ant) = aux;
 			return OK;
 		}
 	} else {
@@ -128,7 +130,7 @@ TipoRetorno ImprimirTexto(editor & e){
 			l = l->sig;
 		}
 		printf("\n");
-		iter = iter->sig;
+		iter = TextoSiguiente(iter);
 	}
 	return OK;
 }
@@ -142,19 +144,17 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-	texto iter = e->primer_linea;
-	texto nueva_linea = new(nodo_texto);
 
-	nueva_linea->dato = new(nodo_linea);
-	nueva_linea->dato->palabra = palabraAIngresar;
-	nueva_linea->dato->sig = NULL;
-	nueva_linea->sig = NULL;
+	texto iter = e->primer_linea;
+	texto nueva_linea = CrearTexto();
+	nueva_linea->dato = CrearLinea();
+	InsertarPalabraAlInicio(nueva_linea->dato,palabraAIngresar);	
 
 	if (e->primer_linea == NULL){
 		e->primer_linea = nueva_linea;
 	}
 	while (iter != NULL && posicionLinea > 1){
-		iter = iter->sig;
+		iter = TextoSiguiente(iter);
 		posicionLinea--;
 	}
 
@@ -165,7 +165,7 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 			posicionPalabra--;
 		}
 		
-		linea nueva_palabra = new(nodo_linea);
+		linea nueva_palabra = CrearLinea();
 		nueva_palabra->palabra = palabraAIngresar;
 		nueva_palabra->sig = NULL;
 		if(iter->dato == NULL){
@@ -173,31 +173,29 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 			nueva_palabra->sig = NULL;
 		}
 		if(posicionPalabra == 1){
-			if (aux->sig == NULL){
+			if (LineaSiguiente(aux) == NULL){
 				aux->sig = nueva_palabra;
 				nueva_palabra->sig = NULL;
 			} else {
-				nueva_palabra->sig = aux->sig;
+				nueva_palabra->sig = LineaSiguiente(aux);
 				aux->sig = nueva_palabra;
+				
 			}
+				if (CantidadPalabras(e->primer_linea->dato) > 3){
+				linea iter2 = e->primer_linea->dato;
+				linea pal = CrearLinea();
+				while (iter2->sig != NULL)
+					iter2 = LineaSiguiente(iter2);
+				strcpy(iter2->palabra, pal->palabra);
+				delete(iter2);
+				InsertarPalabraAlInicio(e->primer_linea->sig, pal->palabra);
+        	}
 		}
-
-		
-
-		strcpy(nueva_palabra->palabra, palabraAIngresar);
-
 		return OK;
-	}
-	
+	}	
 	return ERROR;
 }
 
-
-
-// strlen();
-if (posicionLinea < 1 || posicionPalabra < 1){
-	return ERROR;
-}
 TipoRetorno BorrarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra){
 // Borra la palabra en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
