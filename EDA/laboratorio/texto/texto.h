@@ -1,14 +1,12 @@
 #ifndef TEXTO_H
 #define TEXTO_H
 #include "../definiciones.h"
-#include "../editor/editor.h"
-#include "../linea/linea.h"
 
-typedef struct nodo_texto * texto; // conjunto de linea 
+typedef struct nodo_texto * texto; // conjunto de linea
+typedef struct nodo_linea * linea; // conjunto de linea
 
 
 texto CrearTexto();
-
 
 linea ObtenerLinea(texto t);
 
@@ -24,7 +22,7 @@ texto TextoPrimera(editor e);
 texto TextoUltima(editor e);
 // devuelve el puntero a la última línea (e->ultima_linea).
 
-texto InsertarLineaEnPosicionTexto(texto t, Posicion pos);
+texto InsertarLineaEnPosicionTexto(texto iter, texto ant, texto aux);
 
 
 unsigned int CantidadLineas(texto t);
@@ -48,6 +46,5 @@ TipoRetorno InsertarLineaFinal(texto t);                           // Debe ser O
 TipoRetorno InsertarLineaAlPrincipio(texto t);                        // Debe ser O(1)
 TipoRetorno BorrarLineaEnPosicion(texto t, Posicion pos);
 TipoRetorno BorrarTodoTexto(texto t);
-TipoRetorno ImprimirTextoCompleto(texto t);
-void DestruirTexto(texto& t);
+void DestruirTexto(texto &t);
 #endif

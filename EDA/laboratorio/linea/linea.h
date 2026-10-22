@@ -2,8 +2,9 @@
 #define LINEA_H
 #include "../definiciones.h"
 
-
 typedef struct nodo_linea * linea; // conjunto de palabra
+typedef struct nodo_texto * texto; // conjunto de palabra
+
 
 
 // funciones auxiliares
@@ -14,7 +15,7 @@ linea CrearLinea();
 linea LineaNueva(Cadena palabra);
 // crea e inicializa un nodo de palabra con la cadena dada y sig=null.
 
-linea InsertarPalabraAlInicio(linea l, Cadena palabra);
+linea InsertarPalabraAlInicio(texto t, Cadena palabra);
 // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
 
 linea LineaSiguiente(linea l);
@@ -50,9 +51,8 @@ void LineaInsertarDespues(linea ant, linea nodo);
 
 
 
-linea CrearLinea();
 linea ObtenerSiguienteLinea(linea l);
-linea ObtenerLinea(texto t, Posicion pos);
+// linea ObtenerLinea(texto t, Posicion pos);
 linea InsertarPalabraEnLinea(texto t,Posicion pos, Cadena palabra);
 void EstablecerSiguienteLinea(linea l, linea siguiente);
 TipoRetorno InsertarPalabraEnLinea(linea l, Posicion pos, Cadena palabra);

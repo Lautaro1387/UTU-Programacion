@@ -75,7 +75,7 @@ texto TextoUltimaLinea(editor e){
     }
 }
 
-texto InsertarLineaEnPosicionTexto(Texto iter, Texto ant, Texto aux){
+texto InsertarLineaEnPosicionTexto(texto iter, texto ant, texto aux){
 
     if (iter == NULL){
 			aux->sig = iter;
