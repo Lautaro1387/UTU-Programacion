@@ -2,15 +2,17 @@
 #include "../definiciones.h"
 #include "texto.h"
 
+
+struct nodo_linea {
+   Cadena palabra;
+   linea sig;
+};
+
 struct nodo_texto {
     linea dato;
     texto sig;
 };
 
-linea ObtenerLinea(texto t){
-    // check proximo  
-    return t->dato;
-}
 
 texto crearTextoNull(texto t){
     return NULL;
@@ -23,7 +25,15 @@ texto CrearTexto(){
     return t;
 }
 
-texto InsertarLineaTexto(texto t, linea l){
+texto TextoSiguiente(texto t){
+    if (t == NULL)
+    return NULL;
+    else
+    return t->sig;
+}
+
+// No usada actualmente
+texto InsertarUltimaLineaTexto(texto t, linea l){
     texto aux = CrearTexto();
     aux->dato = l;
     if (t == NULL){
@@ -37,25 +47,18 @@ texto InsertarLineaTexto(texto t, linea l){
     }
 }
 
-linea TextoDato(texto t){
-    if (t == NULL)
-        return NULL;
-    else
-        return t->dato;
-}
+texto InsertarLineaTexto(linea l, linea nueva_palabra, texto iter){
+    // insertar la linea l en el medio de la lista t, manteniendo el orden de las lineas.
 
-texto TextoSiguiente(texto t){
-    if (t == NULL)
-        return NULL;
-    else
-        return t->sig;
+    nueva_palabra->sig = l->sig;
+    l->sig = nueva_palabra;
+    return iter;
 }
-
 
 // devuelve el puntero a la última línea (e->ultima_linea).
 
 
-texto TextoPrimeraLinea(editor e){
+texto TextoPrimera(editor e){
     // devuelve el puntero a la primera línea de editor e (i.e. e->primer_linea).
     if (e == NULL)
         return NULL;
@@ -63,7 +66,7 @@ texto TextoPrimeraLinea(editor e){
         return e->primer_linea;
 }
 
-texto TextoUltimaLinea(editor e){
+texto TextoUltima(editor e){
     // devuelve el puntero a la última línea (e->ultima_linea).
     if (e->ultima_linea == NULL){
         return NULL;
@@ -88,18 +91,7 @@ texto InsertarLineaEnPosicionTexto(texto iter, texto ant, texto aux){
 		}
 }
 
-/*
 
-texto InsertarLineaTexto(editor e){
-
-    texto aux = CrearTexto();
-
-    if (e->primer_linea == NULL){ // documento vacio
-		e->primer_linea = aux;
-		e->ultima_linea = aux;
-	} else {
-		e->ultima_linea->sig = aux;
-		e->ultima_linea = aux;
-	}
+texto insertarLineaAlInicio(texto t, Cadena palabra){
+    return InsertarPalabraAlInicio(TextoDato(t), palabra);
 }
-*/

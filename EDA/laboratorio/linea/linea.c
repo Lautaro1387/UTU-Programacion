@@ -1,12 +1,17 @@
 #include <stdio.h>
-#include "definiciones.h"
+#include "../definiciones.h"
 #include "linea.h"
-#include "../texto/texto.h"
+#include <string.h>
 
 
 struct nodo_linea {
    Cadena palabra;
    linea sig;
+};
+
+struct nodo_texto {
+    linea dato;
+    texto sig;
 };
 
 
@@ -32,6 +37,19 @@ Cadena LineaPalabra(linea l){
         return NULL;
     else
         return l->palabra;
+}
+
+linea ObtenerLinea(texto t){
+    // check proximo  
+    return t->dato;
+}
+
+
+linea TextoDato(texto t){
+    if (t == NULL)
+    return NULL;
+    else
+    return t->dato;
 }
 
 Posicion CantidadPalabras(linea l){
@@ -63,26 +81,45 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra){
     linea aux = CrearLinea();
     aux->palabra = palabra;
     aux->sig = NULL;
-     if (t->dato == NULL){
+     if (TextoDato(t) == NULL){
         return aux;
     } else {
         aux->sig = TextoDato(t);
         t->dato = aux;
-        if (CantidadPalabras(t->dato) > 3){
+        if (CantidadPalabras(TextoDato(t)) > 3){
             linea iter = TextoDato(t);
             linea aux = CrearLinea();
             while (iter->sig != NULL)
                 iter = LineaSiguiente(iter);
-            strcp(iter->palabra, aux->palabra);
+            strcpy(iter->palabra, aux->palabra);
             delete(iter);
             InsertarPalabraAlInicio(t->sig, aux->palabra);
         }
     }
 }
 
+linea InsertarUltimaLinea(linea l, linea nueva_palabra){
+    if (l == NULL){
+        return nueva_palabra;
+    } else {
+        linea iter = l;
+        while (iter->sig != NULL)
+            iter = iter->sig;
+        iter->sig = nueva_palabra;
+        return l;
+    }
+}
 
-texto insertarLineaAlInicio(texto t, Cadena palabra){
-    return insertarPalabraAlInicio(t->dato, palabra);
+
+linea InsertarPalabraAlInicioLinea(linea l, Cadena palabra){
+    linea aux = CrearLinea();
+    aux->palabra = palabra;
+    if (l == NULL){
+        return aux;
+    } else {
+        aux->sig = l;
+        return aux;
+    }
 }
 
 Posicion CantidadPalabras(linea l);
@@ -91,35 +128,3 @@ Posicion CantidadPalabras(linea l);
 linea LineaExtraerUltimo(linea &l);
 // quita el último nodo de la lista l (ajustando el penúltimo a sig=null)
 // y lo devuelve. Retorna NULL si la lista queda vacía.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-linea agregarPalabra(texto t, linea l, ){
-    if(l->palabra[0] == ' '){
-        palabra[0]
-    }
-}
-
-

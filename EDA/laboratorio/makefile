@@ -12,7 +12,7 @@ editor.o: editor/editor.c editor/editor.h linea/linea.h texto/texto.h definicion
 linea.o: linea/linea.c linea/linea.h definiciones.h
 	g++ -Wall -c linea/linea.c -o linea.o
 
-texto.o: texto/texto.c texto/texto.h texto/linea.h definiciones.h
+texto.o: texto/texto.c texto/texto.h linea/linea.h definiciones.h
 	g++ -Wall -c texto/texto.c -o texto.o
 
 diccionario.o: diccionario/diccionario.c diccionario/diccionario.h definiciones.h
