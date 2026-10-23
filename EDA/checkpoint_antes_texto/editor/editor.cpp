@@ -69,7 +69,7 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 	}
 	if (posicionLinea == 1){
 		iter = InsertarLineaEnPosicionTexto(iter, ant, aux);
-		e->ultima_linea = TextoUltima(e);
+		e->ultima_linea = TextoUltima(e->primer_linea);
 		return OK;
 	}
 	else {
@@ -111,7 +111,7 @@ TipoRetorno ImprimirTexto(editor & e){
 		printf("%d: ", i);
 		while (l != NULL) {
 			printf("%s ", LineaPalabra(l));
-			l = LineaSiguiente(l);
+			l = ObtenerSiguienteLinea(l);
 		}
 		printf("\n");
 		iter = TextoSiguiente(iter);
@@ -144,7 +144,7 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 	if (posicionLinea == 1){
 		linea aux = TextoDato(iter);
 		while (aux != NULL && posicionPalabra > 1){
-			aux = LineaSiguiente(aux);
+			aux = ObtenerSiguienteLinea(aux);
 			posicionPalabra--;
 		}
 		
@@ -156,7 +156,7 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 			// nueva_palabra->sig = NULL;
 		}
 		if(posicionPalabra == 1){
-			if (LineaSiguiente(aux) == NULL){
+			if (ObtenerSiguienteLinea(aux) == NULL){
 				// insertar la palabra al final de la linea
 				aux = InsertarUltimaLinea(aux, nueva_palabra);
 				// aux->sig = nueva_palabra;
@@ -170,8 +170,8 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 				if (CantidadPalabras(TextoDato(iter)) > 3){
 				linea iter2 = TextoDato(iter);
 				linea pal = CrearLinea();
-				while (LineaSiguiente(iter2) != NULL)
-					iter2 = LineaSiguiente(iter2);
+				while (ObtenerSiguienteLinea(iter2) != NULL)
+					iter2 = ObtenerSiguienteLinea(iter2);
 				strcpy(LineaPalabra(iter2), LineaPalabra(pal));
 				delete(iter2);
 				InsertarPalabraAlInicio(TextoSiguiente(iter), LineaPalabra(pal));

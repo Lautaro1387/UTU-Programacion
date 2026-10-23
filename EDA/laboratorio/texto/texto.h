@@ -1,7 +1,6 @@
 #ifndef TEXTO_H
 #define TEXTO_H
 #include "../definiciones.h"
-#include "../linea/linea.h"
 
 typedef struct nodo_texto * texto; // conjunto de linea
 typedef struct nodo_linea * linea; // conjunto de linea
@@ -11,6 +10,9 @@ typedef struct nodo_editor * editor; // conjunto de texto
 
 texto CrearTexto();
 // Crea un nuevo nodo de texto vacio
+
+linea ObtenerLinea(texto t);
+// devuelve la cabeza de la lista de palabras en la línea t (t->dato).
 
 texto InsertarLineaTextoVacio(texto t, linea l);
 // Se usa: TipoRetorno InsertarLinea(editor & e);
@@ -28,21 +30,26 @@ texto TextoUltimaLinea(editor e);
 // Se usa en: TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // devuelve el puntero a la última línea (e->ultima_linea).
 
+texto insertarLineaAlInicio(texto t, Cadena palabra);
+
 texto TextoPrimera(editor e);
 // devuelve el puntero a la primera línea de editor e (i.e. e->primer_linea).
 
-texto TextoUltima(editor e);
+texto TextoUltima(texto t);
 // devuelve el puntero a la última línea (e->ultima_linea).
 
-texto insertarLineaAlInicio(texto t, Cadena palabra);
-
 texto InsertarLineaEnPosicionTexto(texto iter, texto ant, texto aux);
+
+linea TextoDato(texto t);
 
 texto TextoSiguiente(texto t);
 // devuelve la siguiente línea después de t (t->sig).
 
 linea TextoContenido(texto t);
 // devuelve la cabeza de la lista de palabras en la línea t (t->dato).
+
+linea InsertarPalabraAlInicio(texto t, Cadena palabra);
+// inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
 
 
 /*

@@ -9,12 +9,6 @@ struct nodo_linea {
    linea sig;
 };
 
-struct nodo_texto {
-    linea dato;
-    texto sig;
-};
-
-
 linea CrearLinea(){
     // Crea un nuevo nodo de línea vacio
     linea l = new(nodo_linea);
@@ -23,12 +17,31 @@ linea CrearLinea(){
     return l;
 }
 
-linea LineaSiguiente(linea l){
+
+void LineaIgualLinea(linea l, linea nueva_linea){
+    // establece la linea siguiente.
+    if (l != NULL)
+        l = nueva_linea;
+}
+
+void LineaSiguienteIgualLinea(linea l, linea nueva_linea){
+    // establece la linea siguiente.
+    if (l != NULL)
+    l->sig = nueva_linea;
+}
+
+void InsertarPalabraEnLinea(linea l, Cadena palabra){
+    // inserta la palabra en la linea l.
+    if (l != NULL)
+        l->palabra = palabra;
+}
+
+linea ObtenerSiguienteLinea(linea l){
     // devuelve la linea siguiente.
     if (l == NULL)
         return NULL;
     else
-        return l->sig;    
+        return l->sig;
 }
 
 Cadena LineaPalabra(linea l){
@@ -37,19 +50,6 @@ Cadena LineaPalabra(linea l){
         return NULL;
     else
         return l->palabra;
-}
-
-linea ObtenerLinea(texto t){
-    // check proximo  
-    return t->dato;
-}
-
-
-linea TextoDato(texto t){
-    if (t == NULL)
-    return NULL;
-    else
-    return t->dato;
 }
 
 Posicion CantidadPalabras(linea l){
@@ -73,28 +73,6 @@ Cadena ObtenerPalabra(linea l, Posicion pos) {
             pos--;
         }
         return iter->palabra;
-    }
-}
-
-linea InsertarPalabraAlInicio(texto t, Cadena palabra){
-    // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
-    linea aux = CrearLinea();
-    aux->palabra = palabra;
-    aux->sig = NULL;
-     if (TextoDato(t) == NULL){
-        return aux;
-    } else {
-        aux->sig = TextoDato(t);
-        t->dato = aux;
-        if (CantidadPalabras(TextoDato(t)) > 3){
-            linea iter = TextoDato(t);
-            linea aux = CrearLinea();
-            while (iter->sig != NULL)
-                iter = LineaSiguiente(iter);
-            strcpy(iter->palabra, aux->palabra);
-            delete(iter);
-            InsertarPalabraAlInicio(t->sig, aux->palabra);
-        }
     }
 }
 
@@ -122,9 +100,11 @@ linea InsertarPalabraAlInicioLinea(linea l, Cadena palabra){
     }
 }
 
+
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
 
 linea LineaExtraerUltimo(linea &l);
 // quita el último nodo de la lista l (ajustando el penúltimo a sig=null)
 // y lo devuelve. Retorna NULL si la lista queda vacía.
+

@@ -3,20 +3,20 @@ todo: main
 main: main.o editor.o linea.o texto.o diccionario.o
 	g++ -Wall -o main main.o editor.o linea.o texto.o diccionario.o
 
-main.o: main.c editor/editor.h definiciones.h
-	g++ -Wall -c main.c -o main.o
+main.o: main.cpp editor/editor.h definiciones.h
+	g++ -Wall -c main.cpp -o main.o
 
-editor.o: editor/editor.c editor/editor.h linea/linea.h texto/texto.h definiciones.h
-	g++ -Wall -c editor/editor.c -o editor.o
+editor.o: editor/editor.cpp editor/editor.h linea/linea.h texto/texto.h definiciones.h
+	g++ -Wall -c editor/editor.cpp -o editor.o
 
-linea.o: linea/linea.c linea/linea.h definiciones.h
-	g++ -Wall -c linea/linea.c -o linea.o
+linea.o: linea/linea.cpp linea/linea.h definiciones.h
+	g++ -Wall -c linea/linea.cpp -o linea.o
 
-texto.o: texto/texto.c texto/texto.h linea/linea.h definiciones.h
-	g++ -Wall -c texto/texto.c -o texto.o
+texto.o: texto/texto.cpp texto/texto.h linea/linea.h definiciones.h
+	g++ -Wall -c texto/texto.cpp -o texto.o
 
-diccionario.o: diccionario/diccionario.c diccionario/diccionario.h definiciones.h
-	g++ -Wall -c diccionario/diccionario.c -o diccionario.o
+diccionario.o: diccionario/diccionario.cpp diccionario/diccionario.h definiciones.h
+	g++ -Wall -c diccionario/diccionario.cpp -o diccionario.o
 
 clean:
 	rm -f main *.o

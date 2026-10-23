@@ -1,32 +1,31 @@
 #ifndef LINEA_H
 #define LINEA_H
 #include "../definiciones.h"
-#include "../texto/texto.h"
 
 typedef struct nodo_linea * linea; // conjunto de palabra
-typedef struct nodo_texto * texto; // conjunto de palabra
+typedef struct nodo_texto * texto; // conjunto de linea
 
 // funciones auxiliares
 
 linea CrearLinea();
-    // Crea una nueva linea
-
+// Crea una nueva linea
 linea LineaNueva(Cadena palabra);
 // crea e inicializa un nodo de palabra con la cadena dada y sig=null.
-
-linea LineaSiguiente(linea l);
+linea ObtenerSiguienteLinea(linea l);
 // devuelve l->sig.
 
 Cadena LineaPalabra(linea l);
 // devuelve l->palabra.
 
-linea TextoDato(texto t);
+void InsertarPalabraEnLinea(linea l, Cadena palabra);
+// inserta la palabra en la linea l.
 
-linea ObtenerLinea(texto t);
-// devuelve la cabeza de la lista de palabras en la línea t (t->dato).
+void LineaIgualLinea(linea l, linea sig);
+// establece el puntero sig de l a sig.
 
-linea InsertarPalabraAlInicio(texto t, Cadena palabra);
-// inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
+void LineaSiguienteIgualLinea(linea l, linea nueva_linea);
+// establece el puntero sig de l a nueva_linea.
+
 
 linea InsertarPalabraAlInicioLinea(linea l, Cadena palabra);
 
@@ -42,8 +41,12 @@ linea InsertarUltimaLinea(linea l, linea nueva_palabra);
 // inserta la linea l al final de la lista t (cambia la cabeza t)
 
 Cadena ObtenerPalabra(linea l, Posicion pos);
-
 // InsertarPalabra(linea &l, Posicion pos, Cadena palabra)
+
+
+
+
+
 
 // ExtraerUltimaPalabra(linea l);
 
@@ -53,21 +56,12 @@ void LineaInsertarDespues(linea ant, linea nodo);
 
 
 
-
-
-
-
-
-
-
-
 linea ObtenerSiguienteLinea(linea l);
 // linea ObtenerLinea(texto t, Posicion pos);
-linea InsertarPalabraEnLinea(texto t,Posicion pos, Cadena palabra);
-void EstablecerSiguienteLinea(linea l, linea siguiente);
-TipoRetorno InsertarPalabraEnLinea(linea l, Posicion pos, Cadena palabra);
-TipoRetorno BorrarPalabraEnLinea(linea l, Posicion pos);
-TipoRetorno BorrarOcurrenciasEnLinea(linea l, Cadena palabra);
+// linea InsertarPalabraEnLinea(texto t,Posicion pos, Cadena palabra);
+// TipoRetorno InsertarPalabraEnLinea(linea l, Posicion pos, Cadena palabra);
+// TipoRetorno BorrarPalabraEnLinea(linea l, Posicion pos);
+// TipoRetorno BorrarOcurrenciasEnLinea(linea l, Cadena palabra);
 void ImprimirLineaContenido(linea l);
 void DestruirLinea(linea& l);
 
