@@ -43,10 +43,10 @@ TipoRetorno InsertarLinea(editor & e){
 // Ver más detalles en la letra del obligatorio.
 	
 	if (e->primer_linea == NULL){ // documento vacio
-		e->primer_linea = InsertarLineaTextoVacio(e->primer_linea, CrearLinea());
+		e->primer_linea = InsertarLineaTextoVacio(e->primer_linea);
 		e->ultima_linea = e->primer_linea;
 	} else {
-		e->ultima_linea = InsertarLineaTextoVacio(e->ultima_linea, CrearLinea());
+		e->ultima_linea = InsertarLineaTextoVacio(e->ultima_linea);
 	}
 	return OK;
 }
@@ -108,7 +108,7 @@ TipoRetorno ImprimirTexto(editor & e){
 	while(iter != NULL){
 		l = ObtenerLinea(iter);
 		i++;
-		printf("%d: ", i);
+		printf("%d: ",i);
 		while (l != NULL) {
 			printf("%s ", LineaPalabra(l));
 			l = ObtenerSiguienteLinea(l);

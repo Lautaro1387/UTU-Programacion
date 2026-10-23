@@ -7,6 +7,7 @@
 
 struct nodo_texto {
     linea dato;
+
     texto sig;
 };
 
@@ -43,9 +44,9 @@ texto TextoSiguiente(texto t){
     return t->sig;
 }
 
-texto InsertarLineaTextoVacio(texto t, linea l){
+texto InsertarLineaTextoVacio(texto t){
     texto aux = CrearTexto();
-    aux->dato = l;
+    // aux->dato = l;
     aux->sig = NULL;
 
     if (t == NULL)

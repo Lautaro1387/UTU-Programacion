@@ -14,7 +14,7 @@ texto CrearTexto();
 linea ObtenerLinea(texto t);
 // devuelve la cabeza de la lista de palabras en la línea t (t->dato).
 
-texto InsertarLineaTextoVacio(texto t, linea l);
+texto InsertarLineaTextoVacio(texto t);
 // Se usa: TipoRetorno InsertarLinea(editor & e);
 // inserta la linea l al final de la lista t (cambia la cabeza t) y devuelve el puntero a la nueva línea creada.
 
