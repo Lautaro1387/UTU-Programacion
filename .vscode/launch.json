@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Depurar laboratorio (main)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/EDA/laboratorio/main",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/EDA/laboratorio",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Habilitar pretty-printing para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build-main",
+            "sourceFileMap": {
+                "/home/tecnoinf/Desktop/LI - EDA/UTU-Programacion": "${workspaceFolder}"
+            }
+        }
+    ]
+}
