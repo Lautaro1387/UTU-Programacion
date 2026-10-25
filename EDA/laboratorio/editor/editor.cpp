@@ -55,6 +55,9 @@ TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
 // Inserta una nueva línea vacía en la posición indicada.
 // Ver más detalles en la letra del obligatorio.
 
+	if (posicionLinea < 1){
+		return ERROR;
+	}
 	texto aux = CrearTexto();
 	if (e->primer_linea == NULL){
 		e->primer_linea = aux;
@@ -128,6 +131,11 @@ TipoRetorno ComprimirTexto(editor & e){
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
+
+
+	if (posicionLinea < 1 || posicionPalabra < 1){
+		return ERROR;
+	}
 
 	texto iter = CrearTexto();
 	texto nueva_linea = CrearTexto();

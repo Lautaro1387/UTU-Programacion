@@ -7,7 +7,6 @@
 
 struct nodo_texto {
     linea dato;
-
     texto sig;
 };
 
@@ -47,7 +46,7 @@ texto TextoSiguiente(texto t){
 texto InsertarLineaTextoVacio(texto t){
     texto aux = CrearTexto();
     // aux->dato = l;
-    aux->sig = NULL;
+    // aux->sig = NULL;
 
     if (t == NULL)
         return aux;
@@ -62,8 +61,8 @@ texto InsertarLineaTextoVacio(texto t){
 // No usada actualmente
 texto InsertarUltimaLineaTexto(texto t, linea l){
     texto aux = CrearTexto();
-    aux->dato = l;
-    aux->sig = NULL;
+    aux->dato = l; // l-palabra
+    // aux->sig = NULL;
 
     if (t == NULL)
         return aux;
