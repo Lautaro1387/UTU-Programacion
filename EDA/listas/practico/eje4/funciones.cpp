@@ -118,7 +118,7 @@ bool esOrdenada(lista l){
     // pos: retorna true si l está ordenada de menor a mayor, false en caso contrario
     if (IsEmpty(l) || IsEmpty(Tail(l))){
         return true;
-    } else if (Head(l) > Tail(l)){
+    } else if (Tail(l)){
         return false;
     } else {
         return esOrdenada;
