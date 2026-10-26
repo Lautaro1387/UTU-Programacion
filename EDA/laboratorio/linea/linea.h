@@ -23,7 +23,7 @@ void InsertarPalabraEnLinea(linea l, Cadena palabra);
 void LineaIgualLinea(linea l, linea sig);
 // establece el puntero sig de l a sig.
 
-void LineaSiguienteIgualLinea(linea l, linea nueva_linea);
+linea LineaSiguienteIgualLinea(linea l, linea nueva_linea);
 // establece el puntero sig de l a nueva_linea.
 
 

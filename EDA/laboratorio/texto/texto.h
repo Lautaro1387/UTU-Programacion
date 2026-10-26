@@ -38,7 +38,7 @@ texto TextoPrimera(editor e);
 texto TextoUltima(texto t);
 // devuelve el puntero a la última línea (e->ultima_linea).
 
-texto InsertarLineaEnPosicionTexto(texto iter, texto ant, texto aux);
+texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos);
 
 linea TextoDato(texto t);
 

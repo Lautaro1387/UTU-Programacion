@@ -51,99 +51,111 @@ TipoRetorno InsertarLinea(editor & e){
 	return OK;
 }
 
-TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
-// Inserta una nueva línea vacía en la posición indicada.
-// Ver más detalles en la letra del obligatorio.
 
-	if (posicionLinea < 1){
-		return ERROR;
-	}
-	texto aux = CrearTexto();
-	if (e->primer_linea == NULL){
-		e->primer_linea = aux;
-		return OK;
-	}
+TipoRetorno InsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
+	// Inserta una nueva línea vacía en la posición indicada.
+	// Ver más detalles en la letra del obligatorio.
+	
+	/*
 	texto iter = e->primer_linea;
 	texto ant = iter;
 	while (iter != NULL && posicionLinea > 1){
 		ant = iter;
 		iter = TextoSiguiente(iter);
 		posicionLinea--;
-	}
-	if (posicionLinea == 1){
-		iter = InsertarLineaEnPosicionTexto(iter, ant, aux);
+		}
+		if (posicionLinea == 1){
+			e->primer_linea = InsertarLineaEnPosicionTexto(e->primer_linea, aux);
+			*/
+		if (posicionLinea < 1){
+			return ERROR;
+		}
+		texto aux = CrearTexto();
+		if (e->primer_linea == NULL){
+			e->primer_linea = aux;
+			return OK;
+		}
+		e->primer_linea = InsertarLineaEnPosicionTexto(e->primer_linea, aux, posicionLinea);
 		e->ultima_linea = TextoUltima(e->primer_linea);
 		return OK;
 	}
-	else {
-		return ERROR;
+	
+	TipoRetorno BorrarLinea(editor & e, Posicion posicionLinea){
+		// Borra la línea en la posición indicada.
+		// Ver más detalles en la letra del obligatorio.
+		return NO_IMPLEMENTADA;
 	}
-}
-
-TipoRetorno BorrarLinea(editor & e, Posicion posicionLinea){
-// Borra la línea en la posición indicada.
-// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
-}
-
-TipoRetorno BorrarTodo(editor & e){
-// Borra todas las líneas del texto.
-// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
-}
-
-TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
-// Borra todas las ocurrencias de una palabra en el texto.
-// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
-}
-
-TipoRetorno ImprimirTexto(editor & e){
-// Imprime el texto por pantalla.
-// Ver más detalles en la letra del obligatorio.
-	if (e->primer_linea == NULL){
-		printf("Texto vacio");
+	
+	TipoRetorno BorrarTodo(editor & e){
+		// Borra todas las líneas del texto.
+		// Ver más detalles en la letra del obligatorio.
+		return NO_IMPLEMENTADA;
+	}
+	
+	TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor & e, Cadena palabraABorrar){
+		// Borra todas las ocurrencias de una palabra en el texto.
+		// Ver más detalles en la letra del obligatorio.
+		return NO_IMPLEMENTADA;
+	}
+	
+	TipoRetorno ImprimirTexto(editor & e){
+		// Imprime el texto por pantalla.
+		// Ver más detalles en la letra del obligatorio.
+		if (e->primer_linea == NULL){
+			printf("Texto vacio");
+			return OK;
+		}
+		texto iter = e->primer_linea;
+		int i = 0;
+		linea l;
+		while(iter != NULL){
+			l = ObtenerLinea(iter);
+			i++;
+			printf("%d: ",i);
+			while (l != NULL) {
+				printf("%s ", LineaPalabra(l));
+				l = ObtenerSiguienteLinea(l);
+			}
+			printf("\n");
+			iter = TextoSiguiente(iter);
+		}
 		return OK;
 	}
-	texto iter = e->primer_linea;
-	int i = 0;
-	linea l;
-	while(iter != NULL){
-		l = ObtenerLinea(iter);
-		i++;
-		printf("%d: ",i);
-		while (l != NULL) {
-			printf("%s ", LineaPalabra(l));
-			l = ObtenerSiguienteLinea(l);
-		}
-		printf("\n");
-		iter = TextoSiguiente(iter);
+	
+	TipoRetorno ComprimirTexto(editor & e){
+		// Comprime las palabras del texto. Para implementar esta operación no debe generarse un nuevo documento.
+		// Ver más detalles en la letra del obligatorio.
+		return NO_IMPLEMENTADA;
 	}
-	return OK;
-}
-
-TipoRetorno ComprimirTexto(editor & e){
-// Comprime las palabras del texto. Para implementar esta operación no debe generarse un nuevo documento.
-// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
-}
-
+	
+	// funcion auxiliar
+	editor EditorInsertarLineaEnPosicion(editor & e, Posicion posicionLinea){
+	
+		texto aux = CrearTexto();
+		if (e->primer_linea == NULL){
+			e->primer_linea = aux;
+			return e;
+		}
+		e->primer_linea = InsertarLineaEnPosicionTexto(e->primer_linea, aux, posicionLinea);
+		e->ultima_linea = TextoUltima(e->primer_linea);
+		return e;
+	
+	}
+	
 TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar){
 // Inserta una palabra en una línea.
 // Ver más detalles en la letra del obligatorio.
-
-
+		
 	if (posicionLinea < 1 || posicionPalabra < 1){
 		return ERROR;
 	}
 
-	texto iter = CrearTexto();
-	texto nueva_linea = CrearTexto();
-	InsertarPalabraAlInicio(nueva_linea, palabraAIngresar);	
-
-	if (e->primer_linea == NULL){
-		e->primer_linea = nueva_linea;
-	}
+	e = EditorInsertarLineaEnPosicion(e, posicionLinea);
+		
+	linea nueva_linea = CrearLinea();
+	nueva_linea = InsertarPalabraEnLinea(nueva_linea, palabraAIngresar);
+	texto iter = e->primer_linea;
+	
 	while (iter != NULL && posicionLinea > 1){
 		iter = TextoSiguiente(iter);
 		posicionLinea--;
@@ -156,37 +168,37 @@ TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicio
 			posicionPalabra--;
 		}
 		
-		// Crear una funcion de ingresarLineaAlInicio de tipo linea
-		linea nueva_palabra = InsertarPalabraAlInicioLinea(nueva_palabra, palabraAIngresar);
-		if(TextoDato(iter) == NULL){
-			iter = InsertarUltimaLineaTexto(iter, nueva_palabra);
-			// iter->dato = nueva_palabra;
-			// nueva_palabra->sig = NULL;
-		}
+
+	linea nueva_linea = InsertarPalabraAlInicioLinea(nueva_linea, palabraAIngresar);
+	if(TextoDato(iter) == NULL)
+		iter = InsertarUltimaLineaTexto(iter, nueva_linea);
+
+	else {
 		if(posicionPalabra == 1){
 			if (ObtenerSiguienteLinea(aux) == NULL){
 				// insertar la palabra al final de la linea
-				aux = InsertarUltimaLinea(aux, nueva_palabra);
+				aux = InsertarUltimaLinea(aux, nueva_linea);
 				// aux->sig = nueva_palabra;
 				// nueva_palabra->sig = NULL;
 			} else {
 				// modificiar InsertarLineaTexto el primer parametro para que sea de tipo linea y no texto
-				iter = InsertarLineaTexto(aux, nueva_palabra, iter);
+				iter = InsertarLineaTexto(aux, nueva_linea, iter);
 				// nueva_palabra = InsertarLineaTexto(nueva_palabra, LineaSiguiente(aux));
 				// aux->sig = nueva_palabra;
 			}
-				if (CantidadPalabras(TextoDato(iter)) > 3){
+			if (CantidadPalabras(TextoDato(iter)) > 3){
 				linea iter2 = TextoDato(iter);
 				linea pal = CrearLinea();
 				while (ObtenerSiguienteLinea(iter2) != NULL)
-					iter2 = ObtenerSiguienteLinea(iter2);
+				iter2 = ObtenerSiguienteLinea(iter2);
 				strcpy(LineaPalabra(iter2), LineaPalabra(pal));
 				delete(iter2);
 				InsertarPalabraAlInicio(TextoSiguiente(iter), LineaPalabra(pal));
-        	}
+			}
 		}
 		return OK;
 	}	
+}
 	return ERROR;
 }
 
@@ -246,3 +258,59 @@ TipoRetorno DestruirEditor(editor & e){
 }
 
 
+
+/*
+InsertarPalabra:
+
+
+	texto iter = CrearTexto();
+	texto nueva_linea = CrearTexto();
+	InsertarPalabraAlInicio(nueva_linea, palabraAIngresar);	
+	
+		while (iter != NULL && posicionLinea > 1){
+			iter = TextoSiguiente(iter);
+			posicionLinea--;
+		}
+
+
+	if (posicionLinea == 1){
+		linea aux = TextoDato(iter);
+		while (aux != NULL && posicionPalabra > 1){
+			aux = ObtenerSiguienteLinea(aux);
+			posicionPalabra--;
+		}
+		
+		// Crear una funcion de ingresarLineaAlInicio de tipo linea
+		linea nueva_palabra = InsertarPalabraAlInicioLinea(nueva_palabra, palabraAIngresar);
+		if(TextoDato(iter) == NULL){
+			iter = InsertarUltimaLineaTexto(iter, nueva_palabra);
+			// iter->dato = nueva_palabra;
+			// nueva_palabra->sig = NULL;
+		}
+		if(posicionPalabra == 1){
+			if (ObtenerSiguienteLinea(aux) == NULL){
+				// insertar la palabra al final de la linea
+				aux = InsertarUltimaLinea(aux, nueva_palabra);
+				// aux->sig = nueva_palabra;
+				// nueva_palabra->sig = NULL;
+			} else {
+				// modificiar InsertarLineaTexto el primer parametro para que sea de tipo linea y no texto
+				iter = InsertarLineaTexto(aux, nueva_palabra, iter);
+				// nueva_palabra = InsertarLineaTexto(nueva_palabra, LineaSiguiente(aux));
+				// aux->sig = nueva_palabra;
+			}
+			if (CantidadPalabras(TextoDato(iter)) > 3){
+				linea iter2 = TextoDato(iter);
+				linea pal = CrearLinea();
+				while (ObtenerSiguienteLinea(iter2) != NULL)
+				iter2 = ObtenerSiguienteLinea(iter2);
+				strcpy(LineaPalabra(iter2), LineaPalabra(pal));
+				delete(iter2);
+				InsertarPalabraAlInicio(TextoSiguiente(iter), LineaPalabra(pal));
+			}
+		}
+		return OK;
+	}	
+	return ERROR;
+
+*/

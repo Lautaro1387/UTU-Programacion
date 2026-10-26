@@ -99,19 +99,26 @@ texto TextoUltima(texto t){
     return t;
 }
 
-texto InsertarLineaEnPosicionTexto(texto iter, texto ant, texto aux){
+texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
+    if (aux == NULL || pos == 0)
+        return e;
 
-    if (iter == NULL){
-			aux->sig = NULL;
-			if (ant != NULL)
-				ant->sig = aux;
-			return aux;
-		}
+    texto iter = e;
+    texto ant = NULL;
+    while (iter != NULL && pos > 1){
+        ant = iter;
+        iter = iter->sig;
+        pos--;
+    }
+    if (pos > 1)
+        return e;
 
-		aux->sig = iter;
-		if (ant != NULL)
-			ant->sig = aux;
-    return aux;
+    aux->sig = iter;
+    if (ant == NULL)
+        return aux;
+
+    ant->sig = aux;
+    return e;
 }
 
 linea InsertarPalabraAlInicio(texto t, Cadena palabra){

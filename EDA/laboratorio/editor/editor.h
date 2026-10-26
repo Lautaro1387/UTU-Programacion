@@ -87,5 +87,13 @@ TipoRetorno ImprimirUltimasPalabras(editor & e);
 TipoRetorno DestruirEditor(editor & e);
 // Destruye la estructura editor y libera la memoria asociada.
 
+
+// funciones auxiliares nuestras
+
+editor EditorInsertarLineaEnPosicion(editor & e, Posicion posicionLinea);
+
+ 
+
+
 #endif
 

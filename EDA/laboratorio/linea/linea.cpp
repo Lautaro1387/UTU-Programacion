@@ -29,11 +29,20 @@ void LineaSiguienteIgualLinea(linea l, linea nueva_linea){
     if (l != NULL)
     l->sig = nueva_linea;
 }
+/*
 
 void InsertarPalabraEnLinea(linea l, Cadena palabra){
     // inserta la palabra en la linea l.
     if (l != NULL)
+    l->palabra = palabra;
+}
+*/
+
+linea InsertarPalabraEnLinea(linea l, Cadena palabra){
+    // inserta la palabra en la linea l.
+    if (l != NULL)
         l->palabra = palabra;
+    return l;
 }
 
 linea ObtenerSiguienteLinea(linea l){
@@ -107,4 +116,8 @@ Posicion CantidadPalabras(linea l);
 linea LineaExtraerUltimo(linea &l);
 // quita el último nodo de la lista l (ajustando el penúltimo a sig=null)
 // y lo devuelve. Retorna NULL si la lista queda vacía.
+
+
+
+
 
