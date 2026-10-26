@@ -123,16 +123,16 @@ texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
 
 linea InsertarPalabraAlInicio(texto t, Cadena palabra){
     // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
+    // hacerla de forma recursiva luego para repetir mas de 1 caso.
     linea aux = CrearLinea();
     InsertarPalabraEnLinea(aux, palabra);
-
     if (t == NULL || TextoDato(t) == NULL){
         if (t != NULL)
             t->dato = aux;
         return aux;
     }
 
-    LineaIgualLinea(aux, TextoDato(t));
+    aux = LineaIgualLinea(aux, TextoDato(t));
     if (t != NULL)
         t->dato = aux;
     return aux;

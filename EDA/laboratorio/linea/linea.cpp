@@ -18,16 +18,17 @@ linea CrearLinea(){
 }
 
 
-void LineaIgualLinea(linea l, linea nueva_linea){
+linea LineaIgualLinea(linea l, linea nueva_linea){
     // establece la linea siguiente.
     if (l != NULL)
-        l = nueva_linea;
+        return nueva_linea;
 }
 
-void LineaSiguienteIgualLinea(linea l, linea nueva_linea){
+linea LineaSiguienteIgualLinea(linea l, linea nueva_linea){
     // establece la linea siguiente.
     if (l != NULL)
-    l->sig = nueva_linea;
+        l->sig = nueva_linea;
+    return l;
 }
 /*
 
@@ -63,9 +64,8 @@ Cadena LineaPalabra(linea l){
 
 Posicion CantidadPalabras(linea l){
 // Cant de palabras
-    if ( l == NULL){
+    if (l == NULL)
         return 0;
-    }
     else {
         return 1 + CantidadPalabras(l->sig);
     }

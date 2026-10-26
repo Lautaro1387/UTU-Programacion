@@ -17,10 +17,13 @@ linea ObtenerSiguienteLinea(linea l);
 Cadena LineaPalabra(linea l);
 // devuelve l->palabra.
 
-void InsertarPalabraEnLinea(linea l, Cadena palabra);
+// void InsertarPalabraEnLinea(linea l, Cadena palabra);
 // inserta la palabra en la linea l.
 
-void LineaIgualLinea(linea l, linea sig);
+linea InsertarPalabraEnLinea(linea l, Cadena palabra);
+// inserta la palabra en la linea l.
+
+linea LineaIgualLinea(linea l, linea nueva_linea);
 // establece el puntero sig de l a sig.
 
 linea LineaSiguienteIgualLinea(linea l, linea nueva_linea);
