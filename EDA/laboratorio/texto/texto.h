@@ -18,7 +18,8 @@ texto InsertarLineaTextoVacio(texto t);
 // Se usa: TipoRetorno InsertarLinea(editor & e);
 // inserta la linea l al final de la lista t (cambia la cabeza t) y devuelve el puntero a la nueva línea creada.
 
-texto InsertarLineaTexto(linea l, linea nueva_palabra, texto iter);
+// Se uso en insertarPalabra()
+// texto InsertarLineaTexto(linea l, linea nueva_palabra, texto iter);
 // Se usa en: TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar);
 // inserta la linea l en el medio de la lista t, manteniendo el orden de las lineas.
 
@@ -51,6 +52,7 @@ linea TextoContenido(texto t);
 linea InsertarPalabraAlInicio(texto t, Cadena palabra);
 // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
 
+texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra);
 
 /*
 

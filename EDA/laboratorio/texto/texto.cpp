@@ -58,7 +58,6 @@ texto InsertarLineaTextoVacio(texto t){
     return t;
 }
 
-// No usada actualmente
 texto InsertarUltimaLineaTexto(texto t, linea l){
     texto aux = CrearTexto();
     aux->dato = l; // l-palabra
@@ -73,14 +72,15 @@ texto InsertarUltimaLineaTexto(texto t, linea l){
     iter->sig = aux;
     return t;
 }
-
+/* // Se uso en INsertarPalabra Version anterior
 texto InsertarLineaTexto(linea l, linea nueva_palabra, texto iter){
     // insertar la linea l en el medio de la lista t, manteniendo el orden de las lineas.
     if (l == NULL)
-        return iter;
+    return iter;
     LineaIgualLinea(l, nueva_palabra);
     return iter;
 }
+*/
 
 // devuelve el puntero a la última línea (e->ultima_linea).
 
@@ -119,6 +119,29 @@ texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
 
     ant->sig = aux;
     return e;
+}
+texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra){
+    texto iter = t;
+
+    if (t->dato == NULL){
+        t = InsertarUltimaLineaTexto(t, nueva_linea);
+        return t;
+    }
+    else {
+        while (iter != NULL && posicionLinea > 1) {
+            iter = iter->sig;
+            posicionLinea--;
+        }
+        if (iter->dato == NULL){
+            iter = InsertarUltimaLineaTexto(iter, nueva_linea);
+            return iter;
+        }
+        else {
+            if (posicionLinea == 1)
+            iter->dato = Insertar_Palabra_En_Linea(iter->dato, nueva_linea, posicionPalabra);
+            return t;
+        } 
+    }
 }
 
 linea InsertarPalabraAlInicio(texto t, Cadena palabra){

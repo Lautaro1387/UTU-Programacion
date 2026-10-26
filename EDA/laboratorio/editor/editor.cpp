@@ -148,8 +148,7 @@ editor EditorInsertarLineaEnPosicion(editor &e, Posicion posicionLinea)
 	return e;
 }
 
-TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar)
-{
+TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar) {
 	// Inserta una palabra en una línea.
 	// Ver más detalles en la letra del obligatorio.
 
@@ -158,49 +157,18 @@ TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicion
 
 	linea nueva_linea = CrearLinea();
 	nueva_linea = InsertarPalabraEnLinea(nueva_linea, palabraAIngresar);
-	texto iter = e->primer_linea;
-
-	while (iter != NULL && posicionLinea > 1) {
-		iter = TextoSiguiente(iter);
-		posicionLinea--;
-	}
-	if (TextoDato(iter) == NULL)
-		iter = InsertarUltimaLineaTexto(iter, nueva_linea); 
-	else {
-		if (posicionLinea == 1) {
-			linea aux = TextoDato(iter);
-			while (aux != NULL && posicionPalabra > 1) {
-				aux = ObtenerSiguienteLinea(aux);
-				posicionPalabra--;
-			}	
-			else {
-				if (posicionPalabra == 1) {
-					if (ObtenerSiguienteLinea(aux) == NULL) {
-						// insertar la palabra al final de la linea
-						aux = InsertarUltimaLinea(aux, nueva_linea);
-						// aux->sig = nueva_palabra;
-						// nueva_palabra->sig = NULL;
-					}
-				else {
-					// modificiar InsertarLineaTexto el primer parametro para que sea de tipo linea y no texto
-					iter = InsertarLineaTexto(aux, nueva_linea, iter);
-					// nueva_palabra = InsertarLineaTexto(nueva_palabra, LineaSiguiente(aux));
-					// aux->sig = nueva_palabra;
-				}
-				if (CantidadPalabras(TextoDato(iter)) > 3) {
-					linea iter2 = TextoDato(iter);
-					linea pal = CrearLinea();
-					while (ObtenerSiguienteLinea(iter2) != NULL)
-					iter2 = ObtenerSiguienteLinea(iter2);
-					strcpy(LineaPalabra(iter2), LineaPalabra(pal));
-					delete (iter2);
-					InsertarPalabraAlInicio(TextoSiguiente(iter), LineaPalabra(pal));
-				}	
-				}
-			}
-			return OK;
-		}
-	}
+	e->primer_linea = insertar_Palabra_En_Texto(e->primer_linea, nueva_linea, posicionLinea, posicionPalabra);
+		// e->primer_linea = insertar_Palabra_En_Texto(iter, nueva_linea, posicionPalabra);
+		if (CantidadPalabras(TextoDato(e->primer_linea)) > 3) {
+			linea iter2 = TextoDato(e->primer_linea);
+			linea pal = CrearLinea();
+			while (ObtenerSiguienteLinea(iter2) != NULL)
+				iter2 = ObtenerSiguienteLinea(iter2);
+			strcpy(LineaPalabra(iter2), LineaPalabra(pal));
+			delete (iter2);
+			InsertarPalabraAlInicio(TextoSiguiente(e->primer_linea), LineaPalabra(pal));
+		}	
+	return OK;
 }
 
 TipoRetorno BorrarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra)

@@ -97,18 +97,38 @@ linea InsertarUltimaLinea(linea l, linea nueva_palabra){
     }
 }
 
-
-linea InsertarPalabraAlInicioLinea(linea l, Cadena palabra){
-    linea aux = CrearLinea();
-    aux->palabra = palabra;
-    if (l == NULL){
-        return aux;
-    } else {
-        aux->sig = l;
-        return aux;
+linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPalabra) {
+    linea iter = l;
+    linea aux = nueva_linea;
+    linea ant = iter;
+    while (iter != NULL && posicionPalabra > 1) {
+        ant = iter;
+        iter = iter->sig;
+        posicionPalabra--;
+    }
+    if (posicionPalabra == 1) {
+        if (iter == NULL)
+            return aux;
+        else {
+            if (iter->sig == NULL) {
+                if (ant == NULL) {
+                    aux->sig = iter;
+                    return aux; // insertar la palabra al final de la linea
+                }
+                else {
+                    aux->sig = iter;
+                    ant->sig = aux;
+                    return l;
+                }
+            }
+            else {
+                aux->sig = iter;
+                ant->sig = aux;
+                return l;
+            }
+        }
     }
 }
-
 
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
