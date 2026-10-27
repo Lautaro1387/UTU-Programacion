@@ -20,7 +20,7 @@ Cadena LineaPalabra(linea l);
 // void InsertarPalabraEnLinea(linea l, Cadena palabra);
 // inserta la palabra en la linea l.
 
-linea InsertarPalabraEnLinea(linea l, Cadena palabra);
+linea GuardarPalabraEnLinea(linea l, Cadena palabra);
 // inserta la palabra en la linea l.
 
 linea LineaIgualLinea(linea l, linea nueva_linea);
@@ -36,6 +36,8 @@ linea InsertarPalabraAlInicioLinea(linea l, Cadena palabra);
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
 
+linea CambiarSig(linea l);
+
 linea LineaExtraerUltimo(linea &l);
 // quita el último nodo de la lista l (ajustando el penúltimo a sig=null)
 // y lo devuelve. Retorna NULL si la lista queda vacía.
@@ -47,9 +49,9 @@ linea InsertarUltimaLinea(linea l, linea nueva_palabra);
 Cadena ObtenerPalabra(linea l, Posicion pos);
 // InsertarPalabra(linea &l, Posicion pos, Cadena palabra)
 
+linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra);
 
-
-
+linea EliminarTodaPalabra(linea l);
 
 
 // ExtraerUltimaPalabra(linea l);
@@ -66,8 +68,8 @@ linea ObtenerSiguienteLinea(linea l);
 // TipoRetorno InsertarPalabraEnLinea(linea l, Posicion pos, Cadena palabra);
 // TipoRetorno BorrarPalabraEnLinea(linea l, Posicion pos);
 // TipoRetorno BorrarOcurrenciasEnLinea(linea l, Cadena palabra);
-void ImprimirLineaContenido(linea l);
-void DestruirLinea(linea& l);
+// void ImprimirLineaContenido(linea l);
+// void DestruirLinea(linea& l);
 
 
 #endif

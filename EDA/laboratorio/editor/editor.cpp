@@ -80,18 +80,19 @@ TipoRetorno InsertarLineaEnPosicion(editor &e, Posicion posicionLinea)
 	return OK;
 }
 
-TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea)
-{
-	// Borra la línea en la posición indicada.
-	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea) {
+	texto aux = e->primer_linea;
+	if (posicionLinea < 1 || e->primer_linea == NULL || TextoDato(e->primer_linea) == NULL)
+		return ERROR;
+	e->primer_linea = ObtenerPosicionLinea2(e->primer_linea, posicionLinea);
+	return OK;
 }
 
-TipoRetorno BorrarTodo(editor &e)
-{
+TipoRetorno BorrarTodo(editor &e) {
 	// Borra todas las líneas del texto.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	e->primer_linea = EliminarTodaLinea(e->primer_linea);
+	return OK;
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor &e, Cadena palabraABorrar)
@@ -134,48 +135,67 @@ TipoRetorno ComprimirTexto(editor &e)
 }
 
 // funcion auxiliar
+/*
 editor EditorInsertarLineaEnPosicion(editor &e, Posicion posicionLinea)
 {
-
-	texto aux = CrearTexto();
-	if (e->primer_linea == NULL)
-	{
-		e->primer_linea = aux;
-		return e;
-	}
-	e->primer_linea = InsertarLineaEnPosicionTexto(e->primer_linea, aux, posicionLinea);
-	e->ultima_linea = TextoUltima(e->primer_linea);
+	
+texto aux = CrearTexto();
+if (e->primer_linea == NULL)
+{
+	e->primer_linea = aux;
 	return e;
 }
+e->primer_linea = InsertarLineaEnPosicionTexto(e->primer_linea, aux, posicionLinea);
+e->ultima_linea = TextoUltima(e->primer_linea);
+return e;
+}
+*/
 
 TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar) {
 	// Inserta una palabra en una línea.
 	// Ver más detalles en la letra del obligatorio.
 
-	if (posicionLinea < 1 || posicionPalabra < 1)
+	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL)
 		return ERROR;
-
-	linea nueva_linea = CrearLinea();
-	nueva_linea = InsertarPalabraEnLinea(nueva_linea, palabraAIngresar);
-	e->primer_linea = insertar_Palabra_En_Texto(e->primer_linea, nueva_linea, posicionLinea, posicionPalabra);
+		
+		linea nueva_linea = CrearLinea();
+		nueva_linea = GuardarPalabraEnLinea(nueva_linea, palabraAIngresar);
+		e->primer_linea = insertar_Palabra_En_Texto(e->primer_linea, nueva_linea, posicionLinea, posicionPalabra);
 		// e->primer_linea = insertar_Palabra_En_Texto(iter, nueva_linea, posicionPalabra);
 		if (CantidadPalabras(TextoDato(e->primer_linea)) > 3) {
 			linea iter2 = TextoDato(e->primer_linea);
-			linea pal = CrearLinea();
-			while (ObtenerSiguienteLinea(iter2) != NULL)
+			linea ant2 = iter2;
+
+			while (ObtenerSiguienteLinea(iter2) != NULL){
+				ant2 = iter2;
 				iter2 = ObtenerSiguienteLinea(iter2);
-			strcpy(LineaPalabra(iter2), LineaPalabra(pal));
+			}
+			if (LineaPalabra(iter2) == NULL)
+				return ERROR;
+
+			Cadena copia = new char[strlen(LineaPalabra(iter2)) + 1];
+			strcpy(copia, LineaPalabra(iter2));
+
+			linea pal = CrearLinea();
+			pal = GuardarPalabraEnLinea(pal, copia);
+
+			// strcpy(LineaPalabra(iter2), LineaPalabra(pal));
+			ant2 = CambiarSig(ant2);
 			delete (iter2);
 			InsertarPalabraAlInicio(TextoSiguiente(e->primer_linea), LineaPalabra(pal));
 		}	
 	return OK;
 }
 
-TipoRetorno BorrarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra)
-{
+TipoRetorno BorrarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra) {
 	// Borra la palabra en la posición indicada.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	texto aux = e->primer_linea;
+	 
+	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL || TextoDato(e->primer_linea) == NULL)
+		return ERROR;
+	e->primer_linea = ObtenerPosicionLinea(e->primer_linea, posicionLinea, posicionPalabra);
+	return OK;
 }
 
 TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, Cadena palabraABorrar)
@@ -185,11 +205,21 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, C
 	return NO_IMPLEMENTADA;
 }
 
-TipoRetorno ImprimirLinea(editor &e, Posicion posicionLinea)
-{
+TipoRetorno ImprimirLinea(editor &e, Posicion posicionLinea) {
 	// Imprime la línea por pantalla.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+	texto iter = e->primer_linea;
+	while (iter != NULL && posicionLinea > 1){
+		iter = TextoSiguiente(iter);
+		posicionLinea--;
+	}
+	
+	if (posicionLinea == 1){
+		printf("%s", TextoDato(iter));
+		return OK;
+	} else
+		return ERROR;
 }
 
 TipoRetorno IngresarPalabraDiccionario(editor &e, Cadena palabraAIngresar)

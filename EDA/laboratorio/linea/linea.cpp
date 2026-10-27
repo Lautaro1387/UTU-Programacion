@@ -31,7 +31,6 @@ linea LineaSiguienteIgualLinea(linea l, linea nueva_linea){
     return l;
 }
 /*
-
 void InsertarPalabraEnLinea(linea l, Cadena palabra){
     // inserta la palabra en la linea l.
     if (l != NULL)
@@ -39,7 +38,7 @@ void InsertarPalabraEnLinea(linea l, Cadena palabra){
 }
 */
 
-linea InsertarPalabraEnLinea(linea l, Cadena palabra){
+linea GuardarPalabraEnLinea(linea l, Cadena palabra){
     // inserta la palabra en la linea l.
     if (l != NULL)
         l->palabra = palabra;
@@ -52,6 +51,14 @@ linea ObtenerSiguienteLinea(linea l){
         return NULL;
     else
         return l->sig;
+}
+
+linea CambiarSig(linea l){
+    if (l == NULL)
+        return NULL;
+    else
+        l->sig = NULL;
+    return l;
 }
 
 Cadena LineaPalabra(linea l){
@@ -98,26 +105,30 @@ linea InsertarUltimaLinea(linea l, linea nueva_palabra){
 }
 
 linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPalabra) {
-    linea iter = l;
-    linea aux = nueva_linea;
-    linea ant = iter;
-    while (iter != NULL && posicionPalabra > 1) {
-        ant = iter;
-        iter = iter->sig;
-        posicionPalabra--;
-    }
-    if (posicionPalabra == 1) {
-        if (iter == NULL)
-            return aux;
-        else {
-            if (iter->sig == NULL) {
-                if (ant == NULL) {
-                    aux->sig = iter;
-                    return aux; // insertar la palabra al final de la linea
-                }
-                else {
-                    aux->sig = iter;
-                    ant->sig = aux;
+    
+linea iter = l;
+linea aux = nueva_linea;
+linea ant = iter;
+if (l == NULL)
+    return aux;
+
+while (iter != NULL && posicionPalabra > 1) {
+    ant = iter;
+    iter = iter->sig;
+    posicionPalabra--;
+}
+if (posicionPalabra == 1) {
+    if (iter == NULL)
+    return aux;
+    else {
+        if (iter->sig == NULL) {
+            if (ant == NULL) {
+                aux->sig = iter;
+                return aux; // insertar la palabra al final de la linea
+            }
+            else {
+                aux->sig = iter;
+                ant->sig = aux;
                     return l;
                 }
             }
@@ -129,6 +140,30 @@ linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPal
         }
     }
 }
+
+
+linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra){
+    linea iter = l;
+    if (l != NULL) {
+        while (iter != NULL && posicionPalabra > 1){
+            iter = iter->sig;
+            posicionPalabra--;
+        }
+        // if (posicionLinea == 1){
+            iter = NULL;
+            return l;
+        //}
+    }
+}
+
+linea EliminarTodaPalabra(linea l){
+    if (l->sig == NULL)
+        return NULL;
+    else {
+        return EliminarTodaPalabra(l->sig);
+    }
+}
+
 
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.

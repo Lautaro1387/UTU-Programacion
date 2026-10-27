@@ -54,8 +54,14 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra);
 
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra);
 
-/*
 
+texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPalabra);
+
+texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea);
+
+texto EliminarTodaLinea(texto t);
+
+/*
 unsigned int CantidadLineas(texto t);
 void ImprimirTextoCompleto(texto t);
 void TextoCrearLinea(editor &e, texto despues);

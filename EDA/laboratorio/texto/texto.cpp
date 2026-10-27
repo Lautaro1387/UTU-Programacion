@@ -122,7 +122,6 @@ texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
 }
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
-
     if (t->dato == NULL){
         t = InsertarUltimaLineaTexto(t, nueva_linea);
         return t;
@@ -148,7 +147,7 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra){
     // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
     // hacerla de forma recursiva luego para repetir mas de 1 caso.
     linea aux = CrearLinea();
-    InsertarPalabraEnLinea(aux, palabra);
+    GuardarPalabraEnLinea(aux, palabra);
     if (t == NULL || TextoDato(t) == NULL){
         if (t != NULL)
             t->dato = aux;
@@ -161,16 +160,54 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra){
     return aux;
 }
 
-
-
 texto insertarLineaAlInicio(texto t, Cadena palabra){
     texto aux = CrearTexto();
     aux->dato = CrearLinea();
-    InsertarPalabraEnLinea(aux->dato, palabra);
+    GuardarPalabraEnLinea(aux->dato, palabra);
 
     if (t == NULL)
         return aux;
 
     aux->sig = t;
     return aux;
+}
+
+
+texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPalabra){
+    texto iter = t;
+    if (t != NULL) {
+        while (iter != NULL && posicionLinea > 1){
+            iter = iter->sig;
+            posicionLinea--;
+        }
+        if (posicionLinea == 1){
+            iter->dato = ObtenerPosicionPalabra(iter->dato, posicionPalabra);
+            return t;
+        }
+    }
+}
+
+
+texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea){
+    texto iter = t;
+    if (t != NULL) {
+        while (iter != NULL && posicionLinea > 1){
+            iter = iter->sig;
+            posicionLinea--;
+        }
+        if (posicionLinea == 1){
+            iter = NULL;
+            return t;
+        }
+    }
+}
+
+texto EliminarTodaLinea(texto t){
+    if (t->sig == NULL) {
+        t->dato = EliminarTodaPalabra(t->dato);
+        return NULL;
+    }
+    else {
+        return EliminarTodaLinea(t->sig);
+    }
 }
