@@ -95,15 +95,14 @@ TipoRetorno BorrarTodo(editor &e) {
 	return OK;
 }
 
-TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor &e, Cadena palabraABorrar)
-{
+TipoRetorno BorrarOcurrenciasPalabraEnTexto(editor &e, Cadena palabraABorrar) {
 	// Borra todas las ocurrencias de una palabra en el texto.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	e->primer_linea = EliminarOcurrenciasPalabraEnTexto(e->primer_linea, palabraABorrar);
+	return OK;
 }
 
-TipoRetorno ImprimirTexto(editor &e)
-{
+TipoRetorno ImprimirTexto(editor &e) {
 	// Imprime el texto por pantalla.
 	// Ver más detalles en la letra del obligatorio.
 	if (e->primer_linea == NULL) {
@@ -202,7 +201,10 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, C
 {
 	// Borra todas las ocurrencias de una palabra en la línea indicada.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	if (posicionLinea < 1)
+		return ERROR;
+	e->primer_linea = EliminarOcurrenciasEnLineaTexto(e->primer_linea, posicionLinea, palabraABorrar);
+	return OK;
 }
 
 TipoRetorno ImprimirLinea(editor &e, Posicion posicionLinea) {
@@ -216,7 +218,7 @@ TipoRetorno ImprimirLinea(editor &e, Posicion posicionLinea) {
 	}
 	
 	if (posicionLinea == 1){
-		printf("%s", TextoDato(iter));
+		ImprimirT(TextoDato(iter));
 		return OK;
 	} else
 		return ERROR;

@@ -59,6 +59,10 @@ texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPal
 
 texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea);
 
+texto EliminarOcurrenciasEnLineaTexto(texto t, Posicion posicionLinea, Cadena palabraABorrar);
+
+texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar);
+
 texto EliminarTodaLinea(texto t);
 
 /*

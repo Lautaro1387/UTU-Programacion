@@ -108,6 +108,52 @@ linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPal
     
 linea iter = l;
 linea aux = nueva_linea;
+linea ant = NULL;
+
+if (aux == NULL)
+    return l;
+
+if (l == NULL)
+    return aux;
+
+if (l->palabra == NULL && l->sig == NULL) {
+        delete l;
+        return aux;
+    }
+
+while (iter != NULL && posicionPalabra > 1) {
+    ant = iter;
+    iter = iter->sig;
+    posicionPalabra--;
+}
+if (posicionPalabra == 1) {
+    if (ant == NULL) {
+        aux->sig = iter;
+        return aux; // insertar la palabra al final de la linea
+    }
+    else {
+        aux->sig = iter;
+        ant->sig = aux;
+        return l;
+    }
+    } else
+        return l;
+}
+
+void ImprimirT(linea l){
+    linea iter = l;
+
+    while (iter != NULL){
+        printf("%s", iter->palabra);
+        iter = iter->sig;
+    }
+}
+
+/*
+linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPalabra) {
+    
+linea iter = l;
+linea aux = nueva_linea;
 linea ant = iter;
 if (l == NULL)
     return aux;
@@ -119,7 +165,7 @@ while (iter != NULL && posicionPalabra > 1) {
 }
 if (posicionPalabra == 1) {
     if (iter == NULL)
-    return aux;
+        return aux;
     else {
         if (iter->sig == NULL) {
             if (ant == NULL) {
@@ -138,8 +184,17 @@ if (posicionPalabra == 1) {
                 return l;
             }
         }
-    }
+    } else
+        return l;
 }
+
+
+*/
+
+
+
+
+
 
 
 linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra){
@@ -161,6 +216,18 @@ linea EliminarTodaPalabra(linea l){
         return NULL;
     else {
         return EliminarTodaPalabra(l->sig);
+    }
+}
+
+linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
+    if (l == NULL)
+        return NULL;
+    else {
+        if (l->palabra == palabraABorrar) {
+            l->palabra == NULL;
+            return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
+        } else
+            return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
     }
 }
 

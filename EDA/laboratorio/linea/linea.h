@@ -53,6 +53,9 @@ linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra);
 
 linea EliminarTodaPalabra(linea l);
 
+linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar);
+
+void ImprimirT(linea l);
 
 // ExtraerUltimaPalabra(linea l);
 

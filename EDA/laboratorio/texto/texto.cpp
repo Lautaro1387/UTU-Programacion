@@ -211,3 +211,33 @@ texto EliminarTodaLinea(texto t){
         return EliminarTodaLinea(t->sig);
     }
 }
+
+texto EliminarOcurrenciasEnLineaTexto(texto t, Posicion posicionLinea, Cadena palabraABorrar){
+
+    texto iter = t;
+    if (t != NULL) {
+        while (iter != NULL && posicionLinea > 1){
+            iter = iter->sig;
+            posicionLinea--;
+        }
+        if (posicionLinea == 1){
+            iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
+            return t;
+    } else
+        return NULL;
+    }
+}
+
+texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar){
+
+    texto iter = t;
+    if (t == NULL)
+        return NULL;
+    else {
+        while (iter != NULL){
+            iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
+            iter = iter->sig;
+        }
+        return t;
+    }
+}
