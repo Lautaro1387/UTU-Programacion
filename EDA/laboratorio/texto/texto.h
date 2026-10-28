@@ -1,11 +1,11 @@
 #ifndef TEXTO_H
 #define TEXTO_H
 #include "../definiciones.h"
+#include "../linea/linea.h"
+#include "../editor/editor.h"
+
 
 typedef struct nodo_texto * texto; // conjunto de linea
-typedef struct nodo_linea * linea; // conjunto de linea
-typedef struct nodo_editor * editor; // conjunto de texto
-
 
 
 texto CrearTexto();

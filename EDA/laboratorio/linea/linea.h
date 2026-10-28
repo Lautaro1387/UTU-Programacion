@@ -2,8 +2,8 @@
 #define LINEA_H
 #include "../definiciones.h"
 
+
 typedef struct nodo_linea * linea; // conjunto de palabra
-typedef struct nodo_texto * texto; // conjunto de linea
 
 // funciones auxiliares
 

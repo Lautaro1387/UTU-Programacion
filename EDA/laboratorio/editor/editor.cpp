@@ -201,7 +201,7 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, C
 {
 	// Borra todas las ocurrencias de una palabra en la línea indicada.
 	// Ver más detalles en la letra del obligatorio.
-	if (posicionLinea < 1)
+	if (posicionLinea < 1) 
 		return ERROR;
 	e->primer_linea = EliminarOcurrenciasEnLineaTexto(e->primer_linea, posicionLinea, palabraABorrar);
 	return OK;

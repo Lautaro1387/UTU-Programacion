@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "../definiciones.h"
 #include "linea.h"
-#include <string.h>
 
 
 struct nodo_linea {
@@ -30,13 +29,6 @@ linea LineaSiguienteIgualLinea(linea l, linea nueva_linea){
         l->sig = nueva_linea;
     return l;
 }
-/*
-void InsertarPalabraEnLinea(linea l, Cadena palabra){
-    // inserta la palabra en la linea l.
-    if (l != NULL)
-    l->palabra = palabra;
-}
-*/
 
 linea GuardarPalabraEnLinea(linea l, Cadena palabra){
     // inserta la palabra en la linea l.

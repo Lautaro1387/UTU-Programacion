@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "../definiciones.h"
-#include "texto.h"
-#include <string.h>
 #include "../linea/linea.h"
+#include "../texto/texto.h"
 
 
 struct nodo_texto {
