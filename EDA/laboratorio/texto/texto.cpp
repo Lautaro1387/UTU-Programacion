@@ -220,14 +220,20 @@ texto insertarLineaAlInicio(texto t, Cadena palabra){
 texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
     if (t != NULL) {
-        while (iter != NULL && posicionLinea > 1){
-            iter = iter->sig;
-            posicionLinea--;
-        }
-        if (posicionLinea == 1){
-            iter->dato = ObtenerPosicionPalabra(iter->dato, posicionPalabra);
+        if (t->dato != NULL ){
+            while (iter != NULL && posicionLinea > 1){
+                iter = iter->sig;
+                posicionLinea--;
+            }
+            if (posicionLinea == 1){                
+                iter->dato = ObtenerPosicionPalabra(iter->dato, posicionPalabra);
+                return t;
+            }
+        }else {
+            t->sig = ObtenerPosicionLinea(t->sig, posicionLinea - 1, posicionPalabra);
             return t;
         }
+
     }
 }
 
@@ -240,7 +246,7 @@ texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea){
             posicionLinea--;
         }
         if (posicionLinea == 1){
-            iter = NULL;
+            iter->dato = NULL;
             return t;
         }
     }

@@ -180,9 +180,10 @@ linea EliminarTodaPalabra(linea l){
 
 linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
     if (l == NULL)
-        return NULL;
+        return l;
     else {
-        if (l->palabra == palabraABorrar) {
+        int comp = strcmp(palabraABorrar, l->palabra);
+        if (comp == 0) {
             l->palabra = NULL;
             return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
         } else

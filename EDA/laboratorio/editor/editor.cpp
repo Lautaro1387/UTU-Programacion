@@ -82,7 +82,7 @@ TipoRetorno InsertarLineaEnPosicion(editor &e, Posicion posicionLinea)
 
 TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea) {
 	// texto aux = e->primer_linea;
-	if (posicionLinea < 1 || e->primer_linea == NULL || TextoDato(e->primer_linea) == NULL)
+	if (posicionLinea < 1 || e->primer_linea == NULL )
 		return ERROR;
 	e->primer_linea = ObtenerPosicionLinea2(e->primer_linea, posicionLinea);
 	return OK;
@@ -138,7 +138,7 @@ TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicion
 	// Inserta una palabra en una línea.
 	// Ver más detalles en la letra del obligatorio.
 
-	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL || posicionPalabra > 3 || posicionLinea > 3)
+	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL || posicionPalabra > 3)
 		return ERROR;
 
 		linea nueva_linea = CrearLinea();
@@ -153,7 +153,7 @@ TipoRetorno BorrarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPa
 	// Ver más detalles en la letra del obligatorio.
 	// texto aux = e->primer_linea;
 	 
-	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL || TextoDato(e->primer_linea) == NULL)
+	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL)
 		return ERROR;
 	e->primer_linea = ObtenerPosicionLinea(e->primer_linea, posicionLinea, posicionPalabra);
 	return OK;

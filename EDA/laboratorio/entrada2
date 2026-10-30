@@ -1,0 +1,11 @@
+InsertarLinea()
+InsertarLinea()
+InsertarPalabra(2, 1, palabra21)
+InsertarPalabra(2, 2, palabra22)
+ImprimirTexto()
+InsertarPalabra(2,3,palabra22)
+InsertarPalabra(1,1,palabra22)
+ImprimirTexto()
+BorrarOcurrenciasPalabraEnLinea(2,palabra22)
+ImprimirTexto()
+salir
