@@ -56,14 +56,11 @@ linea EliminarTodaPalabra(linea l);
 linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar);
 
 void ImprimirT(linea l);
-
 // ExtraerUltimaPalabra(linea l);
 
 // No dar bola
 void LineaInsertarDespues(linea ant, linea nodo);
 // inserta nodo justo después del nodo ant en la lista (este es el caso de inserción intermedia o final).
-
-
 
 linea ObtenerSiguienteLinea(linea l);
 // linea ObtenerLinea(texto t, Posicion pos);

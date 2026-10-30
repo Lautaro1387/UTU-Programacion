@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../definiciones.h"
 #include "linea.h"
+#include <cstring>
 
 
 struct nodo_linea {
@@ -32,9 +33,14 @@ linea LineaSiguienteIgualLinea(linea l, linea nueva_linea){
 
 linea GuardarPalabraEnLinea(linea l, Cadena palabra){
     // inserta la palabra en la linea l.
-    if (l != NULL)
-        l->palabra = palabra;
-    return l;
+    if (l == NULL)
+        return l;
+    else {
+        Cadena copia = new char[strlen(palabra) + 1];
+        strcpy(copia, palabra);
+        l->palabra = copia;
+        return l;
+    }
 }
 
 linea ObtenerSiguienteLinea(linea l){
@@ -121,10 +127,12 @@ linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPal
 
     if (posicionPalabra == 1) {
         if (ant == NULL) {
+            // insertar la palabra al final de la linea
             aux->sig = iter;
-            return aux; // insertar la palabra al final de la linea
+            return aux; 
         }
         else {
+            // Insertar palabra en el medio y en el principio
             aux->sig = iter;
             ant->sig = aux;
             return l;
@@ -150,10 +158,11 @@ linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra){
             iter = iter->sig;
             posicionPalabra--;
         }
-        // if (posicionLinea == 1){
-            iter = NULL;
+        if (posicionPalabra == 1){
+            iter->palabra = NULL;
+            // iter = NULL;
             return l;
-        //}
+        }
     }
 }
 
@@ -170,7 +179,7 @@ linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
         return NULL;
     else {
         if (l->palabra == palabraABorrar) {
-            l->palabra == NULL;
+            l->palabra = NULL;
             return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
         } else
             return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);

@@ -10,9 +10,11 @@ struct nodo_texto {
 };
 
 
-texto crearTextoNull(texto t){
-    return NULL;
-}
+texto CrearTextoNull(){
+    texto t = new(nodo_texto);
+    t->dato = NULL;
+    t->sig = NULL;
+    return t;}
 
 texto CrearTexto(){
     texto t = new(nodo_texto);
@@ -43,7 +45,7 @@ texto TextoSiguiente(texto t){
 }
 
 texto InsertarLineaTextoVacio(texto t){
-    texto aux = CrearTexto();
+    texto aux = CrearTextoNull();
     // aux->dato = l;
     // aux->sig = NULL;
 
@@ -56,6 +58,8 @@ texto InsertarLineaTextoVacio(texto t){
     iter->sig = aux;
     return t;
 }
+
+
 
 texto InsertarUltimaLineaTexto(texto t, linea l){
     texto aux = CrearTexto();
@@ -71,15 +75,7 @@ texto InsertarUltimaLineaTexto(texto t, linea l){
     iter->sig = aux;
     return t;
 }
-/* // Se uso en INsertarPalabra Version anterior
-texto InsertarLineaTexto(linea l, linea nueva_palabra, texto iter){
-    // insertar la linea l en el medio de la lista t, manteniendo el orden de las lineas.
-    if (l == NULL)
-    return iter;
-    LineaIgualLinea(l, nueva_palabra);
-    return iter;
-}
-*/
+
 
 // devuelve el puntero a la última línea (e->ultima_linea).
 
@@ -122,7 +118,8 @@ texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
     if (t->dato == NULL){
-        t = InsertarUltimaLineaTexto(t, nueva_linea);
+        t->dato = CrearLinea();
+        t->dato = GuardarPalabraEnLinea(t->dato, LineaPalabra(nueva_linea));
         return t;
     }
     else {
@@ -146,7 +143,7 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra){
     // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
     // hacerla de forma recursiva luego para repetir mas de 1 caso.
     linea aux = CrearLinea();
-    GuardarPalabraEnLinea(aux, palabra);
+    aux = GuardarPalabraEnLinea(aux, palabra);
     if (t == NULL || TextoDato(t) == NULL){
         if (t != NULL)
             t->dato = aux;
@@ -162,7 +159,7 @@ linea InsertarPalabraAlInicio(texto t, Cadena palabra){
 texto insertarLineaAlInicio(texto t, Cadena palabra){
     texto aux = CrearTexto();
     aux->dato = CrearLinea();
-    GuardarPalabraEnLinea(aux->dato, palabra);
+    aux->dato = GuardarPalabraEnLinea(aux->dato, palabra);
 
     if (t == NULL)
         return aux;
