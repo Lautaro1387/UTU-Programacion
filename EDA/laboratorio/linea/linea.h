@@ -23,6 +23,8 @@ Cadena LineaPalabra(linea l);
 linea GuardarPalabraEnLinea(linea l, Cadena palabra);
 // inserta la palabra en la linea l.
 
+linea LineaSiguiente(linea l);
+
 linea LineaIgualLinea(linea l, linea nueva_linea);
 // establece el puntero sig de l a sig.
 

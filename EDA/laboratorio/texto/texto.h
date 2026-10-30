@@ -49,7 +49,7 @@ texto TextoSiguiente(texto t);
 linea TextoContenido(texto t);
 // devuelve la cabeza de la lista de palabras en la línea t (t->dato).
 
-linea InsertarPalabraAlInicio(texto t, Cadena palabra);
+texto InsertarPalabraAlInicio(texto t, Cadena palabra);
 // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
 
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra);

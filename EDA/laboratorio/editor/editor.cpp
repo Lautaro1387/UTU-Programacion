@@ -81,7 +81,7 @@ TipoRetorno InsertarLineaEnPosicion(editor &e, Posicion posicionLinea)
 }
 
 TipoRetorno BorrarLinea(editor &e, Posicion posicionLinea) {
-	texto aux = e->primer_linea;
+	// texto aux = e->primer_linea;
 	if (posicionLinea < 1 || e->primer_linea == NULL || TextoDato(e->primer_linea) == NULL)
 		return ERROR;
 	e->primer_linea = ObtenerPosicionLinea2(e->primer_linea, posicionLinea);
@@ -138,34 +138,13 @@ TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicion
 	// Inserta una palabra en una línea.
 	// Ver más detalles en la letra del obligatorio.
 
-	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL)
+	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL || posicionPalabra > 3 || posicionLinea > 3)
 		return ERROR;
 
 		linea nueva_linea = CrearLinea();
 		nueva_linea = GuardarPalabraEnLinea(nueva_linea, palabraAIngresar);
 		e->primer_linea = insertar_Palabra_En_Texto(e->primer_linea, nueva_linea, posicionLinea, posicionPalabra);
-		if (CantidadPalabras(TextoDato(e->primer_linea)) > 3) {
-			linea iter2 = TextoDato(e->primer_linea);
-			linea ant2 = iter2;
 
-			while (ObtenerSiguienteLinea(iter2) != NULL){
-				ant2 = iter2;
-				iter2 = ObtenerSiguienteLinea(iter2);
-			}
-			if (LineaPalabra(iter2) == NULL)
-				return ERROR;
-
-			Cadena copia = new char[strlen(LineaPalabra(iter2)) + 1];
-			strcpy(copia, LineaPalabra(iter2));
-			
-			linea pal = CrearLinea();
-			pal = GuardarPalabraEnLinea(pal, copia);
-
-			// strcpy(LineaPalabra(iter2), LineaPalabra(pal));
-			ant2 = CambiarSig(ant2);
-			delete (iter2);
-			InsertarPalabraAlInicio(TextoSiguiente(e->primer_linea), LineaPalabra(pal));
-		}	
 	return OK;
 }
 

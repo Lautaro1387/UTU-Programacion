@@ -17,6 +17,10 @@ linea CrearLinea(){
     return l;
 }
 
+linea LineaSiguiente(linea l){
+    return l->sig;
+}
+
 
 linea LineaIgualLinea(linea l, linea nueva_linea){
     // establece la linea siguiente.
