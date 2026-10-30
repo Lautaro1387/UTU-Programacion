@@ -186,19 +186,16 @@ texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLin
 			ant2 = iter2;
 			iter2 = ObtenerSiguienteLinea(iter2);
 		}
-			//if (LineaPalabra(iter2) == NULL)
-				//return ERROR;
-
-		Cadena copia = new char[strlen(LineaPalabra(iter2)) + 1];
-		strcpy(copia, LineaPalabra(iter2));
-		
-		linea pal = CrearLinea();
-		pal = GuardarPalabraEnLinea(pal, copia);
-
-			// strcpy(LineaPalabra(iter2), LineaPalabra(pal));
-		ant2 = CambiarSig(ant2);
-		delete (iter2);
-		iter->sig = InsertarPalabraAlInicio(iter->sig, LineaPalabra(pal));
+        
+        Cadena copia = new char[strlen(LineaPalabra(iter2)) + 1];
+        strcpy(copia, LineaPalabra(iter2));
+            
+        linea pal = CrearLinea();
+        pal = GuardarPalabraEnLinea(pal, copia);
+            
+        ant2 = CambiarSig(ant2);
+        delete (iter2);
+        iter->sig = InsertarPalabraAlInicio(iter->sig, LineaPalabra(pal));
 	}	
     return t;
 }
@@ -273,10 +270,11 @@ texto EliminarOcurrenciasEnLineaTexto(texto t, Posicion posicionLinea, Cadena pa
         if (posicionLinea == 1){
             iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
             return t;
+        }
     } else
         return NULL;
-    }
 }
+
 
 texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar){
 
