@@ -120,25 +120,19 @@ texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
 texto InsertarPalabraAlInicio(texto t, Cadena palabra){
     // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
     // hacerla de forma recursiva luego para repetir mas de 1 caso.
-    if(t != NULL){
-
+    if (t == NULL)
+        t = CrearTextoNull();
+    
         linea aux = CrearLinea();
+        aux = GuardarPalabraEnLinea(aux, palabra);
         if (t->dato == NULL){
-            aux = GuardarPalabraEnLinea(aux, palabra);
             t->dato = CrearLinea();
             t->dato = aux;
-            return t;
         }
         else {
-            linea l = t->dato;  
-            if (l == NULL)
-            l = aux;
-            else {
-                aux = LineaSiguiente(l); 
-                l = aux;
-            }
+            aux = LineaSiguiente(t->dato); 
+            t->dato = aux;
         }
-        return t;
         if (CantidadPalabras(t->dato) > 3){
             linea iter2 = t->dato;
             linea ant2 = iter2;
@@ -161,8 +155,7 @@ texto InsertarPalabraAlInicio(texto t, Cadena palabra){
             delete (iter2);
             t->sig = InsertarPalabraAlInicio(t->sig, LineaPalabra(pal));
         }
-        return t;
-    }
+    return t;
 }
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
