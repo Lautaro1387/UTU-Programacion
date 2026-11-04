@@ -125,7 +125,7 @@ texto InsertarPalabraAlInicio(texto t, Cadena palabra){
         linea aux = CrearLinea();
         if (t->dato == NULL){
             aux = GuardarPalabraEnLinea(aux, palabra);
-            t = CrearTexto();
+            t->dato = CrearLinea();
             t->dato = aux;
             return t;
         }

@@ -201,9 +201,9 @@ TipoRetorno IngresarPalabraDiccionario(editor &e, Cadena palabraAIngresar)
 
 TipoRetorno BorrarPalabraDiccionario(editor &e, Cadena palabraABorrar)
 {
-	return BorrarPalabraDiccionariodic(e->dic,palabraABorrar);
 	// Borra una palabra del diccionario.
 	// Ver más detalles en la letra del obligatorio.
+	return BorrarPalabraDiccionariodic(e->dic,palabraABorrar);
 
 }
 
@@ -215,7 +215,7 @@ TipoRetorno ImprimirDiccionario(editor &e)
 	cout << "Salida :" << endl;
 	if (e->dic == NULL){
 		cout << "\t El diccionario esta vacio" << endl;
-	}else{
+	} else {
 		Diccionario dic = e->dic;
 		ImprimirDiccionarioD(dic);
 	}
