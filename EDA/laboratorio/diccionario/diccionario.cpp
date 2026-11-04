@@ -69,37 +69,38 @@ if (d != NULL) {
 
 //eliminar nodo abb
 
-Diccionario ObtenerMinimo(nodo_diccionario* nodo){
-    nodo_diccionario* actual = nodo;
+Diccionario ObtenerMinimo(Diccionario nodo){
+    Diccionario actual = nodo;
     while (actual && actual->izq != NULL) {
         actual = actual->izq;
     }
     return actual;
 }
 
-TipoRetorno BorrarPalabraDiccionario(Diccionario& d, Cadena palabraABorrar) {
+TipoRetorno BorrarPalabraDiccionariodic(Diccionario& d, Cadena palabraABorrar) {
     if (d == NULL) return ERROR;
 
     int comp = strcmp(palabraABorrar, d->palabra);
     if (comp < 0) {
-        return BorrarPalabraDiccionario(d->izq, palabraABorrar);
+        return BorrarPalabraDiccionariodic(d->izq, palabraABorrar);
     } else if (comp > 0) {
-        return BorrarPalabraDiccionario(d->der, palabraABorrar);
+        return BorrarPalabraDiccionariodic(d->der, palabraABorrar);
     } else {
         //nodo hoja
         if (d->izq == NULL) {
-            nodo_diccionario* temp = d->der;
+            Diccionario temp = d->der;
             delete[] d->palabra;
             delete d;
             d = temp;
         } else if (d->der == NULL) {
-            nodo_diccionario* temp = d->izq;
+            Diccionario temp = d->izq;
             delete[] d->palabra;
             delete d;
             d = temp;
         } else {
             //nodo con 2 hijos
-            nodo_diccionario * temp = ObtenerMinimo(d->der);//es lo mismo?          
+            Diccionario temp = ObtenerMinimo(d->der);//es lo mismo? 
+            //Diccionario algo = ObtenerMinimo(d->der);//es lo mismo?
             
             // Copiar la palabra del sucesor
             delete[] d->palabra;
@@ -107,7 +108,7 @@ TipoRetorno BorrarPalabraDiccionario(Diccionario& d, Cadena palabraABorrar) {
             strcpy(d->palabra, temp->palabra);
 
             // Eliminar el sucesor
-            BorrarPalabraDiccionario(d->der, temp->palabra);
+            BorrarPalabraDiccionariodic(d->der, temp->palabra);
         }
         return OK;
     }

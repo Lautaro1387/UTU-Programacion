@@ -191,14 +191,20 @@ TipoRetorno IngresarPalabraDiccionario(editor &e, Cadena palabraAIngresar)
 	// Agrega una palabra al diccionario.
 	// Esta operación debe realizarse en a lo sumo O(log n) promedio.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	bool insertado = IngresarPalabraDiccionarioD(e->dic,palabraAIngresar);
+	if (insertado) {
+        return OK;
+    } else {
+        return ERROR;
+	}
 }
 
 TipoRetorno BorrarPalabraDiccionario(editor &e, Cadena palabraABorrar)
 {
+	return BorrarPalabraDiccionariodic(e->dic,palabraABorrar);
 	// Borra una palabra del diccionario.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
 }
 
 TipoRetorno ImprimirDiccionario(editor &e)
@@ -206,7 +212,14 @@ TipoRetorno ImprimirDiccionario(editor &e)
 	// Muestra las palabras del diccionario alfabéticamente.
 	// Esta operación debe realizarse en O(n) peor caso.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	cout << "Salida :" << endl;
+	if (e->dic == NULL){
+		cout << "\t El diccionario esta vacio" << endl;
+	}else{
+		Diccionario dic = e->dic;
+		ImprimirDiccionarioD(dic);
+	}
+	return OK;
 }
 
 TipoRetorno ImprimirTextoIncorrecto(editor &e)

@@ -117,53 +117,53 @@ texto InsertarLineaEnPosicionTexto(texto e, texto aux, Posicion pos){
         return e;
     }
     
-    texto InsertarPalabraAlInicio(texto t, Cadena palabra){
-        // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
-        // hacerla de forma recursiva luego para repetir mas de 1 caso.
-        if(t != NULL){
-    
-            linea aux = CrearLinea();
-            if (t->dato == NULL){
-                aux = GuardarPalabraEnLinea(aux, palabra);
-                t = CrearTexto();
-                t->dato = aux;
-                return t;
-            }
-            else {
-                linea l = t->dato;  
-                if (l == NULL)
-                l = aux;
-                else {
-                    aux = LineaSiguiente(l); 
-                    l = aux;
-                }
-            }
-            return t;
-            if (CantidadPalabras(t->dato) > 3){
-                linea iter2 = t->dato;
-                linea ant2 = iter2;
-                
-                while (ObtenerSiguienteLinea(iter2) != NULL){
-                    ant2 = iter2;
-                    iter2 = ObtenerSiguienteLinea(iter2);
-                }
-                //if (LineaPalabra(iter2) == NULL)
-                //return ERROR;
-                
-                Cadena copia = new char[strlen(LineaPalabra(iter2)) + 1];
-                strcpy(copia, LineaPalabra(iter2));
-                
-                linea pal = CrearLinea();
-                pal = GuardarPalabraEnLinea(pal, copia);
-                
-                // strcpy(LineaPalabra(iter2), LineaPalabra(pal));
-                ant2 = CambiarSig(ant2);
-                delete (iter2);
-                t->sig = InsertarPalabraAlInicio(t->sig, LineaPalabra(pal));
-            }
+texto InsertarPalabraAlInicio(texto t, Cadena palabra){
+    // inserta el nodo nodo al inicio de la lista l (cambia la cabeza l).
+    // hacerla de forma recursiva luego para repetir mas de 1 caso.
+    if(t != NULL){
+
+        linea aux = CrearLinea();
+        if (t->dato == NULL){
+            aux = GuardarPalabraEnLinea(aux, palabra);
+            t = CrearTexto();
+            t->dato = aux;
             return t;
         }
+        else {
+            linea l = t->dato;  
+            if (l == NULL)
+            l = aux;
+            else {
+                aux = LineaSiguiente(l); 
+                l = aux;
+            }
+        }
+        return t;
+        if (CantidadPalabras(t->dato) > 3){
+            linea iter2 = t->dato;
+            linea ant2 = iter2;
+            
+            while (ObtenerSiguienteLinea(iter2) != NULL){
+                ant2 = iter2;
+                iter2 = ObtenerSiguienteLinea(iter2);
+            }
+            //if (LineaPalabra(iter2) == NULL)
+            //return ERROR;
+            
+            Cadena copia = new char[strlen(LineaPalabra(iter2)) + 1];
+            strcpy(copia, LineaPalabra(iter2));
+            
+            linea pal = CrearLinea();
+            pal = GuardarPalabraEnLinea(pal, copia);
+            
+            // strcpy(LineaPalabra(iter2), LineaPalabra(pal));
+            ant2 = CambiarSig(ant2);
+            delete (iter2);
+            t->sig = InsertarPalabraAlInicio(t->sig, LineaPalabra(pal));
+        }
+        return t;
     }
+}
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
 

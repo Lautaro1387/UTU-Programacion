@@ -11,5 +11,7 @@ InsertarPalabra(2,3,palabra3)
 ImprimirTexto()
 InsertarPalabra(2,1,palabra4)
 ImprimirTexto()
+InsertarPalabra(4,3,palabra10)
+ImprimirTexto()
 salir
 
