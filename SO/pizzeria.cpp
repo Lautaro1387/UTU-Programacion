@@ -108,10 +108,8 @@ int main() {
             cout << "Cantidad de pizzas que quiere: ";
             sem_wait(&mutex_inventario); // Bloqueo seguro para chequear stock
             cin >> cantidad;
-            if (cantidad <= 0 || cantidad > MAX_PIZZAS) {
+            if (cantidad <= 0 || cantidad > MAX_PIZZAS)
                 cout << "Error - Cantidad invalida. Debe ser positiva y no superar " << MAX_PIZZAS << endl;
-                continue;
-            }
             if (pizzas_disponibles >= cantidad) {
                 pizzas_disponibles -= cantidad;
                 cout << "Pizzas entregadas con exito: " << cantidad << endl;
