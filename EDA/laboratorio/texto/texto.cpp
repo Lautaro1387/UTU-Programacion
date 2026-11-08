@@ -282,3 +282,13 @@ texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar){
         return t;
     }
 }
+
+texto comprimirTexto(texto t){
+    if (t == NULL)
+        return NULL;
+    else {
+            t->dato = comprimirLinea(t->dato);
+            t->sig = comprimirTexto(t->sig);
+        return t;
+    }
+}

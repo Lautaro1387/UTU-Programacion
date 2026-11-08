@@ -64,6 +64,9 @@ void ImprimirT(linea l);
 void LineaInsertarDespues(linea ant, linea nodo);
 // inserta nodo justo después del nodo ant en la lista (este es el caso de inserción intermedia o final).
 
+linea comprimirLinea(linea l);
+
+
 linea ObtenerSiguienteLinea(linea l);
 // linea ObtenerLinea(texto t, Posicion pos);
 // linea InsertarPalabraEnLinea(texto t,Posicion pos, Cadena palabra);

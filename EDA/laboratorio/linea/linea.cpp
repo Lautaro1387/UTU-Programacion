@@ -194,7 +194,6 @@ linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
     }
 }
 
-
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
 
@@ -203,6 +202,18 @@ linea LineaExtraerUltimo(linea &l);
 // y lo devuelve. Retorna NULL si la lista queda vacía.
 
 
-
-
-
+linea comprimirLinea(linea l){
+    if (l == NULL)
+        return NULL;
+    else {
+        if (l->palabra == NULL) {
+            linea aux = l;
+            l = l->sig;
+            delete aux;
+            l->sig = comprimirLinea(l->sig);
+        } else {
+            l->sig = comprimirLinea(l->sig);
+        }
+        return l;
+    }
+}

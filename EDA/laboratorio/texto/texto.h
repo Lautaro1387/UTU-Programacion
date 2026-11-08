@@ -65,6 +65,8 @@ texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar);
 
 texto EliminarTodaLinea(texto t);
 
+texto comprimirTexto(texto t);
+
 /*
 unsigned int CantidadLineas(texto t);
 void ImprimirTextoCompleto(texto t);

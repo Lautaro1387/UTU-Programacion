@@ -45,11 +45,14 @@ bool IngresarPalabraDiccionarioD(Diccionario& d, Cadena palabraAIngresar) {
 // O(log n)
 
 bool PerteneceDiccionario(Diccionario d, Cadena palabra) {
-    if (d == NULL) return false;
+    if (d == NULL)
+        return false;
 
     int comp = strcmp(palabra, d->palabra);
-    if (comp == 0) return true;
-    if (comp < 0) return PerteneceDiccionario(d->izq, palabra);
+    if (comp == 0)
+        return true;
+    if (comp < 0)
+        return PerteneceDiccionario(d->izq, palabra);
     return PerteneceDiccionario(d->der, palabra);
 }
 
@@ -58,7 +61,7 @@ bool PerteneceDiccionario(Diccionario d, Cadena palabra) {
 
 void ImprimirDiccionarioD(Diccionario d){
 
-if (d != NULL) {
+    if (d != NULL) {
         ImprimirDiccionarioD(d->izq);
         cout << d->palabra << endl;
         ImprimirDiccionarioD(d->der);
@@ -71,9 +74,9 @@ if (d != NULL) {
 
 Diccionario ObtenerMinimo(Diccionario nodo){
     Diccionario actual = nodo;
-    while (actual && actual->izq != NULL) {
+
+    while (actual && actual->izq != NULL)
         actual = actual->izq;
-    }
     return actual;
 }
 
@@ -113,6 +116,7 @@ TipoRetorno BorrarPalabraDiccionariodic(Diccionario& d, Cadena palabraABorrar) {
         return OK;
     }
 }
+
 
 
 void DestruirDiccionario(Diccionario& d) {

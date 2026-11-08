@@ -52,22 +52,10 @@ TipoRetorno InsertarLinea(editor &e)
 	return OK;
 }
 
-TipoRetorno InsertarLineaEnPosicion(editor &e, Posicion posicionLinea)
-{
+TipoRetorno InsertarLineaEnPosicion(editor &e, Posicion posicionLinea) {
 	// Inserta una nueva línea vacía en la posición indicada.
 	// Ver más detalles en la letra del obligatorio.
 
-	/*
-	texto iter = e->primer_linea;
-	texto ant = iter;
-	while (iter != NULL && posicionLinea > 1){
-		ant = iter;
-		iter = TextoSiguiente(iter);
-		posicionLinea--;
-		}
-		if (posicionLinea == 1){
-			e->primer_linea = InsertarLineaEnPosicionTexto(e->primer_linea, aux);
-			*/
 	if (posicionLinea < 1)
 		return ERROR;
 	texto aux = CrearTexto();
@@ -126,11 +114,11 @@ TipoRetorno ImprimirTexto(editor &e) {
 	return OK;
 }
 
-TipoRetorno ComprimirTexto(editor &e)
-{
+TipoRetorno ComprimirTexto(editor &e) {
 	// Comprime las palabras del texto. Para implementar esta operación no debe generarse un nuevo documento.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+	e->primer_linea = comprimirTexto(e->primer_linea);
+	return OK;
 }
 
 
@@ -186,8 +174,7 @@ TipoRetorno ImprimirLinea(editor &e, Posicion posicionLinea) {
 		return ERROR;
 }
 
-TipoRetorno IngresarPalabraDiccionario(editor &e, Cadena palabraAIngresar)
-{
+TipoRetorno IngresarPalabraDiccionario(editor &e, Cadena palabraAIngresar) {
 	// Agrega una palabra al diccionario.
 	// Esta operación debe realizarse en a lo sumo O(log n) promedio.
 	// Ver más detalles en la letra del obligatorio.
@@ -199,16 +186,13 @@ TipoRetorno IngresarPalabraDiccionario(editor &e, Cadena palabraAIngresar)
 	}
 }
 
-TipoRetorno BorrarPalabraDiccionario(editor &e, Cadena palabraABorrar)
-{
+TipoRetorno BorrarPalabraDiccionario(editor &e, Cadena palabraABorrar) {
 	// Borra una palabra del diccionario.
 	// Ver más detalles en la letra del obligatorio.
 	return BorrarPalabraDiccionariodic(e->dic,palabraABorrar);
-
 }
 
-TipoRetorno ImprimirDiccionario(editor &e)
-{
+TipoRetorno ImprimirDiccionario(editor &e) {
 	// Muestra las palabras del diccionario alfabéticamente.
 	// Esta operación debe realizarse en O(n) peor caso.
 	// Ver más detalles en la letra del obligatorio.
@@ -222,22 +206,41 @@ TipoRetorno ImprimirDiccionario(editor &e)
 	return OK;
 }
 
-TipoRetorno ImprimirTextoIncorrecto(editor &e)
-{
+TipoRetorno ImprimirTextoIncorrecto(editor &e) {
 	// Muestra las palabras del texto que no se encuentran en el diccionario.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+	if (e->primer_linea == NULL) {
+		printf("Texto vacio");
+		return OK;
+	}
+	texto iter = e->primer_linea;
+	linea l;
+
+	int i = 0;
+	while (iter != NULL) {
+		l = ObtenerLinea(iter);
+		i++;
+		printf("%d: ", i);
+		while (l != NULL) {
+			if (!PerteneceDiccionario(e->dic, LineaPalabra(l))){
+				printf("%s ", LineaPalabra(l));
+			}
+			l = ObtenerSiguienteLinea(l);
+		}
+		printf("\n");
+		iter = TextoSiguiente(iter);
+	}
+	return OK;
 }
 
-TipoRetorno ImprimirUltimasPalabras(editor &e)
-{
+TipoRetorno ImprimirUltimasPalabras(editor &e) {
 	// Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 	// Ver más detalles en la letra del obligatorio.
 	return NO_IMPLEMENTADA;
 }
 
-TipoRetorno DestruirEditor(editor &e)
-{
+TipoRetorno DestruirEditor(editor &e) {
 	// Destruye la estructura editor y libera la memoria asociada.
 	return NO_IMPLEMENTADA;
 }
