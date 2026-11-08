@@ -43,13 +43,13 @@ void *producir_pizzas(void *arg) {
 
         // Entrada - Sección critica
         pizzas_disponibles++;
-        cout << "\n Pizza pronta colocada en la mesada! (Total: " << pizzas_disponibles << ")" << endl;
-        // printf("Pizza pronta colocada en la mesada! Total: %d \n", pizzas_disponibles);
+        // cout << "\n Pizza pronta colocada en la mesada! (Total: " << pizzas_disponibles << ")" << endl;
+        printf("Pizza pronta colocada en la mesada! Total: %d \n", pizzas_disponibles);
 
         // Salida - Sección critica
         sem_post(&mutex_inventario);  // Abre el candado del inventario para que otros puedan usarlo.
-        sem_post(&sem_pizzas_listas); // Avisa que hay una pizza más lista para el cliente.
-    }
+        sem_post(&sem_pizzas_listas); // Avisa que hay una pizza más lista para el cliente; // Para salir de la producción
+
     return NULL;
 }
 
@@ -67,8 +67,8 @@ void *producir_postres(void *arg) {
 
         // Entrada - Sección critica
         postres_disponibles++;
-        cout << "\n Postre pronto colocado en la mesada! (Total: " << postres_disponibles << ")" << endl;
-        // printf("Postre pronto colocada en la mesa! Total: %d \n", postres_disponibles);
+        // cout << "\n Postre pronto colocado en la mesada! (Total: " << postres_disponibles << ")" << endl;
+        printf("Postre pronto colocada en la mesa! Total: %d \n", postres_disponibles);
 
         // Salida - Sección critica
         sem_post(&mutex_inventario);   // =1 del inventario para que otros puedan usarlo.
@@ -95,8 +95,10 @@ int main() {
 
     // Menu interactivo del consumidor
     while (ejecutar) {
-        cout << "\n--- MENU PIZZERIA ---" << endl;
-        cout << "1. Pedir pizzas." << endl;
+        // cout << "\n--- MENU PIZZERIA ---" << endl;
+        printf("Menu Pizzeria\n");
+        printf("1. Pedir pizzas\n");
+        printf("2. Pedir postres.\n");
         cout << "2. Pedir postres." << endl;
         cout << "3. Consultar inventario." << endl;
         cout << "4. Salir." << endl;
