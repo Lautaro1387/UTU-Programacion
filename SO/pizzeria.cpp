@@ -3,8 +3,6 @@
 #include <pthread.h>   // hilos
 #include <semaphore.h> // semaforos
 
-// using namespace std;
-
 // 1 Inventario al abrir
 int pizzas_disponibles = 0;
 int postres_disponibles = 0;
@@ -34,10 +32,6 @@ void *producir_pizzas(void *arg) {
     while (ejecutar) {
         sleep(3);
 
-        // QUITAR ESTA SECCION
-        if (!ejecutar)
-            break; // Para salir de la producción
-
         // Sincronización
         sem_wait(&sem_lugar_pizzas); // Gasta un espacio vacío. Si está vacia, aquí se frena.
         sem_wait(&mutex_inventario); // Cierra el candado del inventario (Exclusión Mutua).
@@ -59,10 +53,6 @@ void *producir_postres(void *arg) {
 
     while (ejecutar) {
         sleep(4);
-
-        // QUITAR ESTA SECCION
-        if (!ejecutar)
-            break; // Para salir de la producción
 
         // Sincronización
         sem_wait(&sem_lugar_postres); // Gasta un espacio vacío de la mesada. Si está llena, aquí se frena.
