@@ -1,10 +1,9 @@
-#include <pthread.h>   // hilos
-#include <semaphore.h> // semaforos
 #include <unistd.h>    // sleep()
 #include <stdio.h>     // printf
-#include <iostream>    // cout/cin
+#include <pthread.h>   // hilos
+#include <semaphore.h> // semaforos
 
-using namespace std;
+// using namespace std;
 
 // 1 Inventario al abrir
 int pizzas_disponibles = 0;
@@ -34,6 +33,8 @@ void *producir_pizzas(void *arg) {
 
     while (ejecutar) {
         sleep(3);
+
+        // QUITAR ESTA SECCION
         if (!ejecutar)
             break; // Para salir de la producción
 
@@ -43,13 +44,13 @@ void *producir_pizzas(void *arg) {
 
         // Entrada - Sección critica
         pizzas_disponibles++;
-        // cout << "\n Pizza pronta colocada en la mesada! (Total: " << pizzas_disponibles << ")" << endl;
         printf("Pizza pronta colocada en la mesada! Total: %d \n", pizzas_disponibles);
 
         // Salida - Sección critica
         sem_post(&mutex_inventario);  // Abre el candado del inventario para que otros puedan usarlo.
         sem_post(&sem_pizzas_listas); // Avisa que hay una pizza más lista para el cliente; // Para salir de la producción
 
+    }
     return NULL;
 }
 
@@ -58,6 +59,8 @@ void *producir_postres(void *arg) {
 
     while (ejecutar) {
         sleep(4);
+
+        // QUITAR ESTA SECCION
         if (!ejecutar)
             break; // Para salir de la producción
 
@@ -67,8 +70,7 @@ void *producir_postres(void *arg) {
 
         // Entrada - Sección critica
         postres_disponibles++;
-        // cout << "\n Postre pronto colocado en la mesada! (Total: " << postres_disponibles << ")" << endl;
-        printf("Postre pronto colocada en la mesa! Total: %d \n", postres_disponibles);
+        printf("Postre pronto colocada en la mesada! Total: %d \n", postres_disponibles);
 
         // Salida - Sección critica
         sem_post(&mutex_inventario);   // =1 del inventario para que otros puedan usarlo.
@@ -95,26 +97,24 @@ int main() {
 
     // Menu interactivo del consumidor
     while (ejecutar) {
-        // cout << "\n--- MENU PIZZERIA ---" << endl;
         printf("Menu Pizzeria\n");
         printf("1. Pedir pizzas\n");
         printf("2. Pedir postres.\n");
-        cout << "2. Pedir postres." << endl;
-        cout << "3. Consultar inventario." << endl;
-        cout << "4. Salir." << endl;
-        cout << "Seleccione una opcion: ";
+        printf("3. Consultar inventario.\n");
+        printf("4. Salir.\n");
+        printf("Seleccione una opcion: ");
 
-        cin >> opcion;
+        scanf("%d", &opcion);
         if (opcion == 1) {
             int cantidad;
-            cout << "Cantidad de pizzas que quiere: ";
+            printf("Cantidad de pizzas que quiere: ");
             sem_wait(&mutex_inventario); // Bloqueo seguro para chequear stock
-            cin >> cantidad;
+            scanf("%d", &cantidad);
             if (cantidad <= 0 || cantidad > MAX_PIZZAS)
-                cout << "Error - Cantidad invalida. Debe ser positiva y no superar " << MAX_PIZZAS << endl;
+                printf("Error - Cantidad invalida. Debe ser positiva y no superar %d\n", MAX_PIZZAS);
             if (pizzas_disponibles >= cantidad) {
                 pizzas_disponibles -= cantidad;
-                cout << "Pizzas entregadas con exito: " << cantidad << endl;
+                printf("Pizzas entregadas con exito: %d\n", cantidad);
 
                 // Liberamos espacio de la mesada (asi el horno sigue produciendo)
                 for (int i = 0; i < cantidad; i++) {
@@ -122,22 +122,21 @@ int main() {
                     sem_post(&sem_lugar_pizzas);
                 }
             } else
-                cout << "No hay suficientes unidades disponibles en este momento." << endl;
+                printf("No hay suficientes unidades disponibles en este momento.\n");
             sem_post(&mutex_inventario);
         }
 
         else if (opcion == 2) {
             int cantidad;
-            cout << "Cantidad de postres que desea: ";
-            cin >> cantidad;
-            if (cantidad <= 0 || cantidad > MAX_POSTRES) {
-                cout << "Error - Cantidad invalida. Debe ser positiva y no superar " << MAX_POSTRES << endl;
-                continue;
-            }
+            printf("Cantidad de postres que desea: ");
             sem_wait(&mutex_inventario);
+            scanf("%d", &cantidad);
+            if (cantidad <= 0 || cantidad > MAX_POSTRES)
+                printf("Error - Cantidad invalida. Debe ser positiva y no superar %d\n", MAX_POSTRES);
+
             if (postres_disponibles >= cantidad) {
                 postres_disponibles -= cantidad;
-                cout << "Postres entregados con exito: " << cantidad << endl;
+                printf("Postres entregados con exito: %d\n", cantidad);
 
                 // Liberamos espacio en la heladera
                 for (int i = 0; i < cantidad; i++) {
@@ -146,22 +145,22 @@ int main() {
                 }
             }
             else
-                cout << "No hay suficientes unidades disponibles en este momento." << endl;
+                printf("No hay suficientes unidades disponibles en este momento.\n");
             sem_post(&mutex_inventario);
         }
         else if (opcion == 3) {
             sem_wait(&mutex_inventario);
-            cout << "\n--- INVENTARIO ACTUAL ---" << endl;
-            cout << "Pizzas en la mesada: " << pizzas_disponibles << " / " << MAX_PIZZAS << endl;
-            cout << "Postres en la heladera: " << postres_disponibles << " / " << MAX_POSTRES << endl;
+            printf("\n--- INVENTARIO ACTUAL ---\n");
+            printf("Pizzas en la mesada: %d / %d\n", pizzas_disponibles, MAX_PIZZAS);
+            printf("Postres en la heladera: %d / %d\n", postres_disponibles, MAX_POSTRES);
             sem_post(&mutex_inventario);
         }
         else if (opcion == 4) {
-            cout << "Finalizando hilos y liberando recursos..." << endl;
+            printf("Finalizando hilos y liberando recursos...\n");
             ejecutar = false; // Detiene los whiles de los hilos y salimos del menu
         }
         else
-            cout << "Error - Opcion incorrecta." << endl;
+            printf("Error - Opcion incorrecta.\n");
     }
     // Limpieza de recursos
     // Destrabamos hilos por si quedaron bloqueados esperando espacio
@@ -178,6 +177,7 @@ int main() {
     sem_destroy(&sem_lugar_postres);
     sem_destroy(&sem_postres_listos);
     sem_destroy(&mutex_inventario);
-    cout << "Recursos liberados. Programa terminado con exito." << endl;
+    printf("Recursos liberados. Programa terminado con exito.\n");
     return 0;
+
 }
