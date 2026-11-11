@@ -283,12 +283,48 @@ texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar){
     }
 }
 
+
+linea extraerPrimeraPalabra(texto &t){
+    while (t != NULL && t->dato == NULL){
+        texto aux = t;
+        t = t->sig;
+        delete aux;
+    }
+    if (t == NULL)
+        return NULL;
+    linea primeraLinea = t->dato;
+    t->dato = LineaSiguiente(primeraLinea);
+    LineaIgualLinea(primeraLinea, NULL);
+    return primeraLinea;
+}
+
 texto comprimirTexto(texto t){
     if (t == NULL)
         return NULL;
-    else {
-            t->dato = comprimirLinea(t->dato);
-            t->sig = comprimirTexto(t->sig);
-        return t;
+    else if (TextoDato(t) == NULL) {
+        texto aux = t;
+        t = t->sig;
+        delete aux;
+        return comprimirTexto(t);
+    } else {
+        
+        int cant = CantidadPalabras(t->dato);
+        linea ultima = t->dato;
+        while (LineaSiguiente(ultima) != NULL)
+        ultima = LineaSiguiente(ultima);
+        while (cant < MAX_CANT_PALABRAS_X_LINEA && LineaSiguiente(t->dato) != NULL) {
+            linea siguienteLinea = extraerPrimeraPalabra(t->sig);
+            if (siguienteLinea != NULL) {
+                // Mover palabras de la siguiente línea a la línea actual
+                LineaIgualLinea(ultima, siguienteLinea);
+                ultima = siguienteLinea;
+                cant++;
+                // Actualizar la línea siguiente después de mover palabras
+                
+            }
+        }
+        t->dato = comprimirLinea(t->dato);
+        t->sig = comprimirTexto(t->sig);
     }
+    return t;
 }

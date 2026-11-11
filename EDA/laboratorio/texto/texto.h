@@ -67,16 +67,6 @@ texto EliminarTodaLinea(texto t);
 
 texto comprimirTexto(texto t);
 
-/*
-unsigned int CantidadLineas(texto t);
-void ImprimirTextoCompleto(texto t);
-void TextoCrearLinea(editor &e, texto despues);
-// inserta una nueva línea (nodo vacía) en editor, inmediatamente después de la línea apuntada por despues. Si despues==NULL, agrega la línea al inicio (y actualiza primer_linea). Actualiza ultima_linea si es la última.
-texto CrearTexto();//Lista
-    TipoRetorno InsertarLineaFinal(texto t);                           // Debe ser O(1)
-    TipoRetorno InsertarLineaAlPrincipio(texto t);                        // Debe ser O(1)
-    TipoRetorno BorrarLineaEnPosicion(texto t, Posicion pos);
-    TipoRetorno BorrarTodoTexto(texto t);
-    void DestruirTexto(texto &t);
-*/
+linea extraerPrimeraPalabra(texto &t);
+
 #endif

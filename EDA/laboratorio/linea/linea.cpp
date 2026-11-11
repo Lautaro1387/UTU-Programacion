@@ -202,6 +202,8 @@ linea LineaExtraerUltimo(linea &l);
 // y lo devuelve. Retorna NULL si la lista queda vacía.
 
 
+
+
 linea comprimirLinea(linea l){
     if (l == NULL)
         return NULL;
@@ -210,7 +212,7 @@ linea comprimirLinea(linea l){
             linea aux = l;
             l = l->sig;
             delete aux;
-            l->sig = comprimirLinea(l->sig);
+            return comprimirLinea(l);
         } else {
             l->sig = comprimirLinea(l->sig);
         }
