@@ -9,20 +9,17 @@ typedef struct nodo_linea * linea; // conjunto de palabra
 
 linea CrearLinea();
 // Crea una nueva linea
-linea LineaNueva(Cadena palabra);
-// crea e inicializa un nodo de palabra con la cadena dada y sig=null.
+
 linea ObtenerSiguienteLinea(linea l);
 // devuelve l->sig.
 
 Cadena LineaPalabra(linea l);
 // devuelve l->palabra.
 
-// void InsertarPalabraEnLinea(linea l, Cadena palabra);
-// inserta la palabra en la linea l.
-
 linea GuardarPalabraEnLinea(linea l, Cadena palabra);
 // inserta la palabra en la linea l.
 
+// QUITAR SI TERMINAMOS TODO Y NO LO USAMOS
 linea LineaSiguiente(linea l);
 
 linea LineaIgualLinea(linea l, linea nueva_linea);
@@ -33,16 +30,10 @@ linea LineaSiguienteIgualLinea(linea l, linea nueva_linea);
 
 linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPalabra);
 
-linea InsertarPalabraAlInicioLinea(linea l, Cadena palabra);
-
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
 
 linea CambiarSig(linea l);
-
-linea LineaExtraerUltimo(linea &l);
-// quita el último nodo de la lista l (ajustando el penúltimo a sig=null)
-// y lo devuelve. Retorna NULL si la lista queda vacía.
 
 linea InsertarUltimaLinea(linea l, linea nueva_palabra);
 // Se usa en: TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar);
@@ -60,21 +51,11 @@ linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar);
 void ImprimirT(linea l);
 // ExtraerUltimaPalabra(linea l);
 
-// No dar bola
-void LineaInsertarDespues(linea ant, linea nodo);
-// inserta nodo justo después del nodo ant en la lista (este es el caso de inserción intermedia o final).
-
 linea comprimirLinea(linea l);
-
+// comprime la linea l eliminando los nodos que tengan palabra=NULL. Retorna la cabeza de la lista resultante.
 
 linea ObtenerSiguienteLinea(linea l);
-// linea ObtenerLinea(texto t, Posicion pos);
-// linea InsertarPalabraEnLinea(texto t,Posicion pos, Cadena palabra);
-// TipoRetorno InsertarPalabraEnLinea(linea l, Posicion pos, Cadena palabra);
-// TipoRetorno BorrarPalabraEnLinea(linea l, Posicion pos);
-// TipoRetorno BorrarOcurrenciasEnLinea(linea l, Cadena palabra);
-// void ImprimirLineaContenido(linea l);
-// void DestruirLinea(linea& l);
+// devuelve la linea siguiente.
 
 
 #endif

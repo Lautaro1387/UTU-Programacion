@@ -80,12 +80,6 @@ texto InsertarUltimaLineaTexto(texto t, linea l){
 
 // devuelve el puntero a la última línea (e->ultima_linea).
 
-
-texto TextoPrimera(texto t){
-    // devuelve el puntero a la primera línea de editor e (i.e. e->primer_linea).
-    return t;
-}
-
 texto TextoUltima(texto t){
     // devuelve el puntero a la última línea (e->ultima_linea).
     if (t == NULL)
