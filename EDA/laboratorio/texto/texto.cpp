@@ -292,15 +292,18 @@ linea extraerPrimeraPalabra(texto &t){
     }
     if (t == NULL)
         return NULL;
-    linea primeraLinea = t->dato;
+
+    linea primeraLinea = TextoDato(t);
     t->dato = LineaSiguiente(primeraLinea);
-    LineaIgualLinea(primeraLinea, NULL);
+    LineaSiguienteIgualLinea(primeraLinea, NULL);
+
     return primeraLinea;
 }
 
 texto comprimirTexto(texto t){
     if (t == NULL)
         return NULL;
+
     else if (TextoDato(t) == NULL) {
         texto aux = t;
         t = t->sig;
@@ -311,12 +314,12 @@ texto comprimirTexto(texto t){
         int cant = CantidadPalabras(t->dato);
         linea ultima = t->dato;
         while (LineaSiguiente(ultima) != NULL)
-        ultima = LineaSiguiente(ultima);
-        while (cant < MAX_CANT_PALABRAS_X_LINEA && LineaSiguiente(t->dato) != NULL) {
+            ultima = LineaSiguiente(ultima);
+        while (cant < MAX_CANT_PALABRAS_X_LINEA && t->sig != NULL) {
             linea siguienteLinea = extraerPrimeraPalabra(t->sig);
             if (siguienteLinea != NULL) {
                 // Mover palabras de la siguiente línea a la línea actual
-                LineaIgualLinea(ultima, siguienteLinea);
+                LineaSiguienteIgualLinea(ultima, siguienteLinea);
                 ultima = siguienteLinea;
                 cant++;
                 // Actualizar la línea siguiente después de mover palabras

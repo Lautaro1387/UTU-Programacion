@@ -237,10 +237,15 @@ TipoRetorno ImprimirTextoIncorrecto(editor &e) {
 TipoRetorno ImprimirUltimasPalabras(editor &e) {
 	// Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 	// Ver más detalles en la letra del obligatorio.
-	return NO_IMPLEMENTADA;
+
+	return OK;
 }
 
 TipoRetorno DestruirEditor(editor &e) {
 	// Destruye la estructura editor y libera la memoria asociada.
-	return NO_IMPLEMENTADA;
+
+	// check
+	e->primer_linea = EliminarTodaLinea(e->primer_linea);
+	delete(e);
+	return OK;
 }
