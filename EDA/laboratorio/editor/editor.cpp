@@ -15,8 +15,7 @@
 
 using namespace std;
 
-struct nodo_editor
-{
+struct nodo_editor {
 	/* acá deben figurar los campos/estructuras que usted considere necesarios
 	para implementar el editor. Ej: texto, diccionario, etc. Recordar que cada módulo
 	debe implementarse independientemente e incluirse */
@@ -24,16 +23,18 @@ struct nodo_editor
 	Diccionario dic;
 	texto primer_linea;
 	texto ultima_linea;
+	texto historial;
 };
 
-editor CrearEditor()
-{
+editor CrearEditor() {
 	// Crea la estructura editor.
 	editor e = new (nodo_editor);
 	/* crear el resto de las estructuras que se incluyan en el editor
 	usando las funciones correspondientes de cada modulo */
+	e->dic = NULL;
 	e->primer_linea = NULL;
 	e->ultima_linea = NULL;
+	e->historial = NULL;
 	return e;
 }
 
@@ -128,13 +129,13 @@ TipoRetorno InsertarPalabra(editor &e, Posicion posicionLinea, Posicion posicion
 
 	if (posicionLinea < 1 || posicionPalabra < 1 || e->primer_linea == NULL || posicionPalabra > 3)
 		return ERROR;
-
-		linea nueva_linea = CrearLinea();
-		nueva_linea = GuardarPalabraEnLinea(nueva_linea, palabraAIngresar);
-		e->primer_linea = insertar_Palabra_En_Texto(e->primer_linea, nueva_linea, posicionLinea, posicionPalabra);
-
+	linea nueva_linea = CrearLinea();
+	nueva_linea = GuardarPalabraEnLinea(nueva_linea, palabraAIngresar);
+	e->primer_linea = insertar_Palabra_En_Texto(e->primer_linea, nueva_linea, posicionLinea, posicionPalabra);
+	e->historial = AgregarAlHistorial(e->historial, palabraAIngresar);
 	return OK;
 }
+   
 
 TipoRetorno BorrarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPalabra) {
 	// Borra la palabra en la posición indicada.
@@ -237,8 +238,18 @@ TipoRetorno ImprimirTextoIncorrecto(editor &e) {
 TipoRetorno ImprimirUltimasPalabras(editor &e) {
 	// Imprime las últimas MAX_CANT_ULTIMAS_PALABRAS palabras ingresadas al texto.
 	// Ver más detalles en la letra del obligatorio.
-
-	return OK;
+	if (e->historial == NULL) {
+		printf("No se ingresaron palabras");
+		return OK;
+	} else {
+		linea l = ObtenerLinea(e->historial);
+		while (l != NULL) {
+			printf("%s ", LineaPalabra(l));
+			l = ObtenerSiguienteLinea(l);
+			printf("\n");
+		}
+		return OK;
+	}
 }
 
 TipoRetorno DestruirEditor(editor &e) {

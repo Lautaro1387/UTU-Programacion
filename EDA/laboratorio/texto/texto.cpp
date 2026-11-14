@@ -124,7 +124,8 @@ texto InsertarPalabraAlInicio(texto t, Cadena palabra){
             t->dato = aux;
         }
         else {
-            aux = LineaSiguiente(t->dato); 
+            // aux->sig = t->dato;
+            aux = LineaSiguienteIgualLinea(aux, t->dato); 
             t->dato = aux;
         }
         if (CantidadPalabras(t->dato) > 3){
@@ -324,4 +325,41 @@ texto comprimirTexto(texto t){
         t->sig = comprimirTexto(t->sig);
     }
     return t;
+}
+
+
+texto LimitarHistorial(texto historial){
+    // Limitar el historial a MAX_CANT_ULTIMAS_PALABRAS palabras.
+    int contador = 0;
+    linea iter = historial->dato;
+    linea ant = NULL;
+    
+    while (iter != NULL) {
+        contador++;
+        if (contador > MAX_CANT_ULTIMAS_PALABRAS) {
+            // Eliminar el resto del historial.
+            CambiarSig(ant); // Desconectar el resto del historial.
+            delete iter; // Liberar memoria del resto del historial.
+        }
+        ant = iter;
+        iter = LineaSiguiente(iter);
+    }
+    
+    return historial;
+}
+
+texto AgregarAlHistorial(texto historial, Cadena palabra) {    
+    // Agregar una palabra al historial.
+    
+    if (historial == NULL) {
+        historial = CrearTexto();
+        historial->dato = GuardarPalabraEnLinea(historial->dato, palabra);
+    } else {
+        historial = InsertarPalabraAlInicio(historial, palabra);
+    }
+    
+    // Limitar el historial a MAX_CANT_ULTIMAS_PALABRAS palabras.
+    historial = LimitarHistorial(historial);
+    
+    return historial;
 }

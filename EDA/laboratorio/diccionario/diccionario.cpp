@@ -15,7 +15,7 @@ Diccionario CrearDiccionario() {
 }
 
 Diccionario CrearNodo(Cadena palabra) {
-    Diccionario  nuevo = new (nodo_diccionario);
+    Diccionario nuevo = new (nodo_diccionario);
     nuevo->palabra = new char[strlen(palabra) + 1];//Preguntar si se puede utilizar esta funcion stlen R:si se puede
     strcpy(nuevo->palabra, palabra);
     nuevo->izq = NULL;
@@ -81,7 +81,8 @@ Diccionario ObtenerMinimo(Diccionario nodo){
 }
 
 TipoRetorno BorrarPalabraDiccionariodic(Diccionario& d, Cadena palabraABorrar) {
-    if (d == NULL) return ERROR;
+    if (d == NULL)
+        return ERROR;
 
     int comp = strcmp(palabraABorrar, d->palabra);
     if (comp < 0) {

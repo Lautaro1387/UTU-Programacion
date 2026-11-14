@@ -53,4 +53,8 @@ texto comprimirTexto(texto t);
 
 linea extraerPrimeraPalabra(texto &t);
 
+texto AgregarAlHistorial(texto historial, Cadena palabra);
+
+texto LimitarHistorial(texto historial);
+
 #endif
