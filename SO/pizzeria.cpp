@@ -14,7 +14,6 @@ const int MAX_POSTRES = 3; // heladera
 // 3 - Contra los hilos
 bool ejecutar = true;
 
-
 // 4 - Semaforo de las pizzas
 sem_t sem_lugar_pizzas;  // Contador de espacios vacios en la mesada
 sem_t sem_pizzas_listas; // Contador de pizzas listas
@@ -71,12 +70,12 @@ void *producir_postres(void *arg) {
 
 int main() {
     // Inicialización
-    // El (0) es que los semáforos se comparten entre hilos (mismo proceso)
-    sem_init(&sem_lugar_pizzas, 0, MAX_PIZZAS);   // 4 espacios vacíos
+    // (0) los semáforos se comparten entre hilos
+    sem_init(&sem_lugar_pizzas, 0, MAX_PIZZAS);   // 4
     sem_init(&sem_pizzas_listas, 0, 0);           // 0
-    sem_init(&sem_lugar_postres, 0, MAX_POSTRES); // 3 espacios vacíos
+    sem_init(&sem_lugar_postres, 0, MAX_POSTRES); // 3
     sem_init(&sem_postres_listos, 0, 0);          // 0
-    sem_init(&mutex_inventario, 0, 1);            // El candado arranca abierto (= 1)
+    sem_init(&mutex_inventario, 0, 1);            // =1
 
     // Creación de los hilos
     pthread_t hilo_pizzas, hilo_postres;
@@ -92,7 +91,7 @@ int main() {
         printf("2. Pedir postres.\n");
         printf("3. Consultar inventario.\n");
         printf("4. Salir.\n");
-        printf("Seleccione una opcion: ");
+        printf("Seleccione una opcion: \n");
 
         scanf("%d", &opcion);
         if (opcion == 1) {
@@ -115,8 +114,8 @@ int main() {
                 printf("No hay suficientes unidades disponibles en este momento.\n");
             sem_post(&mutex_inventario);
         }
-
         else if (opcion == 2) {
+
             int cantidad;
             printf("Cantidad de postres que desea: ");
             sem_wait(&mutex_inventario);
@@ -127,7 +126,6 @@ int main() {
             if (postres_disponibles >= cantidad) {
                 postres_disponibles -= cantidad;
                 printf("Postres entregados con exito: %d\n", cantidad);
-
                 // Liberamos espacio en la heladera
                 for (int i = 0; i < cantidad; i++) {
                     sem_wait(&sem_postres_listos);
@@ -152,8 +150,9 @@ int main() {
         else
             printf("Error - Opcion incorrecta.\n");
     }
+
     // Limpieza de recursos
-    // Destrabamos hilos por si quedaron bloqueados esperando espacio
+    // Desbloquear los hilos por si quedan bloqueados esperando espacio
     sem_post(&sem_lugar_pizzas);
     sem_post(&sem_lugar_postres);
 
@@ -168,6 +167,4 @@ int main() {
     sem_destroy(&sem_postres_listos);
     sem_destroy(&mutex_inventario);
     printf("Recursos liberados. Programa terminado con exito.\n");
-    return 0;
-
 }
