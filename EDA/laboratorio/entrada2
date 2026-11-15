@@ -8,5 +8,7 @@ ImprimirTexto();
 InsertarPalabra(2, 2, "Palabra4");
 ImprimirTexto();
 InsertarPalabra(2, 3, "Palabra5");
-ImprimirTexto(); 
+ImprimirTexto();
+DestruirEditor();
+ImprimirTexto();
 salir

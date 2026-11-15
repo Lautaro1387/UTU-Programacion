@@ -38,8 +38,7 @@ editor CrearEditor() {
 	return e;
 }
 
-TipoRetorno InsertarLinea(editor &e)
-{
+TipoRetorno InsertarLinea(editor &e) {
 	// Inserta una nueva línea vacía al final del texto.
 	// Este requerimiento debe ser resuelto en O(1) peor caso.
 	// Ver más detalles en la letra del obligatorio.
@@ -148,8 +147,7 @@ TipoRetorno BorrarPalabra(editor &e, Posicion posicionLinea, Posicion posicionPa
 	return OK;
 }
 
-TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, Cadena palabraABorrar)
-{
+TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, Cadena palabraABorrar) {
 	// Borra todas las ocurrencias de una palabra en la línea indicada.
 	// Ver más detalles en la letra del obligatorio.
 	if (posicionLinea < 1) 
@@ -254,8 +252,6 @@ TipoRetorno ImprimirUltimasPalabras(editor &e) {
 
 TipoRetorno DestruirEditor(editor &e) {
 	// Destruye la estructura editor y libera la memoria asociada.
-
-	// check
 	e->primer_linea = EliminarTodaLinea(e->primer_linea);
 	delete(e);
 	return OK;
