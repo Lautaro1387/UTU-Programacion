@@ -4,7 +4,6 @@
 // editor.c
 // Modulo de implementacion de editor.
 
-#include <string.h>
 #include <iostream>
 #include "editor.h"
 #include "../definiciones.h"

@@ -128,7 +128,7 @@ texto InsertarPalabraAlInicio(texto t, Cadena palabra){
             aux = LineaSiguienteIgualLinea(aux, t->dato); 
             t->dato = aux;
         }
-        if (CantidadPalabras(t->dato) > 3){
+        if (CantidadPalabras(t->dato) > MAX_CANT_PALABRAS_X_LINEA){
             linea iter2 = t->dato;
             linea ant2 = iter2;
             
@@ -224,7 +224,7 @@ texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPal
 
 texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea){
     texto iter = t;
-    texto ant;
+    texto ant = iter;
     if (t != NULL) {
         while (iter != NULL && posicionLinea > 1){
             ant = iter;
@@ -232,11 +232,11 @@ texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea){
             posicionLinea--;
         }
         if (posicionLinea == 1){
-            ant = iter->sig;
             iter->dato = NULL;
             if (iter == t){
                 t = iter->sig;
-            }
+            } 
+            ant->sig = iter->sig;
             delete iter;
             return t;
         }
@@ -320,6 +320,7 @@ texto comprimirTexto(texto t){
             ultima = LineaSiguiente(ultima);
 
         while (cant < MAX_CANT_PALABRAS_X_LINEA && t->sig != NULL) {
+            // incrusta 
             linea siguienteLinea = extraerPrimeraPalabra(t->sig);
             if (siguienteLinea != NULL) {
                 // Mover palabras de la siguiente línea a la línea actual
@@ -347,6 +348,7 @@ texto LimitarHistorial(texto historial){
         contador++;
         if (contador > MAX_CANT_ULTIMAS_PALABRAS) {
             // Eliminar el resto del historial.
+            // l->sig == NULL
             CambiarSig(ant); // Desconectar el resto del historial.
             delete iter; // Liberar memoria del resto del historial.
         }
