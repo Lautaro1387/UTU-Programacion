@@ -146,8 +146,10 @@ linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPal
 }
 
 void ImprimirT(linea l){
+    if (l == NULL)
+        printf("Linea vacia");
+        
     linea iter = l;
-
     while (iter != NULL){
         printf("%s", iter->palabra);
         iter = iter->sig;
@@ -184,9 +186,8 @@ linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
     else {
         int comp = strcmp(palabraABorrar, l->palabra);
         if (comp == 0) {
-            l->palabra = NULL;
-            l->sig = EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
-            return l;
+            delete(l->palabra);
+            return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
         } else
             // no coincide
             l->sig = EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);

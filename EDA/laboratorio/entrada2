@@ -1,14 +1,16 @@
 InsertarLinea();
 InsertarLinea();
-InsertarPalabra(2, 1, "Palabra1");
-InsertarPalabra(2, 2, "Palabra2");
+InsertarLinea();
+InsertarLinea();
+InsertarLinea();
+InsertarPalabra(1, 1, "Palabra1");
+InsertarPalabra(1, 2, "Palabra2");
+InsertarPalabra(3, 1, "Palabra3");
+InsertarPalabra(4, 1, "Palabra4");
+InsertarPalabra(5, 1, "Palabra5");
+InsertarPalabra(5, 2, "Palabra6");
+InsertarPalabra(5, 3, "Palabra7");
 ImprimirTexto();
-InsertarPalabra(2, 1, "Palabra3");
-ImprimirTexto();
-InsertarPalabra(2, 2, "Palabra4");
-ImprimirTexto();
-InsertarPalabra(2, 3, "Palabra5");
-ImprimirTexto();
-DestruirEditor();
+ComprimirTexto();
 ImprimirTexto();
 salir

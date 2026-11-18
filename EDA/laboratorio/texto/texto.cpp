@@ -225,13 +225,20 @@ texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPal
 
 texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea){
     texto iter = t;
+    texto ant;
     if (t != NULL) {
         while (iter != NULL && posicionLinea > 1){
+            ant = iter;
             iter = iter->sig;
             posicionLinea--;
         }
         if (posicionLinea == 1){
+            ant = iter->sig;
             iter->dato = NULL;
+            if (iter == t){
+                t = iter->sig;
+            }
+            delete iter;
             return t;
         }
     }
@@ -305,11 +312,11 @@ texto comprimirTexto(texto t){
         delete aux;
         return comprimirTexto(t);
     } else {
-        
         int cant = CantidadPalabras(t->dato);
         linea ultima = t->dato;
         while (LineaSiguiente(ultima) != NULL)
             ultima = LineaSiguiente(ultima);
+            
         while (cant < MAX_CANT_PALABRAS_X_LINEA && t->sig != NULL) {
             linea siguienteLinea = extraerPrimeraPalabra(t->sig);
             if (siguienteLinea != NULL) {
