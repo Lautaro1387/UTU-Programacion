@@ -19,8 +19,8 @@ Cadena LineaPalabra(linea l);
 linea GuardarPalabraEnLinea(linea l, Cadena palabra);
 // inserta la palabra en la linea l.
 
-// QUITAR SI TERMINAMOS TODO Y NO LO USAMOS
 linea LineaSiguiente(linea l);
+// devuelve l->sig.
 
 linea LineaIgualLinea(linea l, linea nueva_linea);
 // establece el puntero sig de l a sig.
@@ -29,11 +29,13 @@ linea LineaSiguienteIgualLinea(linea l, linea nueva_linea);
 // establece el puntero sig de l a nueva_linea.
 
 linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPalabra);
+// inserta la palabra en la linea l en la posición indicada.
 
 Posicion CantidadPalabras(linea l);
 // cuenta y retorna el número de nodos en la lista l.
 
 linea CambiarSig(linea l);
+// cambia el puntero sig de l a NULL y retorna l.
 
 linea InsertarUltimaLinea(linea l, linea nueva_palabra);
 // Se usa en: TipoRetorno InsertarPalabra(editor & e, Posicion posicionLinea, Posicion posicionPalabra, Cadena palabraAIngresar);
@@ -43,10 +45,13 @@ Cadena ObtenerPalabra(linea l, Posicion pos);
 // InsertarPalabra(linea &l, Posicion pos, Cadena palabra)
 
 linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra);
+// devuelve el puntero a la palabra en la posición indicada.
 
 linea EliminarTodaPalabra(linea l);
+// Elimina todos los nodos de la lista l y libera la memoria asociada.
 
 linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar);
+// Elimina todas las ocurrencias de palabraABorrar en la línea l.
 
 void ImprimirT(linea l);
 // ExtraerUltimaPalabra(linea l);

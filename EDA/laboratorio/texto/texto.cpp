@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "../definiciones.h"
 #include "../linea/linea.h"
 #include "../texto/texto.h"
@@ -155,7 +154,6 @@ texto InsertarPalabraAlInicio(texto t, Cadena palabra){
 texto insertar_Palabra_En_Texto(texto t, linea nueva_linea, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
 
-
     while (iter != NULL && posicionLinea > 1) {
         iter = iter->sig;
         posicionLinea--;
@@ -205,12 +203,12 @@ texto insertarLineaAlInicio(texto t, Cadena palabra){
 texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPalabra){
     texto iter = t;
     if (t != NULL) {
-        if (t->dato != NULL ){
-            while (iter != NULL && posicionLinea > 1){
+        if (t->dato != NULL ) {
+            while (iter != NULL && posicionLinea > 1) {
                 iter = iter->sig;
                 posicionLinea--;
             }
-            if (posicionLinea == 1){                
+            if (posicionLinea == 1) {                
                 iter->dato = ObtenerPosicionPalabra(iter->dato, posicionPalabra);
                 return t;
             }

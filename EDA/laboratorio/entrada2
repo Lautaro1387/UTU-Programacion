@@ -2,11 +2,13 @@ InsertarLinea();
 InsertarLinea();
 InsertarPalabra(2, 1, "Palabra1");
 InsertarPalabra(2, 2, "Palabra2");
-ImprimirTexto();
 InsertarPalabra(2, 1, "Palabra3");
 ImprimirTexto();
-InsertarPalabra(2, 2, "Palabra4");
+BorrarPalabra(2, 1);
 ImprimirTexto();
-InsertarPalabra(2, 3, "Palabra5");
-ImprimirTexto();
+InsertarLinea();
+InsertarPalabra(3, 1, "Palabra3");
+BorrarPalabra(2, 1);
+BorrarPalabra(2, 1);
+ImprimirTexto(); 
 salir

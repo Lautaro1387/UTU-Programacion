@@ -159,13 +159,19 @@ void ImprimirT(linea l){
 
 linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra){
     linea iter = l;
+    linea ant;
     if (l != NULL) {
         while (iter != NULL && posicionPalabra > 1){
+            ant = iter;
             iter = iter->sig;
             posicionPalabra--;
         }
         if (posicionPalabra == 1){
-            iter->palabra = NULL;
+            ant = iter->sig;
+            if (iter == l){
+                l = iter->sig;
+            }
+            delete iter;
             // iter = NULL;
             return l;
         }
