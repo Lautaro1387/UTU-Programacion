@@ -62,5 +62,6 @@ linea comprimirLinea(linea l);
 linea ObtenerSiguienteLinea(linea l);
 // devuelve la linea siguiente.
 
+linea EliminarOcurrenciasEnTexto(linea l, Cadena palabraABorrar);
 
 #endif

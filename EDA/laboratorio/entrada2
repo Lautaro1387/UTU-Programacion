@@ -1,14 +1,9 @@
 InsertarLinea();
 InsertarLinea();
-InsertarPalabra(2, 1, "Palabra1");
-InsertarPalabra(2, 2, "Palabra2");
-InsertarPalabra(2, 1, "Palabra3");
+InsertarPalabra(2, 1,"Palabra1");
+InsertarPalabra(2, 2,"Palabra2");
+InsertarPalabra(2, 1,"Palabra2");
 ImprimirTexto();
-BorrarPalabra(2, 1);
-ImprimirTexto();
-InsertarLinea();
-InsertarPalabra(3, 1, "Palabra3");
-BorrarPalabra(2, 1);
-BorrarPalabra(2, 1);
+BorrarOcurrenciasPalabraEnLinea(2,"palabra2");
 ImprimirTexto(); 
 salir

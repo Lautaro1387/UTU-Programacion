@@ -2,6 +2,7 @@
 #include "../linea/linea.h"
 #include "../texto/texto.h"
 #include <cstring>
+#include <stdio.h>
 
 
 struct nodo_texto {
@@ -255,17 +256,18 @@ texto EliminarTodaLinea(texto t){
 texto EliminarOcurrenciasEnLineaTexto(texto t, Posicion posicionLinea, Cadena palabraABorrar){
 
     texto iter = t;
-    if (t != NULL) {
+    if (t == NULL)
+        return NULL;
+    else {
         while (iter != NULL && posicionLinea > 1){
             iter = iter->sig;
             posicionLinea--;
         }
-        if (posicionLinea == 1){
+        if (posicionLinea == 1 && iter->dato != NULL){
             iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
-            return t;
         }
-    } else
-        return NULL;
+        return t;
+    }
 }
 
 
@@ -276,7 +278,7 @@ texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar){
         return NULL;
     else {
         while (iter != NULL){
-            iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
+            iter->dato = EliminarOcurrenciasEnTexto(iter->dato, palabraABorrar);
             iter = iter->sig;
         }
         return t;

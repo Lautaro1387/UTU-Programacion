@@ -186,18 +186,36 @@ linea EliminarTodaPalabra(linea l){
     }
 }
 
-linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
+// Borrar todas las ocurrencias de palabraABorrar en la línea l.
+linea EliminarOcurrenciasEnTexto(linea l, Cadena palabraABorrar) {
     if (l == NULL)
         return NULL;
     else {
         int comp = strcmp(palabraABorrar, l->palabra);
         if (comp == 0) {
             delete(l->palabra);
-            return EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
+            return EliminarOcurrenciasEnTexto(l->sig, palabraABorrar);
         } else
+            l->sig = EliminarOcurrenciasEnTexto(l->sig, palabraABorrar);
+            return l;
+    }
+}
+
+
+linea EliminarOcurrenciasEnLinea(linea l, Cadena palabraABorrar) {
+    if (l == NULL)
+        return NULL;
+    else {
+        int comp = strcasecmp(palabraABorrar, l->palabra);
+        if (comp == 0) {
+            linea sig = l->sig;
+            delete l;
+            return EliminarOcurrenciasEnLinea(sig, palabraABorrar); 
+        } else {
             // no coincide
             l->sig = EliminarOcurrenciasEnLinea(l->sig, palabraABorrar);
             return l;
+        }
     }
 }
 
