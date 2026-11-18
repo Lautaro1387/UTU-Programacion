@@ -146,12 +146,13 @@ linea Insertar_Palabra_En_Linea(linea l, linea nueva_linea, Posicion posicionPal
 }
 
 void ImprimirT(linea l){
-    if (l == NULL)
-        printf("Linea vacia");
-        linea iter = l;
+
+    if (l == NULL) {
+        printf(" ");
+    }
+    linea iter = l;
     while (iter != NULL){
-        // colocarle indice de la linea actual
-        printf("%s", iter->palabra);
+        printf("%s ", iter->palabra);
         iter = iter->sig;
     }
 }
@@ -178,13 +179,28 @@ linea ObtenerPosicionPalabra(linea l, Posicion posicionPalabra){
     }
 }
 
+/*
 linea EliminarTodaPalabra(linea l){
     if (l->sig == NULL)
-        return NULL;
+    return NULL;
     else {
         return EliminarTodaPalabra(l->sig);
     }
 }
+*/
+linea EliminarTodaPalabra(linea l) {
+    if (l == NULL) {
+        return NULL;
+    }
+    l->sig = EliminarTodaPalabra(l->sig);
+    if (l->palabra != NULL) {
+        delete[] l->palabra;
+    }
+    delete l;
+    return NULL;
+}
+
+
 
 // Borrar todas las ocurrencias de palabraABorrar en la línea l.
 linea EliminarOcurrenciasEnTexto(linea l, Cadena palabraABorrar) {

@@ -9,6 +9,9 @@ typedef struct nodo_texto * texto; // conjunto de linea
 texto CrearTexto();
 // Crea un nuevo nodo de texto vacio
 
+texto CrearTextoNull();
+// Crea un nuevo nodo de texto vacio con dato=NULL
+
 linea ObtenerLinea(texto t);
 // devuelve la cabeza de la lista de palabras en la línea t (t->dato).
 

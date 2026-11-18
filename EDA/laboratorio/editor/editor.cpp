@@ -57,7 +57,9 @@ TipoRetorno InsertarLineaEnPosicion(editor &e, Posicion posicionLinea) {
 
 	if (posicionLinea < 1)
 		return ERROR;
-	texto aux = CrearTexto();
+
+	texto aux = CrearTextoNull();
+
 	if (e->primer_linea == NULL) {
 		e->primer_linea = aux;
 		return OK;
@@ -158,15 +160,18 @@ TipoRetorno BorrarOcurrenciasPalabraEnLinea(editor &e, Posicion posicionLinea, C
 TipoRetorno ImprimirLinea(editor &e, Posicion posicionLinea) {
 	// Imprime la línea por pantalla.
 	// Ver más detalles en la letra del obligatorio.
-
+	int i = 1;
 	texto iter = e->primer_linea;
 	while (iter != NULL && posicionLinea > 1){
 		iter = TextoSiguiente(iter);
 		posicionLinea--;
+		i++;
 	}
 	
-	if (posicionLinea == 1){
+	if (iter != NULL && posicionLinea == 1){
+		printf("%d: ", i);
 		ImprimirT(TextoDato(iter));
+		printf("\n");
 		return OK;
 	} else
 		return ERROR;

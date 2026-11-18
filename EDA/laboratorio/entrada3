@@ -1,0 +1,10 @@
+InsertarLinea();
+InsertarLinea();
+InsertarPalabra(2, 1, "Palabra1");
+ImprimirTexto();
+ImprimirLinea(2);
+BorrarLinea(2);
+ImprimirTexto();
+ImprimirLinea(2);
+ImprimirTexto();
+salir

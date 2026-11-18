@@ -15,7 +15,8 @@ texto CrearTextoNull(){
     texto t = new(nodo_texto);
     t->dato = NULL;
     t->sig = NULL;
-    return t;}
+    return t;
+}
 
 texto CrearTexto(){
     texto t = new(nodo_texto);
@@ -47,8 +48,6 @@ texto TextoSiguiente(texto t){
 
 texto InsertarLineaTextoVacio(texto t){
     texto aux = CrearTextoNull();
-    // aux->dato = l;
-    // aux->sig = NULL;
 
     if (t == NULL)
         return aux;
@@ -220,54 +219,66 @@ texto ObtenerPosicionLinea(texto t, Posicion posicionLinea, Posicion posicionPal
 
     }
 }
+texto EliminarTodaLinea(texto t){
+    if (t == NULL) {
+        return NULL;
+    }
+    t->sig = EliminarTodaLinea(t->sig);
+    t->dato = EliminarTodaPalabra(t->dato);
+    delete t;
+    return NULL;
+}
 
+texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea) {
 
-texto ObtenerPosicionLinea2(texto t, Posicion posicionLinea){
+    if (t == NULL || posicionLinea < 1) {
+        return t;
+    }
+
     texto iter = t;
-    texto ant = iter;
+    texto ant = NULL;
     if (t != NULL) {
-        while (iter != NULL && posicionLinea > 1){
+        while (iter != NULL && posicionLinea > 1) {
             ant = iter;
             iter = iter->sig;
             posicionLinea--;
         }
-        if (posicionLinea == 1){
-            iter->dato = NULL;
+        if (iter == NULL)
+            return t;
+         if (posicionLinea == 1){
+            
             if (iter == t){
+                // Si iter es NULL, la posición no existía; devolvemos t sin cambios
                 t = iter->sig;
             } 
-            ant->sig = iter->sig;
+            if (ant == NULL)
+                t = iter->sig; // Era la primera línea
+            else
+                ant->sig = iter->sig; // Era una línea del medio o del final
+            // Liberamos las palabras y luego el nodo de la línea
+            iter->dato = EliminarTodaPalabra(iter->dato);
             delete iter;
             return t;
         }
     }
 }
 
-texto EliminarTodaLinea(texto t){
-    if (t->sig == NULL) {
-        t->dato = EliminarTodaPalabra(t->dato);
-        return NULL;
-    }
-    else {
-        return EliminarTodaLinea(t->sig);
-    }
-}
 
 texto EliminarOcurrenciasEnLineaTexto(texto t, Posicion posicionLinea, Cadena palabraABorrar){
-
+    
     texto iter = t;
     if (t == NULL)
-        return NULL;
-    else {
-        while (iter != NULL && posicionLinea > 1){
-            iter = iter->sig;
-            posicionLinea--;
+            return NULL;
+        else {
+            while (iter != NULL && posicionLinea > 1){
+                iter = iter->sig;
+                posicionLinea--;
+            }
+            if (iter != NULL && posicionLinea == 1 && iter->dato != NULL){
+                iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
+            }
+            return t;
         }
-        if (posicionLinea == 1 && iter->dato != NULL){
-            iter->dato = EliminarOcurrenciasEnLinea(iter->dato, palabraABorrar);
-        }
-        return t;
-    }
 }
 
 
@@ -296,6 +307,8 @@ linea extraerPrimeraPalabra(texto &t){
         t = t->sig;
         delete aux;
     }
+    if (t == NULL)
+        return NULL;
 
     linea primeraLinea = t->dato;
     t->dato = LineaSiguiente(primeraLinea);
