@@ -287,15 +287,17 @@ texto EliminarOcurrenciasPalabraEnTexto(texto t, Cadena palabraABorrar){
 
 
 linea extraerPrimeraPalabra(texto &t){
+
+    if (t == NULL)
+        return NULL;
+
     while (t != NULL && t->dato == NULL){
         texto aux = t;
         t = t->sig;
         delete aux;
     }
-    if (t == NULL)
-        return NULL;
 
-    linea primeraLinea = TextoDato(t);
+    linea primeraLinea = t->dato;
     t->dato = LineaSiguiente(primeraLinea);
     LineaSiguienteIgualLinea(primeraLinea, NULL);
 
@@ -316,7 +318,7 @@ texto comprimirTexto(texto t){
         linea ultima = t->dato;
         while (LineaSiguiente(ultima) != NULL)
             ultima = LineaSiguiente(ultima);
-            
+
         while (cant < MAX_CANT_PALABRAS_X_LINEA && t->sig != NULL) {
             linea siguienteLinea = extraerPrimeraPalabra(t->sig);
             if (siguienteLinea != NULL) {
